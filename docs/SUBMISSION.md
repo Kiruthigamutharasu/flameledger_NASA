@@ -1,6 +1,6 @@
 # Space Apps project page: ready-to-paste fields
 
-Replace `<LIVE_URL>`, `<GITHUB_URL>` and `<SLIDES_URL>` before pasting. Every link must open without a login.
+Every link must open without a login.
 
 ---
 
@@ -11,10 +11,10 @@ FlameLedger
 FlameLedger is an evidence ledger for spacecraft fire safety across gravity levels. Materials are screened for flammability on Earth, but flames behave differently in microgravity and partial gravity. For example, a PMMA rod spread steadily at 13.6% O2 on the ISS against a 16% O2 limit in normal gravity, a published margin of −2.4% O2. FlameLedger collects the published NASA results material by material, links every number to its NASA source page, and shows where the evidence runs out: of 15 materials, 14 have Earth-gravity results but only 5 have microgravity evidence, and 49 of 75 material-by-environment cells are empty. Its Habitat Review agent gives each material a deterministic verdict for a given habitat atmosphere. Gemini explains the verdicts, and a verifier checks every AI number against the sources before anything is shown. The project supports NASA's FM2 lunar experiment with three hypotheses registered before it flies.
 
 ### Link to Project Demo
-`<SLIDES_URL>` (7 slides, public, no login)
+Demo video (30 seconds, English subtitles, YouTube unlisted): paste the YouTube link here after uploading.
 
 ### Link to Final Project
-Live app: `<LIVE_URL>` · Code: `<GITHUB_URL>`
+Live app: https://flameledger.onrender.com · Code: https://github.com/Kiruthigamutharasu/flameledger_NASA
 
 ### Detailed Project Description
 **What it does.** FlameLedger has three pages and an open API.
@@ -48,6 +48,6 @@ No partner-agency data is used. Habitat presets for the ISS cabin, spacesuit and
 ### References
 - All NASA documents listed under NASA Data.
 - NASA Space Apps 2026 challenge brief, *Flame in Freefall*.
-- `<TEAM: list any other public repos or READMEs consulted, or write "None">`
+- We did not use any other repositories or datasets; every fact comes from the NASA documents listed above and the Space Apps 2026 challenge brief.
 
 Built for the 2026 NASA Space Apps Challenge. Not affiliated with or endorsed by NASA. Uses public NASA data.

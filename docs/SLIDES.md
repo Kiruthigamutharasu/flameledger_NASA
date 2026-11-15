@@ -9,9 +9,9 @@ Submission-guide requirements: at most 7 slides including the title, in English,
 
 ## 1. FlameLedger
 **Material by material: what reduced-gravity fire experiments already tell us, and where the evidence runs out.**
-- Team: `<TEAM_NAME>` · Members: `<MEMBER NAMES>`
+- Team: cool-flame-crew · Members: Kiruthiga Mutharasu
 - NASA Space Apps 2026 · Challenge: *Flame in Freefall*
-- Live: `<LIVE_URL>` · Code: `<GITHUB_URL>`
+- Live: https://flameledger.onrender.com · Code: https://github.com/Kiruthigamutharasu/flameledger_NASA
 - Research decision support, not certification.
 
 ## 2. The stakes: the first fire tests on the Moon
