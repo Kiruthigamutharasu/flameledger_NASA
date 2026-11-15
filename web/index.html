@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlameLedger: Evidence Ledger</title>
+  <meta name="description" content="Material by material: what reduced-gravity fire experiments already tell us, and where the evidence runs out. Every number links to its NASA source.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script type="module" src="/static/ledger.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="17" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="17" r="4" fill="#eb6834"/></svg>
+        FlameLedger
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/" aria-current="page">Evidence Ledger</a>
+        <a href="/review">Habitat Review</a>
+        <a href="/fm2">Partial gravity &amp; FM2</a>
+        <a href="/docs">Open API</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div class="hero">
+      <p class="eyebrow">Flame in Freefall · fire safety evidence across gravity levels</p>
+      <h1>What do we actually know about how spacecraft materials burn off Earth?</h1>
+      <p class="lede">FlameLedger supports the bridge NASA's FM2 mission is building between Earth-gravity material screening and real reduced-gravity fire behaviour: material by material, it shows what microgravity experiments already tell us, and where the evidence runs out.</p>
+      <p class="row">
+        <span class="badge strong">Research decision support, not certification</span>
+        <span class="badge">Every number links to its NASA source page</span>
+      </p>
+    </div>
+
+    <section aria-labelledby="h-metrics">
+      <h2 id="h-metrics">The ledger at a glance</h2>
+      <p class="sub">These counts are computed live from the verified evidence rows. Nothing on this page is typed in by hand.</p>
+      <div id="metrics" class="tiles" aria-live="polite"><p class="small">Loading evidence…</p></div>
+    </section>
+
+    <section aria-labelledby="h-grid">
+      <h2 id="h-grid">Coverage: materials by test environment</h2>
+      <p class="sub">Each cell shows the range of published oxygen limits for one material in one gravity environment. Select a cell to see every value behind it with its source, page and a short quote.</p>
+      <ul class="legend" aria-label="Cell types">
+        <li><span class="sw env-1g"></span>Measured values</li>
+        <li><span class="badge">Qualitative</span> observed, no limit value</li>
+        <li><span class="sw planned"></span>Planned test, no result yet</li>
+        <li><span class="badge">No data</span> nothing published that we could verify</li>
+      </ul>
+      <div class="card">
+        <div class="scroll" id="grid"><p class="small">Loading coverage grid…</p></div>
+        <p class="small" id="grid-caption"></p>
+      </div>
+      <div id="cell-detail" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="h-margins">
+      <h2 id="h-margins">Published oxygen margins, ranked</h2>
+      <p class="sub">A negative margin means the material kept burning at a lower oxygen level in reduced gravity than in the normal-gravity test. These margins were published by NASA authors. FlameLedger never calculates one itself.</p>
+      <div class="cols">
+        <div class="card stack">
+          <h3>PMMA ¼-inch rod: Earth test against the Space Station</h3>
+          <div class="scroll"><div class="chart" id="pmma-chart"></div></div>
+          <p class="small" id="pmma-caption"></p>
+        </div>
+        <div class="card stack">
+          <h3>All published margins, most negative first</h3>
+          <ul class="legend" aria-label="Gravity environment">
+            <li><span class="sw env-micro"></span>Microgravity</li>
+            <li><span class="sw env-lunar"></span>Lunar gravity</li>
+            <li><span class="sw env-mars"></span>Mars gravity</li>
+          </ul>
+          <div class="scroll"><div class="chart" id="margin-chart"></div></div>
+          <p class="small">Lunar and Mars values come from short drop-tower tests. The authors note that low-gravity limit criteria are not the same as the 1g criteria because test time is limited. Forced flow in a test duct is not the same as cabin ventilation.</p>
+        </div>
+      </div>
+      <details>
+        <summary>Margins as a table, with sources</summary>
+        <div class="scroll" id="margin-table"></div>
+      </details>
+    </section>
+
+    <section aria-labelledby="h-sources">
+      <h2 id="h-sources">Sources and data</h2>
+      <p class="sub">All evidence comes from public NASA technical reports. Each row was checked against the PDF, and the page or table is recorded so anyone can repeat the check.</p>
+      <p class="row">
+        <a class="btn" href="/api/ledger.csv">Download ledger (CSV)</a>
+        <a class="btn" href="/api/ledger">Ledger as JSON</a>
+        <a class="btn" href="/docs">API documentation</a>
+      </p>
+      <details>
+        <summary>Source documents</summary>
+        <div class="scroll" id="source-table"></div>
+      </details>
+      <details>
+        <summary>Every evidence row with its quote</summary>
+        <div class="scroll" id="row-table"></div>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="disclaimer">Built for the 2026 NASA Space Apps Challenge. Not affiliated with or endorsed by NASA. Uses public NASA data.</p>
+      <p>Research decision support, not certification. Always consult the original NASA documents and your programme's materials and processes authority.</p>
+      <p id="build-info"></p>
+    </div>
+  </footer>
+</body>
+</html>

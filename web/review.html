@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlameLedger: Habitat Review</title>
+  <meta name="description" content="Enter a habitat atmosphere and a list of materials. FlameLedger gives an evidence-based verdict for each material from published NASA data, with an AI explanation that is checked against the sources.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script type="module" src="/static/review.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="17" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="17" r="4" fill="#eb6834"/></svg>
+        FlameLedger
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/">Evidence Ledger</a>
+        <a href="/review" aria-current="page">Habitat Review</a>
+        <a href="/fm2">Partial gravity &amp; FM2</a>
+        <a href="/docs">Open API</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div class="hero">
+      <p class="eyebrow">Habitat Review · AI agent with a fact-checker</p>
+      <h1>Which of your materials has reduced-gravity fire evidence?</h1>
+      <p class="lede">Choose a habitat atmosphere and list your materials. Fixed rules give each material a verdict from the verified ledger. An AI model then explains the verdicts, and its answer is shown only if every number and source in it checks out against the evidence.</p>
+      <p class="row"><span class="badge strong">Research decision support, not certification</span></p>
+    </div>
+
+    <section aria-labelledby="h-input">
+      <h2 id="h-input">Habitat and materials</h2>
+      <form id="review-form" class="card stack" novalidate>
+        <div class="form-grid">
+          <div class="field wide">
+            <label for="preset">Habitat preset</label>
+            <select id="preset" name="preset"><option value="">Custom</option></select>
+            <p class="small" id="preset-note"></p>
+          </div>
+          <div class="field">
+            <label for="o2">Oxygen (% by volume)</label>
+            <input id="o2" name="o2" type="number" inputmode="decimal" step="0.1" min="0.1" max="100" required>
+          </div>
+          <div class="field">
+            <label for="pressure">Total pressure (psia)</label>
+            <input id="pressure" name="pressure" type="number" inputmode="decimal" step="0.1" min="0.1" max="30" required>
+          </div>
+          <div class="field">
+            <label for="gravity">Gravity (Earth g)</label>
+            <input id="gravity" name="gravity" type="number" inputmode="decimal" step="0.001" min="0" max="1.5" required>
+            <p class="small">0 = microgravity, 0.165 = Moon, 0.38 = Mars</p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="materials">Materials, one per line (up to 20)</label>
+          <textarea id="materials" name="materials" rows="5" maxlength="1800" placeholder="PMMA rod&#10;silicone" required></textarea>
+        </div>
+        <details>
+          <summary>Research thresholds</summary>
+          <div class="inner stack">
+            <p class="small">FlameLedger research thresholds, not NASA criteria.</p>
+            <div class="form-grid">
+              <div class="field">
+                <label for="tol">Red: count a reduced-gravity burn up to habitat O2 plus (% O2)</label>
+                <input id="tol" type="number" step="0.1" min="0" max="5" value="0">
+              </div>
+              <div class="field">
+                <label for="thin">Orange: a published margin below this is thin (% O2)</label>
+                <input id="thin" type="number" step="0.1" min="0" max="5" value="0.5">
+              </div>
+            </div>
+          </div>
+        </details>
+        <p class="row">
+          <button class="btn primary" type="submit" id="run">Review materials</button>
+          <button class="btn" type="button" id="example">Example</button>
+          <button class="btn" type="button" id="download" disabled>Download report (PDF)</button>
+          <button class="btn" type="button" id="download-md" disabled>Markdown</button>
+        </p>
+        <p class="error" id="form-error" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <section aria-labelledby="h-results" id="results-section" hidden>
+      <h2 id="h-results">Verdicts</h2>
+      <p class="sub" id="results-lede"></p>
+      <ul class="legend" aria-label="Verdict levels, highest first">
+        <li><span aria-hidden="true">🔴</span>Burns in reduced gravity at or below this O2</li>
+        <li><span aria-hidden="true">🟠</span>Thin or negative published margin</li>
+        <li><span aria-hidden="true">🟢</span>Reduced-gravity evidence of no burning at this O2</li>
+        <li><span aria-hidden="true">⚪</span>No space data for this habitat: test needed</li>
+      </ul>
+      <div class="card"><div class="scroll" id="summary-table"></div></div>
+      <div class="stack" id="ai-panel" aria-live="polite"></div>
+      <div class="stack" id="detail-cards"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="disclaimer">Built for the 2026 NASA Space Apps Challenge. Not affiliated with or endorsed by NASA. Uses public NASA data.</p>
+      <p>Research decision support, not certification. Always consult the original NASA documents and your programme's materials and processes authority.</p>
+      <p id="build-info"></p>
+    </div>
+  </footer>
+</body>
+</html>

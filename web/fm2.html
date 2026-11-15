@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlameLedger: Partial gravity and FM2</title>
+  <meta name="description" content="Why microgravity and Earth gravity do not bracket fire behaviour on the Moon, what NASA's FM2 mission will test, and three hypotheses registered before it flies.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script type="module" src="/static/fm2.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="17" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="17" r="4" fill="#eb6834"/></svg>
+        FlameLedger
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/">Evidence Ledger</a>
+        <a href="/review">Habitat Review</a>
+        <a href="/fm2" aria-current="page">Partial gravity &amp; FM2</a>
+        <a href="/docs">Open API</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div class="hero">
+      <p class="eyebrow">Partial gravity · Flammability of Materials on the Moon (FM2)</p>
+      <h1>The Moon is not halfway between orbit and Earth</h1>
+      <p class="lede">It is natural to assume that a material's fire behaviour in lunar gravity falls somewhere between its behaviour in microgravity and on Earth. The published data say otherwise, and NASA's FM2 mission is designed to test it on the Moon itself.</p>
+      <p class="row"><span class="badge strong">Research decision support, not certification</span></p>
+    </div>
+
+    <section aria-labelledby="h-says">
+      <h2 id="h-says">What the evidence says</h2>
+      <p class="sub">Three findings from NASA authors, each quoted in under 15 words and linked to the page it comes from.</p>
+      <div class="cols" id="findings"><p class="small">Loading findings…</p></div>
+    </section>
+
+    <section aria-labelledby="h-profile">
+      <h2 id="h-profile">Measured limits at four gravity levels</h2>
+      <p class="sub" id="profile-lede">Loading published limits…</p>
+      <ul class="legend" aria-label="Gravity environment">
+        <li><span class="sw env-micro"></span>Microgravity</li>
+        <li><span class="sw env-lunar"></span>Lunar gravity</li>
+        <li><span class="sw env-mars"></span>Mars gravity</li>
+        <li><span class="sw env-1g"></span>Normal gravity (1g)</li>
+      </ul>
+      <div class="panels" id="profile"></div>
+      <p class="small" id="profile-caption"></p>
+      <details>
+        <summary>These limits as a table</summary>
+        <div class="scroll" id="profile-table"></div>
+      </details>
+    </section>
+
+    <section aria-labelledby="h-why">
+      <h2 id="h-why">Why two endpoints do not bracket the middle</h2>
+      <div class="cols">
+        <div class="card stack">
+          <p>A flame on a solid needs a steady supply of oxygen, and it must keep enough of its own heat to keep vaporising fuel. The air flow past the flame controls both.</p>
+          <ul class="steps">
+            <li><strong>Too little flow</strong> (still air in microgravity): oxygen arrives only by diffusion and the flame loses heat faster than it makes it. This is the quenching branch.</li>
+            <li><strong>Too much flow</strong> (strong buoyant plume on Earth, or a fast fan): the gases are swept away before they finish reacting. This is the blowoff branch.</li>
+            <li><strong>In between</strong>, a gentle flow feeds the flame without blowing it out, so it can survive at a lower oxygen level.</li>
+          </ul>
+          <p>On Earth, buoyancy drives a fast upward flow. In lunar or Martian gravity that buoyant flow is weaker, which can place a flame nearer the low point of the curve. So the hardest-to-extinguish condition can sit between microgravity and 1g, not at either end.</p>
+          <p class="small">Test ducts and burners impose their own flow. That flow is not the same as cabin ventilation, so limits measured in a duct should not be read as limits for a real cabin.</p>
+        </div>
+        <div class="card stack">
+          <div class="scroll"><div class="chart">
+            <svg viewBox="0 0 560 300" role="img" aria-label="Conceptual sketch: the oxygen level a flame needs, plotted against the flow past the flame, forms a U shape. The left side is the quenching branch, the right side is the blowoff branch, and the lowest oxygen requirement lies in between.">
+              <path class="region" d="M70 40 C 150 250, 250 250, 300 230 C 370 205, 440 150, 510 60 L 510 30 L 70 30 Z"/>
+              <path class="curve" d="M70 40 C 150 250, 250 250, 300 230 C 370 205, 440 150, 510 60"/>
+              <line class="axis" x1="56" y1="262" x2="530" y2="262"/><line class="axis" x1="56" y1="20" x2="56" y2="262"/>
+              <text x="293" y="286" text-anchor="middle">Flow past the flame (forced or buoyant), slow to fast</text>
+              <text transform="translate(24 150) rotate(-90)" text-anchor="middle">Oxygen needed to keep burning</text>
+              <text class="lab-strong" x="290" y="78" text-anchor="middle">Flame can survive</text>
+              <text x="290" y="252" text-anchor="middle">Flame goes out</text>
+              <text class="lab-strong" x="116" y="108">Quenching</text><text x="116" y="124">branch</text>
+              <text class="lab-strong" x="446" y="108" text-anchor="end">Blowoff</text><text x="446" y="124" text-anchor="end">branch</text>
+              <line class="ref" x1="228" y1="244" x2="228" y2="196"/>
+              <text x="228" y="188" text-anchor="middle">lowest oxygen requirement</text>
+            </svg>
+          </div></div>
+          <p class="small">Conceptual sketch drawn by FlameLedger, after NASA literature. It has no scale and shows no measured values.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-fm2">
+      <h2 id="h-fm2">FM2: the first long-duration fire tests in lunar gravity</h2>
+      <div class="cols">
+        <div class="card stack" id="fm2-about"><p class="small">Loading mission details…</p></div>
+        <div class="card stack">
+          <h3>Planned test atmospheres</h3>
+          <div class="scroll"><div class="chart" id="fm2-chart"></div></div>
+          <p class="small" id="fm2-caption"></p>
+        </div>
+      </div>
+      <details>
+        <summary>Which ledger cells FM2 will fill</summary>
+        <div class="inner" id="fm2-cells"></div>
+      </details>
+    </section>
+
+    <section aria-labelledby="h-hyp">
+      <h2 id="h-hyp">Hypotheses registered before FM2 flies</h2>
+      <p class="sub">We wrote down three qualitative hypotheses, each with the evidence behind it and the result that would prove it wrong. They are fixed in the project's git history so they cannot be adjusted after the results arrive.</p>
+      <div class="card" id="hyp-meta"><p class="small">Loading registration…</p></div>
+      <div class="stack" id="hyp-list"></div>
+      <p class="small">These hypotheses contain no numeric prediction by FlameLedger. Where they agree with NASA's own stated expectation, that is said in the basis.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="disclaimer">Built for the 2026 NASA Space Apps Challenge. Not affiliated with or endorsed by NASA. Uses public NASA data.</p>
+      <p>Research decision support, not certification. Always consult the original NASA documents and your programme's materials and processes authority.</p>
+      <p id="build-info"></p>
+    </div>
+  </footer>
+</body>
+</html>
