@@ -1,0 +1,37 @@
+{
+  "registered_on": "2026-11-15",
+  "tag": "fm2-hypotheses-v1",
+  "statement": "Qualitative hypotheses registered before FM2 flies. They contain no numeric prediction by FlameLedger.",
+  "hypotheses": [
+    {
+      "id": "H1",
+      "text": "At 29% O2 and 8.2 psia (FM2 Test 3), the Synergy Pro Navy fabric sustains upward flame spread in lunar gravity.",
+      "basis": "NASA's FM2 plan states that Tests 1 to 3 should burn to threshold (E13). NASA authors expect partial gravity to increase flammability limits for some materials (E11).",
+      "refuted_if": "The fabric fails to ignite, or self-extinguishes without sustained upward spread, at the Test 3 atmosphere.",
+      "evidence_ids": [
+        "E13",
+        "E11"
+      ]
+    },
+    {
+      "id": "H2",
+      "text": "The fabric's lunar-gravity flammability limit will not lie between its microgravity and normal-gravity limits. It will be lower than both.",
+      "basis": "In NASA's drop-tower data, the lunar-gravity limit is below both the microgravity and the 1g limit for all three materials tested (E15).",
+      "refuted_if": "When 1g and microgravity limits for the same fabric are available, the lunar-gravity limit falls between them.",
+      "evidence_ids": [
+        "E15",
+        "E10"
+      ]
+    },
+    {
+      "id": "H3",
+      "text": "At 25% O2 and 8.2 psia (FM2 Test 4), the outcome is closer to the flammability threshold than at 29%: a shorter burn, or no ignition.",
+      "basis": "This follows NASA's own stated expectation that Test 4 is not expected to ignite (E13), and NASA's design target for the material (E18).",
+      "refuted_if": "The Test 4 burn is as long as, or longer than, the Test 3 burn.",
+      "evidence_ids": [
+        "E13",
+        "E18"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+preset_id,label,o2_pct,pressure_psia,gravity_g,gravity_label,source_id,source_url,source_note
+iss_cabin,ISS / Earth-normal cabin,21,14.7,0,Microgravity,,,NASA Space Apps 2026 challenge brief
+eva_suit_0g,"Spacesuit (EVA), microgravity",100,4.3,0,Microgravity,NTRS-20260001966,https://ntrs.nasa.gov/api/citations/20260001966/downloads/Ferkul-Lunar%20and%20Planetary%20Science%20Conf%202026%20v2.pdf,"Challenge brief; NTRS 20260001966, PDF p.25"
+eva_suit_lunar,"Spacesuit (EVA), lunar surface",100,4.3,0.165,Lunar gravity,NTRS-20260001966,https://ntrs.nasa.gov/api/citations/20260001966/downloads/Ferkul-Lunar%20and%20Planetary%20Science%20Conf%202026%20v2.pdf,"Challenge brief; NTRS 20260001966, PDF p.25"
+lunar_habitat_nominal,"Lunar habitat / pressurized rover, nominal",34,8.2,0.165,Lunar gravity,NTRS-20260001966,https://ntrs.nasa.gov/api/citations/20260001966/downloads/Ferkul-Lunar%20and%20Planetary%20Science%20Conf%202026%20v2.pdf,"NTRS 20260001966, PDF p.25 (planning value)"
+lunar_habitat_max,"Lunar habitat, control-band maximum",37,8.2,0.165,Lunar gravity,NTRS-20260001966,https://ntrs.nasa.gov/api/citations/20260001966/downloads/Ferkul-Lunar%20and%20Planetary%20Science%20Conf%202026%20v2.pdf,"NTRS 20260001966, PDF p.25 (up to 37% O2)"
+moon_base_brief,Moon base / pressurized rover (challenge brief),30,10.2,0.165,Lunar gravity,,,"NASA Space Apps 2026 challenge brief (30% O2 or more, 10.2 psia or less)"
+fm2_test1,FM2 Test 1 atmosphere,37,8.2,0.165,Lunar gravity,NTRS-20260001966,https://ntrs.nasa.gov/api/citations/20260001966/downloads/Ferkul-Lunar%20and%20Planetary%20Science%20Conf%202026%20v2.pdf,"NTRS 20260001966, PDF p.10"
+fm2_test2,FM2 Test 2 atmosphere,33,8.2,0.165,Lunar gravity,NTRS-20260001966,https://ntrs.nasa.gov/api/citations/20260001966/downloads/Ferkul-Lunar%20and%20Planetary%20Science%20Conf%202026%20v2.pdf,"NTRS 20260001966, PDF p.10"
+fm2_test3,FM2 Test 3 atmosphere,29,8.2,0.165,Lunar gravity,NTRS-20260001966,https://ntrs.nasa.gov/api/citations/20260001966/downloads/Ferkul-Lunar%20and%20Planetary%20Science%20Conf%202026%20v2.pdf,"NTRS 20260001966, PDF p.10"
+fm2_test4,FM2 Test 4 atmosphere,25,8.2,0.165,Lunar gravity,NTRS-20260001966,https://ntrs.nasa.gov/api/citations/20260001966/downloads/Ferkul-Lunar%20and%20Planetary%20Science%20Conf%202026%20v2.pdf,"NTRS 20260001966, PDF p.10"
