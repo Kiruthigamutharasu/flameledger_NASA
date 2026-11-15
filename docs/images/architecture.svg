@@ -21,10 +21,12 @@
   <text x="84" y="120" class="h">Browser</text>
   <text x="84" y="142" class="s">Plain HTML, CSS and JavaScript · hand-drawn SVG charts · no CDN, strict Content-Security-Policy</text>
   <g>
-    <rect x="84" y="155" width="240" height="32" rx="7" fill="#fff" stroke="#9db8dc"/><text x="204" y="176" text-anchor="middle" class="t">Evidence Ledger  /</text>
-    <rect x="340" y="155" width="240" height="32" rx="7" fill="#fff" stroke="#9db8dc"/><text x="460" y="176" text-anchor="middle" class="t">Habitat Review  /review</text>
-    <rect x="596" y="155" width="270" height="32" rx="7" fill="#fff" stroke="#9db8dc"/><text x="731" y="176" text-anchor="middle" class="t">Partial gravity &amp; FM2  /fm2</text>
-    <rect x="882" y="155" width="234" height="32" rx="7" fill="#fff" stroke="#9db8dc"/><text x="999" y="176" text-anchor="middle" class="t">Open API docs  /docs</text>
+    <rect x="84" y="155" width="166" height="32" rx="7" fill="#fff" stroke="#9db8dc"/><text x="167" y="176" text-anchor="middle" class="t" font-size="13.5">Evidence Ledger</text>
+    <rect x="258" y="155" width="166" height="32" rx="7" fill="#fff" stroke="#9db8dc"/><text x="341" y="176" text-anchor="middle" class="t" font-size="13.5">Investigations</text>
+    <rect x="432" y="155" width="166" height="32" rx="7" fill="#fff" stroke="#9db8dc"/><text x="515" y="176" text-anchor="middle" class="t" font-size="13.5">Habitat Review</text>
+    <rect x="606" y="155" width="166" height="32" rx="7" fill="#fff" stroke="#9db8dc"/><text x="689" y="176" text-anchor="middle" class="t" font-size="13.5">Ask</text>
+    <rect x="780" y="155" width="166" height="32" rx="7" fill="#fff" stroke="#9db8dc"/><text x="863" y="176" text-anchor="middle" class="t" font-size="13.5">Partial gravity &amp; FM2</text>
+    <rect x="954" y="155" width="166" height="32" rx="7" fill="#fff" stroke="#9db8dc"/><text x="1037" y="176" text-anchor="middle" class="t" font-size="13.5">Open API</text>
   </g>
 
   <line class="line" x1="600" y1="200" x2="600" y2="240" marker-end="url(#arr)" marker-start="url(#arr)"/>
@@ -34,8 +36,8 @@
   <rect x="60" y="245" width="1080" height="120" rx="12" fill="#f3f1fb" stroke="#6250d6" stroke-width="1.5"/>
   <text x="84" y="275" class="h">FastAPI service</text>
   <text x="250" y="275" class="mono">main.py · api.py</text>
-  <text x="84" y="300" class="mono">GET  /api/ledger  /api/ledger.csv  /api/coverage  /api/margins  /api/gravity-profile  /api/hypotheses  /api/sources  /api/presets  /api/health</text>
-  <text x="84" y="324" class="mono">POST /api/review   /api/report   /api/report.pdf</text>
+  <text x="84" y="300" class="mono">GET  /api/ledger(.csv)  /api/coverage  /api/margins  /api/gravity-profile  /api/investigations  /investigations/rank  /investigations/compare  …</text>
+  <text x="84" y="324" class="mono">POST /api/review   /api/report   /api/report.pdf   /api/ask</text>
   <text x="84" y="350" class="s">Security headers · input validation (pydantic) · 10 reviews per minute per IP · errors never show stack traces</text>
 
   <line class="line" x1="600" y1="365" x2="600" y2="400" marker-end="url(#arr)"/>
@@ -50,10 +52,10 @@
     <text x="160" y="510" text-anchor="middle" class="s">never served</text>
 
     <rect x="280" y="405" width="200" height="120" rx="10" fill="#fff" stroke="#b9b6ab"/>
-    <text x="380" y="432" text-anchor="middle" class="h">coverage.py</text>
-    <text x="380" y="456" text-anchor="middle" class="s">Coverage grid, counts</text>
-    <text x="380" y="474" text-anchor="middle" class="s">and gravity profile,</text>
-    <text x="380" y="492" text-anchor="middle" class="s">computed from the data</text>
+    <text x="380" y="432" text-anchor="middle" class="h">investigations.py</text>
+    <text x="380" y="456" text-anchor="middle" class="s">21 NASA investigations:</text>
+    <text x="380" y="474" text-anchor="middle" class="s">habitat ranking, compare;</text>
+    <text x="380" y="492" text-anchor="middle" class="s">coverage.py: grid, counts</text>
 
     <rect x="500" y="405" width="200" height="120" rx="10" fill="#fdecea" stroke="#c8312b" stroke-width="1.5"/>
     <text x="600" y="432" text-anchor="middle" class="h">rules.py</text>
@@ -63,10 +65,10 @@
     <text x="600" y="510" text-anchor="middle" class="s">only</text>
 
     <rect x="720" y="405" width="200" height="120" rx="10" fill="#eef4ff" stroke="#2a78d6" stroke-width="1.5"/>
-    <text x="820" y="432" text-anchor="middle" class="h">llm.py + verifier.py</text>
-    <text x="820" y="456" text-anchor="middle" class="s">Gemini explains;</text>
-    <text x="820" y="474" text-anchor="middle" class="s">verifier checks every</text>
-    <text x="820" y="492" text-anchor="middle" class="s">number and source;</text>
+    <text x="820" y="432" text-anchor="middle" class="h">llm · ask · verifier</text>
+    <text x="820" y="456" text-anchor="middle" class="s">Gemini explains and</text>
+    <text x="820" y="474" text-anchor="middle" class="s">answers; verifier checks</text>
+    <text x="820" y="492" text-anchor="middle" class="s">every number and source;</text>
     <text x="820" y="510" text-anchor="middle" class="s">cache + one retry</text>
 
     <rect x="940" y="405" width="200" height="120" rx="10" fill="#fff" stroke="#b9b6ab"/>
@@ -89,14 +91,14 @@
   <!-- Data -->
   <rect x="60" y="665" width="660" height="110" rx="12" fill="#fdf3dc" stroke="#e2b64a" stroke-width="1.5"/>
   <text x="84" y="695" class="h">Verified data</text>
-  <text x="84" y="719" class="mono">data/ledger.csv  margins.csv  presets.csv  sources.csv  hypotheses.json</text>
-  <text x="84" y="743" class="s">69 verified rows · 15 materials · 10 published margins · every row has its NTRS ID,</text>
-  <text x="84" y="761" class="s">page or table and a quote under 15 words</text>
+  <text x="84" y="719" class="mono">data/ledger.csv  margins.csv  presets.csv  sources.csv  hypotheses.json  investigations.json</text>
+  <text x="84" y="743" class="s">69 verified rows · 15 materials · 10 published margins · 21 investigations · every item has its</text>
+  <text x="84" y="761" class="s">NASA source, page or table and a quote under 15 words</text>
 
   <rect x="800" y="665" width="340" height="110" rx="12" fill="#fff" stroke="#7d8088" stroke-width="1.5"/>
-  <text x="824" y="695" class="h">7 public NASA reports (NTRS)</text>
-  <text x="824" y="719" class="s">BASS-II, WSTF flammability tests,</text>
-  <text x="824" y="737" class="s">drop-tower partial gravity, FM2 (LPSC 2026)</text>
+  <text x="824" y="695" class="h">Public NASA sources</text>
+  <text x="824" y="719" class="s">7 NTRS reports, NASA Glenn pages,</text>
+  <text x="824" y="737" class="s">8 fact sheets, ISS Researcher's Guide</text>
   <text x="824" y="759" class="s">Checked page by page: docs/EVIDENCE_AUDIT.md</text>
   <line class="line" x1="800" y1="720" x2="724" y2="720" marker-end="url(#arr)"/>
   <text x="762" y="711" text-anchor="middle" class="lab">hand-</text>

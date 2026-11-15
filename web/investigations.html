@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlameLedger: NASA combustion investigations</title>
+  <meta name="description" content="NASA's microgravity combustion investigations summarised, ranked by relevance to spacecraft, stations, lunar and Mars bases and rovers, and compared side by side. Every field linked to its NASA source.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script type="module" src="/static/investigations.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="17" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="17" r="4" fill="#eb6834"/></svg>
+        FlameLedger
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/">Evidence Ledger</a>
+        <a href="/investigations" aria-current="page">Investigations</a>
+        <a href="/review">Habitat Review</a>
+        <a href="/ask">Ask</a>
+        <a href="/fm2">Partial gravity &amp; FM2</a>
+        <a href="/docs">Open API</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div class="hero">
+      <p class="eyebrow">Investigations · prevention, detection and suppression</p>
+      <h1>NASA's fire experiments, summarised and ranked for your habitat</h1>
+      <p class="lede">Decades of NASA combustion investigations, from small flames in the Space Station glovebox to large fires inside departing cargo ships. Pick a habitat to see which investigations matter most and why, then open any card for its fuels, conditions, measurements and NASA sources.</p>
+      <p class="row">
+        <span class="badge strong">Research decision support, not certification</span>
+        <span class="badge" id="inv-count">Loading…</span>
+      </p>
+    </div>
+
+    <section aria-labelledby="h-rank">
+      <h2 id="h-rank">Most relevant to your habitat</h2>
+      <p class="sub">Each investigation carries relevance tags taken from its NASA sources (solid materials, air flow, habitat atmospheres, partial gravity, large fires, detection, suppression). The score is a weighted sum of those tags. <span id="rank-label"></span></p>
+      <div class="row">
+        <label class="inline-label" for="habitat">Habitat</label>
+        <select id="habitat"></select>
+      </div>
+      <ol class="rank-list" id="rank-list" aria-live="polite"><li class="small">Loading ranking…</li></ol>
+      <details>
+        <summary>How the weights are set</summary>
+        <div class="scroll" id="weights-table"></div>
+      </details>
+    </section>
+
+    <section aria-labelledby="h-explore">
+      <h2 id="h-explore">All investigations</h2>
+      <p class="sub">Filter by fire-safety area or fuel type. Select two or three cards to compare them side by side.</p>
+      <div class="filters" role="group" aria-label="Filters">
+        <div class="chips" id="area-chips" role="group" aria-label="Fire safety area"></div>
+        <label class="inline-label" for="fuel">Fuel</label>
+        <select id="fuel"><option value="">Any fuel type</option></select>
+        <label class="inline-label" for="q">Search</label>
+        <input id="q" type="search" placeholder="e.g. Nomex, droplet, glovebox" maxlength="60">
+      </div>
+      <div class="compare-bar" id="compare-bar" hidden>
+        <span id="compare-count"></span>
+        <button class="btn primary" type="button" id="compare-go">Compare selected</button>
+        <button class="btn" type="button" id="compare-clear">Clear</button>
+      </div>
+      <div id="compare-out" aria-live="polite"></div>
+      <div class="inv-grid" id="inv-grid"><p class="small">Loading investigations…</p></div>
+    </section>
+
+    <section aria-labelledby="h-earth">
+      <h2 id="h-earth">Fire safety on Earth</h2>
+      <p class="sub">NASA's space fire research has practical uses on the ground.</p>
+      <div class="cols" id="earth"></div>
+    </section>
+
+    <section aria-labelledby="h-data">
+      <h2 id="h-data">Data for modellers</h2>
+      <p class="sub">Everything on FlameLedger is available as open JSON or CSV, so you can feed it into your own flammability and fire-scenario models. Each record keeps its NASA source, page and quote.</p>
+      <div class="scroll"><table>
+        <thead><tr><th scope="col">Data</th><th scope="col">Endpoint</th><th scope="col">What you get</th></tr></thead>
+        <tbody>
+          <tr><td>Evidence ledger</td><td><a class="mono" href="/api/ledger.csv">/api/ledger.csv</a> · <a class="mono" href="/api/ledger">/api/ledger</a></td><td>Every verified row: material, environment, gravity level, O2 %, pressure, flow regime, measure (ULOI, MOC, blowoff, spread), outcome, source, page and quote.</td></tr>
+          <tr><td>Published margins</td><td><a class="mono" href="/api/margins">/api/margins</a></td><td>Oxygen margins of safety exactly as published by NASA authors, with how they were defined.</td></tr>
+          <tr><td>Limits across gravity</td><td><a class="mono" href="/api/gravity-profile">/api/gravity-profile</a></td><td>Published MOC and ULOI at 0g, lunar, Mars and 1g for materials with all four, from one source each.</td></tr>
+          <tr><td>Investigations</td><td><a class="mono" href="/api/investigations">/api/investigations</a></td><td>This catalogue: objectives, fuels, conditions, variables, measurements, hardware and relevance tags.</td></tr>
+          <tr><td>Habitat ranking</td><td><a class="mono" href="/api/investigations/rank?habitat=lunar_base">/api/investigations/rank</a></td><td>Ranked investigations with the reasons behind every score.</td></tr>
+          <tr><td>Everything else</td><td><a class="mono" href="/docs">/docs</a></td><td>Interactive documentation of every endpoint.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section aria-labelledby="h-src">
+      <h2 id="h-src">Sources for this page</h2>
+      <p class="sub" id="inv-statement"></p>
+      <ul class="src-list" id="inv-sources"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="disclaimer">Built for the 2026 NASA Space Apps Challenge. Not affiliated with or endorsed by NASA. Uses public NASA data.</p>
+      <p>Research decision support, not certification. Always consult the original NASA documents and your programme's materials and processes authority.</p>
+      <p id="build-info"></p>
+    </div>
+  </footer>
+</body>
+</html>

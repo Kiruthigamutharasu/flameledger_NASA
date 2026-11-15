@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 client = TestClient(app)
 
 
-@pytest.mark.parametrize("path", ["/", "/fm2", "/review"])
+@pytest.mark.parametrize("path", ["/", "/fm2", "/review", "/investigations", "/ask"])
 def test_pages_load_with_disclaimer(path):
     res = client.get(path)
     assert res.status_code == 200
@@ -25,7 +25,7 @@ def test_pages_load_with_disclaimer(path):
     assert res.headers["X-Content-Type-Options"] == "nosniff"
 
 
-@pytest.mark.parametrize("path", ["/static/styles.css", "/static/common.js", "/static/ledger.js", "/static/fm2.js", "/static/review.js",
+@pytest.mark.parametrize("path", ["/static/styles.css", "/static/common.js", "/static/ledger.js", "/static/fm2.js", "/static/review.js", "/static/investigations.js", "/static/ask.js",
                                   "/static/favicon.svg", "/favicon.ico", "/docs", "/openapi.json"])
 def test_assets_and_docs_load(path):
     assert client.get(path).status_code == 200

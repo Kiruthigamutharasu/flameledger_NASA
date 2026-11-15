@@ -17,10 +17,12 @@ Demo video (30 seconds, English subtitles, YouTube unlisted): paste the YouTube 
 Live app: https://flameledger.onrender.com · Code: https://github.com/Kiruthigamutharasu/flameledger_NASA
 
 ### Detailed Project Description
-**What it does.** FlameLedger has three pages and an open API.
+**What it does.** FlameLedger has five pages and an open API.
 1. *Evidence Ledger*: computed metrics, a coverage grid of materials × environments (1g, ISS microgravity, lunar, Mars, FM2) and all published oxygen margins, ranked. Each cell opens the underlying values with the NASA document, page or table, and a quote of under 15 words.
 2. *Habitat Review* (AI agent): the user picks a habitat preset (e.g. lunar habitat 34% O2 / 8.2 psia, from NASA's FM2 presentation) or enters custom values, and lists materials. Deterministic rules assign 🔴 (burned in reduced gravity at or below this O2), 🟠 (thin or negative published margin), 🟢 (self-extinguished at this gravity level at or above this O2) or ⚪ (no comparable space data: test needed). Every applicable verdict is listed, with caveats on pressure, test-duct flow vs. cabin ventilation, and partial gravity. Gemini then explains the verdicts; a verifier checks that every cited source was in the evidence given, that every number matches it within ±0.1, and that no number appears in the prose without a claim. If verification fails twice, only the deterministic table is shown. Users can download the full report as a PDF.
-3. *Partial gravity & FM2*: NASA drop-tower data show the lunar-gravity limit below both the 0g and 1g limits for all three materials tested, so 0g and 1g do not bracket the Moon. The page shows FM2's four planned tests and three pre-registered qualitative hypotheses, each with a refutation criterion and a SHA-256 fingerprint.
+3. *Investigations*: 21 NASA combustion investigations (BASS, Saffire, SoFIE, FLARE, FM2, LUCI, FLEX, FLEX-2, CFI, the six ACME experiments, SPICE, SLICE, SAME, SAME-R, DAFT, water mist), each summarised with objective, fuels and sample sizes, conditions, variables, measurements and hardware. They are ranked by relevance to a crew spacecraft, space station, lunar base, pressurized rover or Mars base, with the reason behind every score, and can be filtered by prevention, detection and suppression and compared side by side. Includes fire safety on Earth and a data guide for modellers.
+4. *Ask*: plain-English questions answered by Gemini from the catalogue and ledger only; the answer is shown only after the verifier checks every number and citation, and the sourced evidence is always listed.
+5. *Partial gravity & FM2*: NASA drop-tower data show the lunar-gravity limit below both the 0g and 1g limits for all three materials tested, so 0g and 1g do not bracket the Moon. The page shows FM2's four planned tests and three pre-registered qualitative hypotheses, each with a refutation criterion and a SHA-256 fingerprint.
 
 **Benefits.** Habitat and materials engineers, researchers and students can see in seconds which materials have reduced-gravity evidence for their atmosphere, and which tests are missing. The verified ledger is reusable through a JSON/CSV API.
 
@@ -43,10 +45,14 @@ Live app: https://flameledger.onrender.com · Code: https://github.com/Kiruthiga
 - NTRS 20260001966: Ferkul et al., Flammability of Materials on the Moon (FM2), LPSC 2026 presentation. https://ntrs.nasa.gov/citations/20260001966
 
 ### Space Agency Partner & Other Data
-No partner-agency data is used. Habitat presets for the ISS cabin, spacesuit and Moon base come from the NASA Space Apps 2026 *Flame in Freefall* challenge brief. A Saffire preliminary-results paper was considered but is held back, because its only available copy requires a login.
+We use no partner-agency datasets directly. The investigation catalogue notes that NASA Glenn lists FLARE (Flammability Limits At Reduced-g Experiment) as an international team that includes JAXA, ESA, CNES and DLR. Habitat presets for the ISS cabin, spacesuit and Moon base come from the NASA Space Apps 2026 *Flame in Freefall* challenge brief. A Saffire preliminary-results paper was considered but is held back, because its only available copy requires a login.
 
 ### References
 - All NASA documents listed under NASA Data.
+- NASA Glenn Research Center, Combustion Science: https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/
+- NASA, A Researcher's Guide to: Combustion Science (2015): https://www.nasa.gov/missions/station/a-researchers-guide-to-combustion-science/
+- NASA Glenn fact sheets for BASS, Saffire, FLEX, SAME, DAFT, SPICE, SLICE and ACME (linked from the Combustion Science page)
+- NASA Spinoff: Fireman's Air Tanks, Fire Detector, New Technology for the Fire Attire
 - NASA Space Apps 2026 challenge brief, *Flame in Freefall*.
 - We did not use any other repositories or datasets; every fact comes from the NASA documents listed above and the Space Apps 2026 challenge brief.
 

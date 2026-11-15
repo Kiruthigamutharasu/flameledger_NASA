@@ -69,3 +69,13 @@ The ΔO2 margins are **published** values: (mean low-g limit) − (mean 1g limit
 
 Not added: PET and PEI from Table 2 (tested at 10.2 psia with the GRC hot-wire protocol). Their hot-wire values (21.3 / 20 and 23.5 / 23) almost match E15 Mylar G (a PET film) and Ultem 1000 (a PEI), so they are probably the same samples; adding them would double-count materials. The values with non-standard sample widths, thicknesses, durometers or pass/fail lengths (Tables 3, 4, 6, and the ½-in widths in Tables 8–9) are left out to keep one standard configuration per material.
 No reduced-gravity value exists in the ledger for any E19 material. They appear as 1g-only rows, which widens the evidence gap shown by the coverage grid.
+
+## F. Investigation catalogue (data/investigations.json), 15 Nov 2026, 16:00 IST
+
+Method: the NASA PDFs (the 2015 ISS combustion Researcher's Guide and eight NASA Glenn fact sheets) were downloaded from nasa.gov and their text extracted with pypdf. Every quote taken from a PDF was matched word for word against the extracted text, after normalising ligatures and line-break hyphens. All 18 PDF quotes matched. The 7 quotes from web pages (the challenge statement and NASA Glenn's Combustion Science page) were checked by hand against the page text in a browser.
+
+Rules applied:
+- Status says "Conducted" only where a source says so (the challenge page describes the ACME, FLEX, FLEX-2 and CFI tests in the past tense); otherwise the source's own wording is used.
+- Fields with no information in the sources say "Not yet summarised". Nothing was inferred, including what the "-R" in SAME-R stands for.
+- Relevance tags (solid materials, air flow, habitat atmosphere, partial gravity, large scale, detection, suppression) each carry a sentence of evidence from the investigation's sources.
+- Ranking weights are FlameLedger research settings, not NASA criteria, and are shown on the page.

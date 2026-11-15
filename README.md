@@ -22,6 +22,10 @@ If you're choosing materials for a lunar habitat, the useful question is: for my
 
 **Evidence Ledger** (`/`): headline counts, a grid of materials against test environments (1g, ISS microgravity, lunar, Mars, FM2) and every published oxygen margin, ranked. Click any cell to see the values behind it, with the NASA document, the page or table, and a short quote. The empty cells matter most: they show where nobody has published data yet.
 
+**Investigations** (`/investigations`): 21 NASA combustion investigations (BASS, Saffire, SoFIE, FLARE, FM2, LUCI, FLEX, FLEX-2, CFI, the six ACME experiments, SPICE, SLICE, SAME, SAME-R, DAFT and the water-mist experiment). Each card gives the objective, fuels and sample sizes, test conditions, variables, measurements and hardware, with its NASA sources. Pick a habitat (crew spacecraft, space station, lunar base, pressurized rover, Mars base) and the investigations are ranked by relevance, with the reason for every point of the score. Filter by prevention, detection or suppression, and compare two or three investigations side by side. The page also covers fire safety on Earth and a guide to the data for modellers.
+
+**Ask** (`/ask`): ask a question in plain English, such as "Which experiments studied smoke detection?". FlameLedger finds the most relevant investigations and ledger rows, Gemini writes a short answer from that evidence only, and the answer is shown only if every number and citation checks out. The sourced evidence is always listed, even without AI.
+
 **Habitat Review** (`/review`): enter an atmosphere (O2 %, pressure, gravity) and a list of materials. Each material gets a verdict from fixed rules, then Gemini writes a plain-English explanation that is only shown if it passes a fact check. You can download the whole review as a PDF.
 
 **Partial gravity & FM2** (`/fm2`): why 0g and 1g don't bracket lunar gravity, the published limits at four gravity levels, FM2's four planned tests, and three hypotheses we wrote down before FM2 flies.
@@ -50,6 +54,15 @@ These counts are computed by the app from the data files, not typed in:
 **Evidence Ledger:** live counts and the coverage grid. Every striped cell is a material/environment pair with no published data.
 
 ![Evidence Ledger: metrics and coverage grid](docs/images/01_evidence_ledger.png)
+
+**Investigations:** NASA's combustion investigations ranked for the selected habitat, with a side-by-side comparison.
+
+![Investigations ranked for a habitat](docs/images/10_investigations_rank.png)
+![Comparing two investigations](docs/images/11_investigations_compare.png)
+
+**Ask:** a plain-English question answered from the evidence, with a verified badge and the sources.
+
+![Ask FlameLedger with a verified answer](docs/images/12_ask.png)
 
 **Habitat Review:** the Example case (lunar habitat, 34% O2, 8.2 psia). The rules decide the verdicts, and Gemini's explanation is shown only after it passes the fact check.
 
@@ -100,10 +113,10 @@ If the check fails, Gemini gets one more try with the list of errors. If that al
 
 ## How this fits the judging criteria
 
-- **Influence:** a public, checked, citable ledger with an open API, and reviews you can download as a PDF.
+- **Influence:** a public, checked, citable ledger and investigation catalogue with an open API, habitat-specific rankings, and reviews you can download as a PDF.
 - **Creativity:** we treat the gaps as the finding, and we registered FM2 hypotheses before the mission flies (SHA-256 fingerprint plus the git tag `fm2-hypotheses-v1`).
-- **Validity:** every number links to its NASA page, only published margins are shown, the AI is fact-checked, and there are 136 automated tests and a written evidence audit (`docs/EVIDENCE_AUDIT.md`).
-- **Relevance:** it summarises, ranks and interprets NASA combustion data for spacecraft fire safety, which is what *Flame in Freefall* asks for.
+- **Validity:** every number links to its NASA page, only published margins are shown, the AI is fact-checked, and there are 156 automated tests and a written evidence audit (`docs/EVIDENCE_AUDIT.md`).
+- **Relevance:** it summarises, ranks and interprets NASA combustion investigations for spacecraft, stations, lunar and Mars bases and rovers, which is what *Flame in Freefall* asks for. See [`docs/CHALLENGE_COVERAGE.md`](docs/CHALLENGE_COVERAGE.md) for a point-by-point map.
 - **Presentation:** three focused pages, hand-drawn SVG charts, no external scripts, and it works on a phone.
 
 ## NASA data we used
@@ -117,6 +130,8 @@ If the check fails, Gemini gets one more try with the list of errors. If that al
 | [NTRS 20130010991](https://ntrs.nasa.gov/citations/20130010991) | Olson & Ferkul 2012, *Evaluating Material Flammability in Microgravity and Martian Gravity …* | Table I: limits and published margins at 1g, Mars, lunar and 0g for Mylar G, Ultem 1000 and Nomex HT90-40 |
 | [NTRS 20260000646](https://ntrs.nasa.gov/citations/20260000646) | Ferkul et al., FM2 abstract, LPSC 2026 | The FM2 mission; partial gravity may raise flammability limits |
 | [NTRS 20260001966](https://ntrs.nasa.gov/citations/20260001966) | Ferkul et al., FM2 presentation, LPSC 2026 | FM2 Tests 1–4 (37/33/29/25% O2 at 8.2 psia), the lunar habitat atmosphere (34% O2, 8.2 psia), the EVA suit (100% O2, 4.3 psia), the Test 1 description, and the FM2 design target |
+
+The investigation catalogue also draws on NASA Glenn's [Combustion Science](https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/) page and fact sheets (BASS, Saffire, FLEX, SAME, DAFT, SPICE, SLICE, ACME), NASA's [Researcher's Guide to ISS Combustion Science](https://www.nasa.gov/missions/station/a-researchers-guide-to-combustion-science/) and NASA Spinoff pages. The full list is on the Investigations page and in `data/investigations.json`.
 
 Some habitat presets also come from the Space Apps 2026 challenge brief. We checked every value against the PDF and logged the page in [`docs/EVIDENCE_AUDIT.md`](docs/EVIDENCE_AUDIT.md).
 

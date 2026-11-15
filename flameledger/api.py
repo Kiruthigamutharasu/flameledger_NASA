@@ -12,8 +12,10 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import Response
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
+from .ask import Asker
 from .config import Settings
 from .data import Dataset
+from .investigations import Catalogue, compare, rank
 from .llm import Explainer
 from .report import build_report
 from .report_pdf import build_pdf
@@ -134,5 +136,67 @@ def build_router(dataset: Dataset, settings: Settings, disclaimer: str, commit) 
                                                         "Please download the Markdown report instead.")
         return Response(data, media_type="application/pdf",
                         headers={"Content-Disposition": 'attachment; filename="flameledger_habitat_review.pdf"'})
+
+    return router
+
+
+class AskRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    question: str = Field(min_length=3, max_length=300)
+
+
+def build_investigations_router(cat: Catalogue, dataset: Dataset, explainer: Explainer) -> APIRouter:
+    router = APIRouter(prefix="/api", tags=["investigations"])
+    asker = Asker(cat, dataset, explainer)
+    ask_limit = RateLimiter(10)
+    profile_ids = [p.id for p in cat.habitat_profiles]
+
+    @router.get("/investigations", summary="NASA combustion investigations relevant to fire safety")
+    def investigations(area: str | None = None, fuel_type: str | None = None, flag: str | None = None):
+        """The full catalogue (or a filtered part of it), with the sources behind every field."""
+        items = list(cat.investigations)
+        if area:
+            items = [i for i in items if area in i.areas]
+        if fuel_type:
+            items = [i for i in items if i.fuel_type.lower().startswith(fuel_type.lower())]
+        if flag:
+            items = [i for i in items if flag in i.flags]
+        return {"compiled_on": cat.compiled_on, "statement": cat.statement, "flags": cat.flags,
+                "habitat_profiles": [p.model_dump() for p in cat.habitat_profiles],
+                "sources": [s.model_dump() for s in cat.sources],
+                "earth_applications": [a.model_dump() for a in cat.earth_applications],
+                "investigations": [i.model_dump() for i in items]}
+
+    @router.get("/investigations/rank", summary="Rank investigations by relevance to a habitat type")
+    def investigations_rank(habitat: str = "lunar_base"):
+        """Transparent weighted sum of sourced relevance flags. Weights are FlameLedger research settings."""
+        if habitat not in profile_ids:
+            raise HTTPException(status_code=422, detail=f"habitat must be one of: {', '.join(profile_ids)}")
+        return rank(cat, habitat)
+
+    @router.get("/investigations/compare", summary="Compare two or three investigations side by side")
+    def investigations_compare(ids: str):
+        wanted = [i.strip() for i in ids.split(",") if i.strip()]
+        if not 2 <= len(wanted) <= 3 or len(set(wanted)) != len(wanted):
+            raise HTTPException(status_code=422, detail="Give two or three different investigation ids, comma-separated.")
+        try:
+            return compare(cat, wanted)
+        except KeyError:
+            raise HTTPException(status_code=404, detail="Unknown investigation id.")
+
+    @router.get("/investigations/{inv_id}", summary="One investigation")
+    def investigation(inv_id: str):
+        inv = cat.get(inv_id)
+        if inv is None:
+            raise HTTPException(status_code=404, detail="Unknown investigation id.")
+        return inv.model_dump()
+
+    @router.post("/ask", summary="Ask a question; answered only from the catalogue and the verified ledger")
+    def ask(req: AskRequest, request: Request):
+        """Returns the most relevant sourced evidence and, when Gemini is available and the answer passes the
+        verifier, a short answer. `ai_status` is verified, failed_verification, unavailable, not_configured or no_match."""
+        if not ask_limit.allow(client_ip(request)):
+            raise HTTPException(status_code=429, detail="Too many questions. Please wait a minute and try again.")
+        return asker.ask(req.question)
 
     return router

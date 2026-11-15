@@ -1,0 +1,1084 @@
+{
+  "compiled_on": "2026-11-15",
+  "statement": "Summaries of NASA combustion investigations relevant to fire safety. Every field comes from the NASA source named with it; quotes are copied exactly and are under 15 words. Fields marked 'Not yet summarised' were not found in the sources we checked.",
+  "sources": [
+    {
+      "source_id": "SPACEAPPS-2026-FIF",
+      "title": "Flame in Freefall: challenge statement and resources (NASA Space Apps 2026)",
+      "publisher": "NASA Space Apps Challenge",
+      "url": "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+    },
+    {
+      "source_id": "NASA-GRC-COMBUSTION",
+      "title": "Combustion Science (NASA Glenn Research Center, Physical Sciences Program)",
+      "publisher": "NASA",
+      "url": "https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/"
+    },
+    {
+      "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+      "title": "A Researcher's Guide to: Combustion Science (ISS Researcher's Guide Series, NP-2015-10-034-JSC)",
+      "publisher": "NASA",
+      "url": "https://www.nasa.gov/wp-content/uploads/2016/05/np-2015-10-034-jsc_combustion_in_reduced_gravity-iss-mini-book-011116-508.pdf"
+    },
+    {
+      "source_id": "NASA-FS-BASS",
+      "title": "Burning and Suppression of Solids (BASS) fact sheet",
+      "publisher": "NASA Glenn Research Center",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/07/burning-and-suppression-of-solids-bass.pdf"
+    },
+    {
+      "source_id": "NASA-FS-SAFFIRE",
+      "title": "Spacecraft Fire Safety Demonstration (Saffire) fact sheet",
+      "publisher": "NASA Glenn Research Center",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/07/spacecraft-fire-safety-demonstration-saffire.pdf"
+    },
+    {
+      "source_id": "NASA-FS-FLEX",
+      "title": "Flame Extinguishment Experiment (FLEX) fact sheet",
+      "publisher": "NASA Glenn Research Center",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/07/flame-extinguishment-experiment-flex.pdf"
+    },
+    {
+      "source_id": "NASA-FS-SAME",
+      "title": "Smoke Aerosol Measurement Experiment (SAME) fact sheet",
+      "publisher": "NASA Glenn Research Center",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/07/smoke-aerosol-measurement-experiment-same.pdf"
+    },
+    {
+      "source_id": "NASA-FS-DAFT",
+      "title": "Dust and Aerosol Measurement Feasibility Test (DAFT) fact sheet",
+      "publisher": "NASA Glenn Research Center",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/07/dust-and-aerosol-measurement-feasibility-test-daft.pdf"
+    },
+    {
+      "source_id": "NASA-FS-SPICE",
+      "title": "Smoke Point in Co-flow Experiment (SPICE) fact sheet",
+      "publisher": "NASA Glenn Research Center",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/07/smoke-point-in-co-flow-experiment-spice.pdf"
+    },
+    {
+      "source_id": "NASA-FS-SLICE",
+      "title": "Structure & Liftoff in Combustion Experiment (SLICE) fact sheet",
+      "publisher": "NASA Glenn Research Center",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/07/structure-liftoff-in-combustion-experiment-slice.pdf"
+    },
+    {
+      "source_id": "NASA-FS-ACME",
+      "title": "Advanced Combustion via Microgravity Experiments (ACME) fact sheet",
+      "publisher": "NASA Glenn Research Center",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/07/advanced-combustion-via-microgravity-experiments-acme.pdf"
+    },
+    {
+      "source_id": "NASA-SPINOFF-AIR-TANKS",
+      "title": "Fireman's Air Tanks (NASA Spinoff)",
+      "publisher": "NASA Spinoff",
+      "url": "https://spinoff.nasa.gov/node/9582"
+    },
+    {
+      "source_id": "NASA-SPINOFF-FIRE-DETECTOR",
+      "title": "Fire Detector (NASA Spinoff)",
+      "publisher": "NASA Spinoff",
+      "url": "https://spinoff.nasa.gov/node/9407"
+    },
+    {
+      "source_id": "NASA-SPINOFF-FIRE-ATTIRE",
+      "title": "New Technology for the Fire Attire (NASA Spinoff)",
+      "publisher": "NASA Spinoff",
+      "url": "https://spinoff.nasa.gov/node/9918"
+    }
+  ],
+  "flags": {
+    "solid_materials": "Flammability of solid materials such as fabrics and plastics (fire prevention through material selection)",
+    "ventilation_flow": "Effect of air flow speed, which matters in microgravity cabins",
+    "habitat_atmosphere": "Tests at oxygen levels or pressures beyond Earth air, relevant to exploration habitats and suits",
+    "partial_gravity": "Lunar or Mars gravity, or a method that mimics or assesses it",
+    "large_scale": "Fires larger than small laboratory samples",
+    "detection": "Fire or smoke detection",
+    "suppression": "Fire suppression or extinguishment"
+  },
+  "habitat_profiles": [
+    {
+      "id": "spacecraft",
+      "label": "Crew spacecraft",
+      "weights": {
+        "solid_materials": 3,
+        "ventilation_flow": 3,
+        "detection": 2,
+        "suppression": 2,
+        "large_scale": 2,
+        "habitat_atmosphere": 1,
+        "partial_gravity": 0
+      }
+    },
+    {
+      "id": "space_station",
+      "label": "Space station",
+      "weights": {
+        "solid_materials": 3,
+        "ventilation_flow": 3,
+        "detection": 2,
+        "suppression": 2,
+        "large_scale": 2,
+        "habitat_atmosphere": 1,
+        "partial_gravity": 0
+      }
+    },
+    {
+      "id": "lunar_base",
+      "label": "Lunar surface base",
+      "weights": {
+        "solid_materials": 3,
+        "habitat_atmosphere": 3,
+        "partial_gravity": 3,
+        "ventilation_flow": 1,
+        "detection": 1,
+        "suppression": 1,
+        "large_scale": 1
+      }
+    },
+    {
+      "id": "pressurized_rover",
+      "label": "Pressurized rover",
+      "weights": {
+        "solid_materials": 3,
+        "habitat_atmosphere": 3,
+        "partial_gravity": 3,
+        "ventilation_flow": 2,
+        "detection": 1,
+        "suppression": 1,
+        "large_scale": 0
+      }
+    },
+    {
+      "id": "mars_base",
+      "label": "Mars surface base",
+      "weights": {
+        "solid_materials": 3,
+        "partial_gravity": 3,
+        "habitat_atmosphere": 2,
+        "ventilation_flow": 1,
+        "detection": 1,
+        "suppression": 1,
+        "large_scale": 1
+      }
+    }
+  ],
+  "investigations": [
+    {
+      "id": "bass",
+      "acronym": "BASS / BASS-II",
+      "name": "Burning and Suppression of Solids",
+      "project": "",
+      "areas": [
+        "prevention",
+        "suppression"
+      ],
+      "fuel_type": "solid",
+      "platform": "ISS",
+      "hardware": "Microgravity Science Glovebox (MSG), using a slightly modified SPICE flow duct",
+      "status": "Archived by NASA Glenn (BASS operations started in March 2012)",
+      "objective": "Examines how a wide variety of solid fuel samples burn and go out in microgravity, with air flow speed as the main variable, and applies nitrogen as a suppressant to selected flames.",
+      "fuels": "41 fuel samples in three categories: flat samples, solid spheres and candles within tubes. Thin flat samples include the SIBAL cotton-fiberglass fabric, Nomex and Ultem; thick samples include PMMA.",
+      "conditions": "ISS air, nominally 21% oxygen at one atmosphere; nitrogen was used for tests as low as 17% oxygen. In one fabric test the flow was stepped down from 10 cm/s to below 1 cm/s.",
+      "variables": "Air flow speed (main variable), sample type and size, oxygen concentration, nitrogen suppressant",
+      "measurements": "Concurrent-flow spread rate and limiting flame length (thin samples); flame growth rate, flame-to-fuel distance and solid regression rate from high-resolution images",
+      "flags": {
+        "solid_materials": "Burns a wide variety of solid fuel samples, including spacecraft fabrics and plastics",
+        "ventilation_flow": "The air flow speed is the main variable",
+        "suppression": "A nitrogen suppressant was applied to selected flames"
+      },
+      "quotes": [
+        {
+          "text": "burning and extinction characteristics of a wide variety of fuel samples in microgravity",
+          "source_id": "NASA-FS-BASS",
+          "location": "p.1"
+        },
+        {
+          "text": "materials in microgravity, with adequate ventilation, burn as well if not better",
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.21"
+        }
+      ],
+      "earth_application": "BASS results contribute to computational models used in the design of fire detection and suppression systems in microgravity and on Earth.",
+      "ledger_rows": [
+        "E2",
+        "E8.0g"
+      ],
+      "sources": [
+        {
+          "source_id": "NASA-FS-BASS",
+          "location": "p.1"
+        },
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "pp.18-22"
+        },
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Hardware"
+        }
+      ]
+    },
+    {
+      "id": "saffire",
+      "acronym": "Saffire-I to -VI",
+      "name": "Spacecraft Fire Safety Demonstration",
+      "project": "",
+      "areas": [
+        "prevention"
+      ],
+      "fuel_type": "solid",
+      "platform": "Cygnus cargo vehicle, after it leaves the ISS",
+      "hardware": "Flow duct and avionics bay inside an enclosure about 0.5 m wide, 1 m deep and 1.3 m long (Saffire-I)",
+      "status": "Saffire-I completed July 2016; Saffire-II completed 27 Nov 2016; Saffire-III launched 18 Apr 2017; Saffire-IV ignited 11 May 2020; Saffire-V and -VI followed",
+      "objective": "Studies large-scale flame growth and material flammability limits in space by burning samples inside a Cygnus cargo vehicle after it has left the space station and before its destructive reentry.",
+      "fuels": "Saffire-I: a cotton-fiberglass blend sample 0.4 m wide by 1 m long. Saffire-II: nine samples including cotton-fiberglass, Nomex and the acrylic glass used for spacecraft windows. Saffire-IV: SIBAL cloth (75% cotton, 25% fiberglass) and the Saffire-II materials.",
+      "conditions": "Saffire-III burned the Saffire-I fabric at a higher flow velocity. Saffire-IV burned the Saffire-II materials at different pressures and oxygen levels. Saffire-V examines the range of pressures and oxygen concentrations expected in future exploration spacecraft.",
+      "variables": "Sample material, flow velocity, pressure and oxygen concentration",
+      "measurements": "Not yet summarised",
+      "flags": {
+        "solid_materials": "Burns spacecraft materials such as cotton-fiberglass fabric, Nomex and window acrylic",
+        "large_scale": "Saffire-I's sample was 0.4 m by 1 m; before it, the largest space fire experiment was about the size of an index card",
+        "ventilation_flow": "Saffire-III repeated the Saffire-I fabric at a higher flow velocity",
+        "habitat_atmosphere": "Saffire-V examines pressures and oxygen concentrations expected in future exploration spacecraft"
+      },
+      "quotes": [
+        {
+          "text": "investigate large-scale flame growth and material flammability limits in space",
+          "source_id": "NASA-FS-SAFFIRE",
+          "location": "p.1"
+        }
+      ],
+      "earth_application": "",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-FS-SAFFIRE",
+          "location": "pp.1-2"
+        },
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Background"
+        }
+      ]
+    },
+    {
+      "id": "sofie",
+      "acronym": "SoFIE",
+      "name": "Solid Fuel Ignition and Extinction",
+      "project": "",
+      "areas": [
+        "prevention"
+      ],
+      "fuel_type": "solid",
+      "platform": "ISS",
+      "hardware": "An insert for the Combustion Integrated Rack (CIR), plus a larger flow duct in the MSG",
+      "status": "Listed as a current combustion experiment by NASA Glenn",
+      "objective": "Studies ignition and flammability of solid spacecraft materials in practical geometries and realistic atmospheres, including a microgravity flammability map to compare with the NASA-STD-6001 Test 1 worst case.",
+      "fuels": "Most likely plastics such as PMMA or Delrin (as planned in the 2015 guide)",
+      "conditions": "Chamber oxygen from 10% to 40% by volume at 0.2 to 1.5 atm; air flows in the spacecraft ventilation range of 0 to 30 cm/s",
+      "variables": "Material, oxygen concentration, pressure, flow speed, external heating",
+      "measurements": "Not yet summarised",
+      "flags": {
+        "solid_materials": "Studies ignition and flammability of solid spacecraft materials",
+        "habitat_atmosphere": "Oxygen from 10% to 40% at 0.2 to 1.5 atm, which includes exploration atmospheres",
+        "ventilation_flow": "Air flows in the spacecraft ventilation range of 0 to 30 cm/s"
+      },
+      "quotes": [
+        {
+          "text": "ignition and flammability of solid spacecraft materials in practical geometries",
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.22"
+        },
+        {
+          "text": "some researchers believe is not conservative in low-g",
+          "source_id": "NASA-GRC-COMBUSTION",
+          "location": "SoFIE summary"
+        }
+      ],
+      "earth_application": "",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "pp.19-22"
+        },
+        {
+          "source_id": "NASA-GRC-COMBUSTION",
+          "location": "Current Combustion Experiments"
+        }
+      ]
+    },
+    {
+      "id": "flare",
+      "acronym": "FLARE",
+      "name": "Flammability Limits At Reduced-g Experiment",
+      "project": "",
+      "areas": [
+        "prevention"
+      ],
+      "fuel_type": "solid",
+      "platform": "ISS",
+      "hardware": "Not yet summarised",
+      "status": "Listed as a current combustion experiment by NASA Glenn",
+      "objective": "Develops a way to correlate material flammability limits in normal gravity and microgravity, so that microgravity limits can be estimated from ground data. International team including JAXA, NASA, ESA, CNES and DLR.",
+      "fuels": "Not yet summarised",
+      "conditions": "Not yet summarised",
+      "variables": "Not yet summarised",
+      "measurements": "Not yet summarised",
+      "flags": {
+        "solid_materials": "Correlates material flammability limits between normal gravity and microgravity"
+      },
+      "quotes": [
+        {
+          "text": "correlate material flammability limits in normal gravity and microgravity",
+          "source_id": "NASA-GRC-COMBUSTION",
+          "location": "FLARE summary"
+        }
+      ],
+      "earth_application": "",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-GRC-COMBUSTION",
+          "location": "Current Combustion Experiments"
+        }
+      ]
+    },
+    {
+      "id": "fm2",
+      "acronym": "FM2",
+      "name": "Flammability of Materials on the Moon",
+      "project": "",
+      "areas": [
+        "prevention"
+      ],
+      "fuel_type": "solid",
+      "platform": "Lunar surface",
+      "hardware": "Not yet summarised",
+      "status": "Launch planned for late 2026",
+      "objective": "Burns four solid fuel samples in quiescent habitable atmospheres in actual long-duration lunar gravity: the first combustion experiment on another planetary body.",
+      "fuels": "Synergy Pro Navy fabric sheets, 2 x 20 cm exposed, hot-wire ignition, upward burning",
+      "conditions": "Four tests at 8.2 psia with 37%, 33%, 29% and 25% oxygen, in lunar gravity",
+      "variables": "Oxygen concentration",
+      "measurements": "Not yet summarised",
+      "flags": {
+        "partial_gravity": "Tests in actual lunar gravity on the Moon",
+        "habitat_atmosphere": "8.2 psia with 25% to 37% oxygen, matching planned lunar habitat atmospheres",
+        "solid_materials": "Burns a fabric material"
+      },
+      "quotes": [
+        {
+          "text": "first-ever combustion experiment to be performed on another planetary body",
+          "source_id": "NASA-GRC-COMBUSTION",
+          "location": "FM2 summary"
+        }
+      ],
+      "earth_application": "",
+      "ledger_rows": [
+        "E12",
+        "E13.t1",
+        "E13.t2",
+        "E13.t3",
+        "E13.t4",
+        "E18"
+      ],
+      "sources": [
+        {
+          "source_id": "NASA-GRC-COMBUSTION",
+          "location": "Current Combustion Experiments"
+        },
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Partial-gravity data"
+        }
+      ]
+    },
+    {
+      "id": "luci",
+      "acronym": "LUCI",
+      "name": "Lunar-g Combustion Investigation",
+      "project": "",
+      "areas": [
+        "prevention"
+      ],
+      "fuel_type": "unknown",
+      "platform": "Lunar gravity (future)",
+      "hardware": "Not yet summarised",
+      "status": "Future source of partial-gravity combustion data",
+      "objective": "Named by the challenge as a future source of partial-gravity combustion data for NASA's PSI database.",
+      "fuels": "Not yet summarised",
+      "conditions": "Not yet summarised",
+      "variables": "Not yet summarised",
+      "measurements": "Not yet summarised",
+      "flags": {
+        "partial_gravity": "Expected to add partial-gravity combustion data"
+      },
+      "quotes": [
+        {
+          "text": "Lunar-g Combustion Investigation (LUCI)",
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Partial-gravity data"
+        }
+      ],
+      "earth_application": "",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Partial-gravity data"
+        }
+      ]
+    },
+    {
+      "id": "flex",
+      "acronym": "FLEX",
+      "name": "Flame Extinguishment Experiment",
+      "project": "",
+      "areas": [
+        "suppression"
+      ],
+      "fuel_type": "liquid droplet",
+      "platform": "ISS",
+      "hardware": "Multi-user Droplet Combustion Apparatus (MDCA) in the Combustion Integrated Rack (CIR)",
+      "status": "Conducted (per the challenge page)",
+      "objective": "Measures how well inert-gas suppressants work in microgravity by burning fuel droplets in oxygen-nitrogen mixtures diluted with a second inert gas, and maps flammability limits for fire safety.",
+      "fuels": "Heptane and methanol droplets (MDCA handles droplets of 1 to 5 mm)",
+      "conditions": "Oxygen mole fraction from 0.10 to 0.50; diluents nitrogen, carbon dioxide, helium or xenon",
+      "variables": "Oxygen mole fraction, diluent gas, pressure",
+      "measurements": "Droplet burning rate, flame extinction, flame radiation, soot concentration and soot temperature",
+      "flags": {
+        "suppression": "Quantifies the effectiveness of inert-gas suppressants such as carbon dioxide and helium",
+        "habitat_atmosphere": "Oxygen mole fractions up to 0.50, beyond Earth air"
+      },
+      "quotes": [
+        {
+          "text": "assess and quantify the effectiveness of inert-gas suppressants in microgravity",
+          "source_id": "NASA-FS-FLEX",
+          "location": "p.1"
+        },
+        {
+          "text": "the flammability limit is lower in reduced gravity",
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.12"
+        }
+      ],
+      "earth_application": "The heptane and methanol combustion models are building blocks for models of practical fuels such as diesel and jet fuel.",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-FS-FLEX",
+          "location": "p.1"
+        },
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "pp.12-13"
+        },
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Background, Hardware"
+        }
+      ]
+    },
+    {
+      "id": "flex2",
+      "acronym": "FLEX-2",
+      "name": "Flame Extinguishment Experiment 2",
+      "project": "",
+      "areas": [
+        "fundamental"
+      ],
+      "fuel_type": "liquid droplet",
+      "platform": "ISS",
+      "hardware": "MDCA in the CIR",
+      "status": "Conducted (per the challenge page)",
+      "objective": "Builds on FLEX with a wider range of fuels, including mixtures of pure fuels and real-fuel surrogates, and studies soot formation, slow convective flow effects and droplet interactions.",
+      "fuels": "Mixtures of pure fuels and real-fuel surrogates; one image shows ethanol",
+      "conditions": "One example test: ethanol burning in 30% oxygen at 2.4 atm",
+      "variables": "Fuel mixture, diluent, flow, droplet spacing",
+      "measurements": "Not yet summarised",
+      "flags": {
+        "ventilation_flow": "Studies slow sub-buoyant convective flow effects"
+      },
+      "quotes": [
+        {
+          "text": "slow sub-buoyant, convective flow effects and droplet-droplet interactions",
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.13"
+        }
+      ],
+      "earth_application": "",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "pp.12-13"
+        },
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Hardware"
+        }
+      ]
+    },
+    {
+      "id": "cfi",
+      "acronym": "CFI",
+      "name": "Cool Flames Investigation",
+      "project": "",
+      "areas": [
+        "fundamental"
+      ],
+      "fuel_type": "liquid droplet",
+      "platform": "ISS",
+      "hardware": "MDCA in the CIR",
+      "status": "Conducted (per the challenge page)",
+      "objective": "Burns droplets of liquid fuel to study cool flames. FLEX had earlier observed a cool-flame phenomenon after visible flame extinction.",
+      "fuels": "Liquid fuel droplets",
+      "conditions": "Not yet summarised",
+      "variables": "Not yet summarised",
+      "measurements": "Not yet summarised",
+      "flags": {},
+      "quotes": [
+        {
+          "text": "each featured burning droplets of liquid fuel",
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Hardware"
+        }
+      ],
+      "earth_application": "",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Hardware"
+        },
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.13"
+        }
+      ]
+    },
+    {
+      "id": "cfi_g",
+      "acronym": "CFI-G",
+      "name": "Cool Flames Investigation with Gases",
+      "project": "ACME",
+      "areas": [
+        "fundamental"
+      ],
+      "fuel_type": "gas",
+      "platform": "ISS",
+      "hardware": "ACME modular hardware in the CIR, with a spherical burner",
+      "status": "Conducted (per the challenge page)",
+      "objective": "Creates inside-out flames: the chamber holds nitrogen and a flammable gas, while an oxygen-nitrogen mixture flows out of a spherical burner. These were the highest-oxygen microgravity tests.",
+      "fuels": "A flammable gas such as propane in the chamber",
+      "conditions": "Oxygen-nitrogen mixture of up to 85% oxygen from the burner",
+      "variables": "Not yet summarised",
+      "measurements": "Not yet summarised",
+      "flags": {
+        "habitat_atmosphere": "The highest oxygen concentrations of the microgravity tests, up to 85% oxygen"
+      },
+      "quotes": [
+        {
+          "text": "an oxygen-nitrogen mixture of up to 85% oxygen flowed from the spherical burner",
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Spacesuits and oxygen concentration"
+        }
+      ],
+      "earth_application": "",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Spacesuits and oxygen concentration"
+        }
+      ]
+    },
+    {
+      "id": "bre",
+      "acronym": "BRE",
+      "name": "Burning Rate Emulator",
+      "project": "ACME",
+      "areas": [
+        "prevention"
+      ],
+      "fuel_type": "gas (emulating solids and liquids)",
+      "platform": "ISS",
+      "hardware": "ACME modular hardware in the CIR, with a flat porous burner",
+      "status": "Conducted (per the challenge page)",
+      "objective": "Emulates the burning of solid and liquid fuels with a gas-fed porous burner whose fuel flow follows the measured heat flux, to study materials flammability and test how well current flammability tests apply in low and partial gravity.",
+      "fuels": "Gaseous fuels chosen to simulate fuels such as paper, plastic and alcohol",
+      "conditions": "Still (quiescent) atmospheres",
+      "variables": "Emulated material properties, fuel flow rate",
+      "measurements": "Heat flux at the burner and surface temperature (used to control the fuel flow)",
+      "flags": {
+        "solid_materials": "Studies materials flammability, such as ignition and extinction, by emulating solid fuels",
+        "partial_gravity": "Assesses whether existing flammability test methods apply in low and partial gravity"
+      },
+      "quotes": [
+        {
+          "text": "assess the relevance of existing flammability test methods for low- and partial-gravity environments",
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.15"
+        }
+      ],
+      "earth_application": "",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.15"
+        },
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Other investigations in PSI"
+        }
+      ]
+    },
+    {
+      "id": "efield",
+      "acronym": "E-FIELD Flames",
+      "name": "Electric-Field Effects on Laminar Diffusion Flames",
+      "project": "ACME",
+      "areas": [
+        "fundamental"
+      ],
+      "fuel_type": "gas",
+      "platform": "ISS",
+      "hardware": "ACME modular hardware in the CIR; a high-voltage field (up to 10 kV) between the burner and a mesh above it",
+      "status": "Conducted (per the challenge page)",
+      "objective": "Studies how electric fields act on the ions in flames and how they can be used to control flames. Because the field pushes on the ions, it was used to mimic partial gravity.",
+      "fuels": "Gas-jet or coflow diffusion flames",
+      "conditions": "Electric field up to 10 kV",
+      "variables": "Field strength, fuel dilution",
+      "measurements": "Ion current through the flame and the flame's response time to electric forcing",
+      "flags": {
+        "partial_gravity": "Mimicked partial gravity through the effect of the electric field on flame ions"
+      },
+      "quotes": [
+        {
+          "text": "Partial gravity was mimicked in ACME’s Electric-Field Effects on Laminar Diffusion Flames",
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Partial-gravity data"
+        }
+      ],
+      "earth_application": "",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.16"
+        },
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Partial-gravity data"
+        }
+      ]
+    },
+    {
+      "id": "cld",
+      "acronym": "CLD Flame",
+      "name": "Coflow Laminar Diffusion Flame",
+      "project": "ACME",
+      "areas": [
+        "fundamental"
+      ],
+      "fuel_type": "gas",
+      "platform": "ISS",
+      "hardware": "ACME modular hardware in the CIR",
+      "status": "Conducted (per the challenge page)",
+      "objective": "Extends the range of flame conditions that can be predicted accurately by testing chemical kinetic and soot models on very dilute and very sooty lifted flames.",
+      "fuels": "Diluted methane and ethylene in an air coflow",
+      "conditions": "Not yet summarised",
+      "variables": "Injection velocity, fuel dilution",
+      "measurements": "Flame structure",
+      "flags": {},
+      "quotes": [
+        {
+          "text": "extend the range of flame conditions that can be accurately predicted",
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.16"
+        }
+      ],
+      "earth_application": "Applicable to practical combustion issues such as turbulent combustion, ignition and flame stability.",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.16"
+        }
+      ]
+    },
+    {
+      "id": "flame_design",
+      "acronym": "Flame Design",
+      "name": "Flame Design",
+      "project": "ACME",
+      "areas": [
+        "fundamental"
+      ],
+      "fuel_type": "gas",
+      "platform": "ISS",
+      "hardware": "ACME modular hardware in the CIR, with a porous spherical burner",
+      "status": "Conducted (per the challenge page)",
+      "objective": "Studies soot inception and control so that oxygen-enriched combustion can be optimised and flames can be designed to be robust and soot-free.",
+      "fuels": "Ethylene or methane",
+      "conditions": "Oxygen-enriched atmospheres (concentrations varied)",
+      "variables": "Fuel concentration, oxygen concentration, flow direction",
+      "measurements": "Soot inception and extinction limits",
+      "flags": {},
+      "quotes": [
+        {
+          "text": "improve our understanding of soot inception and control",
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.16"
+        }
+      ],
+      "earth_application": "Could lead to burner designs that are more efficient and less polluting.",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "pp.16-17"
+        }
+      ]
+    },
+    {
+      "id": "sflame",
+      "acronym": "s-Flame",
+      "name": "Structure and Response of Spherical Diffusion Flames",
+      "project": "ACME",
+      "areas": [
+        "fundamental"
+      ],
+      "fuel_type": "gas",
+      "platform": "ISS",
+      "hardware": "ACME modular hardware in the CIR, with a porous spherical burner",
+      "status": "Conducted (per the challenge page)",
+      "objective": "Uses spherical flames, possible only in microgravity, to predict the structure and dynamics of flames, including extinction.",
+      "fuels": "Hydrogen and methane (soot-free flames) and ethylene (sooty flames)",
+      "conditions": "Various inert diluents in the fuel and in the chamber",
+      "variables": "Fuel, diluent",
+      "measurements": "Extinction limits; onset of pulsating instabilities",
+      "flags": {},
+      "quotes": [
+        {
+          "text": "predict the structure and dynamics, including extinction, of both soot-free and sooty flames",
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.17"
+        }
+      ],
+      "earth_application": "",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "pp.17-18"
+        }
+      ]
+    },
+    {
+      "id": "spice",
+      "acronym": "SPICE",
+      "name": "Smoke Point In Co-flow Experiment",
+      "project": "",
+      "areas": [
+        "fundamental"
+      ],
+      "fuel_type": "gas",
+      "platform": "ISS",
+      "hardware": "Microgravity Science Glovebox (MSG) with a fan-driven flow duct, later reused by BASS and SLICE",
+      "status": "Conducted in 2009",
+      "objective": "Finds the point at which gas-jet flames start to emit soot in microgravity, for several fuels and nozzle and co-flow settings.",
+      "fuels": "Several gaseous fuels",
+      "conditions": "Different nozzle diameter and co-flow velocity configurations",
+      "variables": "Fuel, nozzle diameter, co-flow velocity",
+      "measurements": "Smoke point, flame shape, flame stabilisation height and temperature field",
+      "flags": {
+        "ventilation_flow": "Varies the co-flow velocity around the flame"
+      },
+      "quotes": [
+        {
+          "text": "laminar smoke point properties of non-buoyant jet diffusion flames",
+          "source_id": "NASA-FS-SPICE",
+          "location": "p.1"
+        },
+        {
+          "text": "improved flammability criteria for selection of materials",
+          "source_id": "NASA-FS-SPICE",
+          "location": "p.1"
+        }
+      ],
+      "earth_application": "Supports improved design of practical combustors through better control of soot formation.",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-FS-SPICE",
+          "location": "p.1"
+        },
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.13"
+        },
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Hardware"
+        }
+      ]
+    },
+    {
+      "id": "slice",
+      "acronym": "SLICE",
+      "name": "Structure & Liftoff In Combustion Experiment",
+      "project": "",
+      "areas": [
+        "fundamental"
+      ],
+      "fuel_type": "gas",
+      "platform": "ISS",
+      "hardware": "SPICE hardware in the MSG",
+      "status": "Operations started and completed in 2012",
+      "objective": "Studies the structure of lifting and lifted flames, where the flame detaches from the burner, to test and improve combustion models. A precursor to the CLD Flame experiment.",
+      "fuels": "Methane, ethylene and nitrogen dilutions of each, in a co-flow of air",
+      "conditions": "Air co-flow at varied velocity",
+      "variables": "Fuel, burner diameter, flow conditions",
+      "measurements": "Flame structure from attached to lifted conditions; liftoff velocity limits",
+      "flags": {},
+      "quotes": [
+        {
+          "text": "structure of lifting and lifted flames",
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.14"
+        }
+      ],
+      "earth_application": "Aims at higher fuel efficiency and lower pollutant emission in practical combustion devices.",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-FS-SLICE",
+          "location": "p.1"
+        },
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "pp.14-15"
+        }
+      ]
+    },
+    {
+      "id": "same",
+      "acronym": "SAME",
+      "name": "Smoke Aerosol Measurement Experiment",
+      "project": "",
+      "areas": [
+        "detection"
+      ],
+      "fuel_type": "solid (heated to smoke)",
+      "platform": "ISS",
+      "hardware": "Microgravity Science Glovebox (MSG), Expedition 15",
+      "status": "Conducted in the MSG during ISS Expedition 15",
+      "objective": "Measures the size distribution of smoke particles from spacecraft materials and evaluates the ionization (Shuttle) and photoelectric (ISS) smoke detectors in microgravity.",
+      "fuels": "30 samples: six each of Teflon, Kapton, silicone rubber, cellulose and dibutyl phthalate on a porous wick",
+      "conditions": "Different air flow rates, heating temperatures and smoke aging durations",
+      "variables": "Material, air flow rate, heating temperature, smoke aging time",
+      "measurements": "Smoke particle size distribution and relative abundance",
+      "flags": {
+        "detection": "Evaluates spacecraft smoke detectors and measures smoke particle sizes"
+      },
+      "quotes": [
+        {
+          "text": "assess the size and distribution of smoke particles produced by different types of material",
+          "source_id": "NASA-FS-SAME",
+          "location": "p.1"
+        }
+      ],
+      "earth_application": "Smoke detectors developed from SAME results can be useful in other extreme environments on Earth, such as submarines or underwater laboratories.",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-FS-SAME",
+          "location": "pp.1-2"
+        },
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.26"
+        }
+      ]
+    },
+    {
+      "id": "same_r",
+      "acronym": "SAME-R",
+      "name": "Smoke and Aerosol Measurement Experiment (SAME-R)",
+      "project": "",
+      "areas": [
+        "detection"
+      ],
+      "fuel_type": "unknown",
+      "platform": "ISS",
+      "hardware": "Not yet summarised",
+      "status": "Not yet summarised",
+      "objective": "Named by the challenge, together with SAME, as a study in which fire detection was tested in microgravity.",
+      "fuels": "Not yet summarised",
+      "conditions": "Not yet summarised",
+      "variables": "Not yet summarised",
+      "measurements": "Not yet summarised",
+      "flags": {
+        "detection": "Microgravity fire detection study"
+      },
+      "quotes": [
+        {
+          "text": "Fire detection was tested in microgravity",
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Background"
+        }
+      ],
+      "earth_application": "",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Background"
+        }
+      ]
+    },
+    {
+      "id": "daft",
+      "acronym": "DAFT / DAFT-2",
+      "name": "Dust and Aerosol Measurement Feasibility Test",
+      "project": "",
+      "areas": [
+        "detection"
+      ],
+      "fuel_type": "none (dust and aerosol)",
+      "platform": "ISS",
+      "hardware": "A modified P-Trak ultrafine particle counter, operable almost anywhere in the ISS",
+      "status": "Completed (begun on Expedition 10)",
+      "objective": "Measured background dust and particle levels on the ISS and checked that the P-Trak counter later used by SAME works in microgravity.",
+      "fuels": "None: background particulate in the ISS cabin",
+      "conditions": "ISS cabin air",
+      "variables": "Location in the ISS, particle size range",
+      "measurements": "Ultrafine particle counts across the ISS (SAME requires counts of particles from 0.2 to 1 micron)",
+      "flags": {
+        "detection": "Characterises background dust so detectors can tell dust from smoke"
+      },
+      "quotes": [
+        {
+          "text": "help design better smoke detectors capable of distinguishing normal dust from dangerous smoke particles",
+          "source_id": "NASA-FS-DAFT",
+          "location": "p.2"
+        }
+      ],
+      "earth_application": "Smoke detectors developed from SAME results can be useful in submarines or underwater laboratories.",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-FS-DAFT",
+          "location": "pp.1-2"
+        },
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Other investigations in PSI"
+        }
+      ]
+    },
+    {
+      "id": "mist",
+      "acronym": "Mist",
+      "name": "Water Mist Fire Suppression experiment",
+      "project": "",
+      "areas": [
+        "suppression"
+      ],
+      "fuel_type": "gas (premixed flame in a tube)",
+      "platform": "Space Shuttle (STS-107, 2003)",
+      "hardware": "Combustion Module (CM) facility",
+      "status": "Completed (2003)",
+      "objective": "Measured how water droplet size and water concentration affect the speed, strength and shape of flames, to design better water-mist fire suppression to replace Halon systems.",
+      "fuels": "Premixed flames in various fuel and oxygen mixtures",
+      "conditions": "Not yet summarised",
+      "variables": "Water droplet diameter, water concentration, fuel-oxygen mixture",
+      "measurements": "Flame speed, strength and shape",
+      "flags": {
+        "suppression": "Studies water-mist fire suppression"
+      },
+      "quotes": [
+        {
+          "text": "water-mist portable fire extinguishers were designed, tested, fabricated and certified for spaceflight",
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.26"
+        }
+      ],
+      "earth_application": "Fine-water-mist extinguishers developed for the ISS have practical applications on Earth.",
+      "ledger_rows": [],
+      "sources": [
+        {
+          "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+          "location": "p.26"
+        },
+        {
+          "source_id": "SPACEAPPS-2026-FIF",
+          "location": "Details: Objectives"
+        }
+      ]
+    }
+  ],
+  "earth_applications": [
+    {
+      "title": "Water-mist fire extinguishers",
+      "text": "Fine-water-mist extinguishers developed for use on the ISS have practical applications on Earth. The first two ISS units were sent in December 2015 to replace carbon dioxide extinguishers.",
+      "investigation_ids": [
+        "mist"
+      ],
+      "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+      "location": "p.26"
+    },
+    {
+      "title": "Smoke detectors for extreme environments",
+      "text": "Smoke detectors developed from SAME results can be useful on Earth in submarines or underwater laboratories.",
+      "investigation_ids": [
+        "same",
+        "daft"
+      ],
+      "source_id": "NASA-FS-SAME",
+      "location": "p.2"
+    },
+    {
+      "title": "Fewer nuisance alarms",
+      "text": "A 1970s smoke detector developed for the Shuttle tells smoke from dust, giving fewer nuisance alarms; it has industrial uses such as mining.",
+      "investigation_ids": [],
+      "source_id": "NASA-SPINOFF-FIRE-DETECTOR",
+      "location": "Described on the challenge Resources tab"
+    },
+    {
+      "title": "Firefighter air tanks",
+      "text": "In the 1970s, spacesuit technology was adapted to improve firefighters' air tanks and breathing gear.",
+      "investigation_ids": [],
+      "source_id": "NASA-SPINOFF-AIR-TANKS",
+      "location": "Described on the challenge Resources tab"
+    },
+    {
+      "title": "Firefighter clothing",
+      "text": "In the 1980s, NASA spacesuit technology was applied to improve firefighter clothing.",
+      "investigation_ids": [],
+      "source_id": "NASA-SPINOFF-FIRE-ATTIRE",
+      "location": "Described on the challenge Resources tab"
+    },
+    {
+      "title": "Models for diesel and jet fuel",
+      "text": "FLEX's heptane and methanol combustion models are building blocks for models of practical liquid fuels such as diesel and jet fuel.",
+      "investigation_ids": [
+        "flex"
+      ],
+      "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+      "location": "pp.12-13"
+    },
+    {
+      "title": "Fire models on Earth",
+      "text": "BASS results feed combustion models used in designing fire detection and suppression systems in microgravity and on Earth.",
+      "investigation_ids": [
+        "bass"
+      ],
+      "source_id": "NASA-FS-BASS",
+      "location": "p.1"
+    }
+  ]
+}

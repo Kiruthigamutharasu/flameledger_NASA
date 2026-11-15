@@ -167,3 +167,76 @@ def verify(raw: dict | str | None, evidence: list[dict], habitat: dict, material
                 errors.append(f"a claim {why}")
 
     return Verification(not errors, errors, out)
+
+
+# ---------- Ask FlameLedger answers ----------
+ANSWER_WORDS = 150
+_ANY_NUM = re.compile(r"\d+(?:\.\d+)?")
+
+
+class AnswerClaim(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    text: str = Field(min_length=1, max_length=400)
+    value: float | None = None
+    source_id: str = Field(min_length=1, max_length=80)
+
+
+class AnswerOutput(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    answer: str = Field(min_length=1, max_length=2000)
+    citations: list[str] = Field(default_factory=list, max_length=30)
+    claims: list[AnswerClaim] = Field(default_factory=list, max_length=60)
+
+
+@dataclass
+class AnswerVerification:
+    ok: bool
+    errors: list[str] = field(default_factory=list)
+    output: AnswerOutput | None = None
+
+
+def item_numbers(item: dict) -> list[float]:
+    """Every number in a context item's text and numeric fields, plus percent forms of fractions."""
+    nums = [float(n) for n in _ANY_NUM.findall(item.get("text", ""))]
+    nums += [float(item[k]) for k in ("o2_pct", "pressure_psia", "gravity_g", "margin_pct_o2") if item.get(k) is not None]
+    nums += [abs(n) for n in nums]
+    return nums + [n * 100 for n in nums if 0 < abs(n) <= 1]
+
+
+def verify_answer(raw, context: list[dict], strip_terms: list[str] | None = None) -> AnswerVerification:
+    """Ask answers: citations and claims must point at the context given; every number must come from it."""
+    if raw is None:
+        return AnswerVerification(False, ["empty response"])
+    try:
+        out = AnswerOutput.model_validate_json(raw) if isinstance(raw, str) else AnswerOutput.model_validate(raw)
+    except (ValidationError, ValueError) as exc:
+        return AnswerVerification(False, [f"output does not match the JSON schema: {str(exc)[:300]}"])
+    errors: list[str] = []
+    by_id = {c["id"]: c for c in context}
+    if _words(out.answer) > ANSWER_WORDS:
+        errors.append(f"answer has {_words(out.answer)} words; the limit is {ANSWER_WORDS}")
+    for cid in out.citations:
+        if cid not in by_id:
+            errors.append(f"citation '{cid}' is not one of the context items given")
+    claim_values: list[float] = []
+    for i, claim in enumerate(out.claims, start=1):
+        item = by_id.get(claim.source_id)
+        if item is None:
+            errors.append(f"claim {i} cites '{claim.source_id}', which is not one of the context items given")
+            continue
+        if claim.value is None:
+            continue
+        if not _matches(claim.value, item_numbers(item)):
+            errors.append(f"claim {i} value {claim.value:g} does not appear in {claim.source_id}")
+            continue
+        claim_values.extend(abs(f) for f in _forms(claim.value))
+    terms = list(strip_terms or []) + [c.get("title", "") for c in context] + list(by_id)
+    for n in prose_numbers(out.answer, terms):
+        if not _matches(n, claim_values):
+            errors.append(f"the number {n:g} in the answer is not backed by a claim")
+    for pattern, why in BANNED:
+        if pattern.search(out.answer):
+            errors.append(f"the answer {why}")
+    if out.claims and not out.citations:
+        errors.append("the answer makes claims but cites no context item")
+    return AnswerVerification(not errors, errors, out)

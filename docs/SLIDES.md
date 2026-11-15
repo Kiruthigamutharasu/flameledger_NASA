@@ -25,18 +25,20 @@ Submission-guide requirements: at most 7 slides including the title, in English,
 - Drop-tower data: lunar-gravity limits fall **below both** the 0g and the 1g limits for all 3 materials tested. *(NTRS 20130010991, Table I)*
 - Visual: the PMMA bar chart from the Evidence Ledger page.
 
-## 4. Evidence Ledger: the gaps are the finding
+## 4. Evidence Ledger and Investigations: the gaps are the finding
 *[Screenshot: metrics tiles and coverage grid]*
 - 15 materials · 69 verified rows · 7 NASA documents
 - **49 of 75** material × environment cells have no data; 14 materials have Earth (1g) results, only 5 have any microgravity evidence
 - **0** materials have long-duration lunar-gravity data; FM2 plans the first
+- 21 NASA investigations (BASS, Saffire, FLEX, SAME, ACME, FM2…) summarised and **ranked for your habitat**: spacecraft, station, lunar base, rover, Mars base
 - Every value links to its NASA PDF page; the same data is available as an open JSON/CSV API.
 
-## 5. Habitat Review: an AI agent with a fact-checker
+## 5. AI agents with a fact-checker: Habitat Review and Ask
 *[Screenshot: Example case, lunar habitat 34% O2 / 8.2 psia: PMMA rod, cotton-fiberglass fabric, silicone, Synergy Pro Navy fabric]*
 - Rules decide: 🔴 PMMA rod (burned in microgravity at 13.6% O2) · ⚪ the other three (no comparable space data)
 - Gemini explains; the **verifier checks every number and source** and shows the explanation only if it passes ("Verified ✔")
 - Works without AI too, and the full report downloads as a PDF.
+- **Ask:** plain-English questions answered only from NASA evidence, with every number and citation checked
 
 ## 6. Partial gravity and FM2 hypotheses
 - Why 0g and 1g do not bracket the Moon: there are a quenching branch and a blowoff branch, and the hardest-to-extinguish flow lies in between (conceptual sketch).

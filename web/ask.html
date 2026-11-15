@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlameLedger: Ask the evidence</title>
+  <meta name="description" content="Ask a question about spacecraft fire safety. Answers come only from NASA investigations and the verified evidence ledger, and every number and citation is checked before it is shown.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script type="module" src="/static/ask.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="17" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="17" r="4" fill="#eb6834"/></svg>
+        FlameLedger
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/">Evidence Ledger</a>
+        <a href="/investigations">Investigations</a>
+        <a href="/review">Habitat Review</a>
+        <a href="/ask" aria-current="page">Ask</a>
+        <a href="/fm2">Partial gravity &amp; FM2</a>
+        <a href="/docs">Open API</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div class="hero">
+      <p class="eyebrow">Ask FlameLedger · AI answers with a fact-checker</p>
+      <h1>Ask the evidence about fire in space</h1>
+      <p class="lede">Ask in plain English. FlameLedger finds the most relevant NASA investigations and verified ledger rows, an AI model writes a short answer from that evidence only, and the answer is shown only if every number and citation checks out.</p>
+      <p class="row"><span class="badge strong">Research decision support, not certification</span></p>
+    </div>
+
+    <section aria-labelledby="h-ask">
+      <h2 id="h-ask" class="skip">Your question</h2>
+      <form id="ask-form" class="card stack" novalidate>
+        <div class="field">
+          <label for="question">Question</label>
+          <textarea id="question" rows="3" maxlength="300" placeholder="e.g. Which NASA experiments studied smoke detection?" required></textarea>
+          <p class="small"><span id="chars">0</span>/300 characters</p>
+        </div>
+        <div class="row" id="examples" aria-label="Example questions"></div>
+        <p class="row"><button class="btn primary" type="submit" id="ask-go">Ask</button></p>
+        <p class="error" id="ask-error" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <section aria-labelledby="h-answer" id="answer-section" hidden>
+      <h2 id="h-answer">Answer</h2>
+      <div id="answer" aria-live="polite"></div>
+      <h3 class="evidence-head">Evidence used</h3>
+      <p class="sub">The most relevant items from the investigation catalogue and the verified ledger, each with its NASA source.</p>
+      <ol class="evidence-list" id="evidence"></ol>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="disclaimer">Built for the 2026 NASA Space Apps Challenge. Not affiliated with or endorsed by NASA. Uses public NASA data.</p>
+      <p>Research decision support, not certification. Always consult the original NASA documents and your programme's materials and processes authority.</p>
+      <p id="build-info"></p>
+    </div>
+  </footer>
+</body>
+</html>

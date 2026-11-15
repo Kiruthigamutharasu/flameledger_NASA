@@ -15,10 +15,11 @@ from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from . import __version__
-from .api import build_router
+from .api import build_investigations_router, build_router
 from .config import ROOT, Settings, get_settings
 from .coverage import build_coverage, build_gravity_profile
 from .data import LedgerRow, Margin, Preset, Source, load_dataset
+from .investigations import load_catalogue
 
 log = logging.getLogger(__name__)
 
@@ -51,6 +52,7 @@ def git_commit() -> str:
 def create_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or get_settings()
     dataset = load_dataset(settings.data_dir)  # raises DataError: a bad ledger must not start
+    catalogue = load_catalogue(settings.data_dir, {r.row_id for r in dataset.rows})
     coverage = build_coverage(dataset)
     profile = build_gravity_profile(dataset)
     web = settings.web_dir
@@ -91,6 +93,14 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/", include_in_schema=False)
     async def page_ledger():
         return FileResponse(web / "index.html")
+
+    @app.get("/investigations", include_in_schema=False)
+    async def page_investigations():
+        return FileResponse(web / "investigations.html")
+
+    @app.get("/ask", include_in_schema=False)
+    async def page_ask():
+        return FileResponse(web / "ask.html")
 
     @app.get("/review", include_in_schema=False)
     async def page_review():
@@ -168,6 +178,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     review_router = build_router(dataset, settings, DISCLAIMER, git_commit)
     app.state.explainer = review_router.explainer
     app.include_router(review_router)
+    app.include_router(build_investigations_router(catalogue, dataset, review_router.explainer))
 
     @app.get("/api/{rest:path}", include_in_schema=False)
     async def api_not_found(rest: str):
