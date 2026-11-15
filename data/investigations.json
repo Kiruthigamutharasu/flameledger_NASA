@@ -91,6 +91,30 @@
       "title": "Flammability of Materials on the Moon (FM2): LPSC 2026 presentation (Ferkul et al.)",
       "publisher": "NASA Technical Reports Server",
       "url": "https://ntrs.nasa.gov/citations/20260001966"
+    },
+    {
+      "source_id": "NTRS-20250010653",
+      "title": "Lunar Combustion Investigation: Flammability Results from a Rotating Sounding Rocket (Ferkul et al., ASGSR 2025)",
+      "publisher": "NASA Technical Reports Server",
+      "url": "https://ntrs.nasa.gov/citations/20250010653"
+    },
+    {
+      "source_id": "NASA-GRC-LUCI",
+      "title": "NASA Fire Safety Test Took on Reduced Gravity (NASA Glenn, 12 Feb 2025)",
+      "publisher": "NASA",
+      "url": "https://www.nasa.gov/centers-and-facilities/glenn/nasa-fire-safety-test-took-on-reduced-gravity/"
+    },
+    {
+      "source_id": "NASA-GRC-FLARE",
+      "title": "Flammability Limits At Reduced-g Experiment (FLARE) (NASA Glenn)",
+      "publisher": "NASA",
+      "url": "https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/flammability-limits-at-reduced-g-experiment-flare/"
+    },
+    {
+      "source_id": "NTRS-20130000422",
+      "title": "Particle Morphology and Size Results from the Smoke Aerosol Measurement Experiment-2 (Urban et al., AIAA 2012-3536)",
+      "publisher": "NASA Technical Reports Server",
+      "url": "https://ntrs.nasa.gov/citations/20130000422"
     }
   ],
   "flags": {
@@ -339,27 +363,37 @@
         "prevention"
       ],
       "fuel_type": "solid",
-      "platform": "ISS",
-      "hardware": "Not yet summarised",
-      "status": "Listed as a current combustion experiment by NASA Glenn",
-      "objective": "Develops a way to correlate material flammability limits in normal gravity and microgravity, so that microgravity limits can be estimated from ground data. International team including JAXA, NASA, ESA, CNES and DLR.",
+      "platform": "Ground tests (1g and parabolic flights), then flight experiments in the ISS Japanese module Kibo",
+      "hardware": "The same hardware as JAXA's 'Solid Combustion' experiment",
+      "status": "Listed as a current combustion experiment by NASA Glenn; flight experiments on orbit were expected in 2017 or later",
+      "objective": "Develops a way to correlate material flammability limits in normal gravity and microgravity, so microgravity limits can be estimated from ground data, and aims to propose a new standard test method for screening spacecraft materials. International team including JAXA, NASA and ESA, with universities in Japan, the USA and France.",
       "fuels": "Not yet summarised",
       "conditions": "Not yet summarised",
-      "variables": "Not yet summarised",
-      "measurements": "Not yet summarised",
+      "variables": "The flow field, studied through a critical Damkohler number (flow time divided by reaction time) for flame extinction",
+      "measurements": "Material flammability limits in normal gravity and microgravity, to verify the correlation",
       "flags": {
-        "solid_materials": "Correlates material flammability limits between normal gravity and microgravity"
+        "solid_materials": "Correlates material flammability limits between normal gravity and microgravity",
+        "ventilation_flow": "Controls the flow field to study a critical Damkohler number for flame extinction"
       },
       "quotes": [
         {
           "text": "correlate material flammability limits in normal gravity and microgravity",
-          "source_id": "NASA-GRC-COMBUSTION",
-          "location": "FLARE summary"
+          "source_id": "NASA-GRC-FLARE",
+          "location": "page"
+        },
+        {
+          "text": "a new fire safety standard test method for screening spacecraft materials",
+          "source_id": "NASA-GRC-FLARE",
+          "location": "Experimental Approach"
         }
       ],
       "earth_application": "",
       "ledger_rows": [],
       "sources": [
+        {
+          "source_id": "NASA-GRC-FLARE",
+          "location": "page"
+        },
         {
           "source_id": "NASA-GRC-COMBUSTION",
           "location": "Current Combustion Experiments"
@@ -435,34 +469,54 @@
       "areas": [
         "prevention"
       ],
-      "fuel_type": "unknown",
-      "platform": "Lunar gravity (future)",
-      "hardware": "Not yet summarised",
-      "status": "Future source of partial-gravity combustion data",
-      "objective": "Named by the challenge as a future source of partial-gravity combustion data for NASA's PSI database.",
-      "fuels": "Not yet summarised",
-      "conditions": "Not yet summarised",
-      "variables": "Not yet summarised",
-      "measurements": "Not yet summarised",
+      "fuel_type": "solid",
+      "platform": "Blue Origin New Shepard suborbital capsule, spun to simulate lunar gravity",
+      "hardware": "A combustion chamber in a New Shepard payload locker (floor about 41 x 48 cm, about 53 cm tall), developed by NASA Glenn with Voyager Technologies",
+      "status": "Flew on 4 Feb 2025; preliminary results presented in Dec 2025",
+      "objective": "Tested whether lunar gravity makes fire more hazardous by burning a fabric and a plastic rod in simulated lunar gravity on a spinning suborbital capsule, and showed that this platform can give flammability data at partial gravity.",
+      "fuels": "Two samples burned at the same time: a cotton-fiberglass (SIBAL) fabric sheet, burning downward, and a 4-mm-diameter PMMA (acrylic) rod, burning upward",
+      "conditions": "Simulated lunar gravity from a steady 11 rpm rotation (effective radius 1.22 m), in air at normal pressure; the burn lasted over two and a half minutes",
+      "variables": "Sample and burn direction; chamber oxygen fell as the burns progressed, so a limiting value for extinction can be defined",
+      "measurements": "Flame spread and growth from two orthogonal cameras, and chamber oxygen. Preliminary: SIBAL flame-base spread 0.92 mm/s; PMMA rod flame-tip spread 1.5 mm/s; chamber oxygen fell from 20% to 14.3%.",
       "flags": {
-        "partial_gravity": "Expected to add partial-gravity combustion data"
+        "partial_gravity": "Burned materials for over 25 seconds in simulated lunar gravity on a spinning capsule",
+        "solid_materials": "Burned a cotton-fiberglass fabric and a PMMA rod"
       },
       "quotes": [
         {
-          "text": "Lunar-g Combustion Investigation (LUCI)",
-          "source_id": "SPACEAPPS-2026-FIF",
-          "location": "Details: Partial-gravity data"
+          "text": "first-ever, extended-duration (greater than 25 seconds) combustion tests performed in simulated Lunar gravity",
+          "source_id": "NTRS-20250010653",
+          "location": "PDF p.12"
+        },
+        {
+          "text": "might be a more hazardous environment for fire safety",
+          "source_id": "NASA-GRC-LUCI",
+          "location": "article"
         }
       ],
       "earth_application": "",
       "ledger_rows": [],
       "sources": [
         {
+          "source_id": "NTRS-20250010653",
+          "location": "PDF pp.2, 10, 12-13, 16-22"
+        },
+        {
+          "source_id": "NASA-GRC-LUCI",
+          "location": "article"
+        },
+        {
           "source_id": "SPACEAPPS-2026-FIF",
           "location": "Details: Partial-gravity data"
         }
       ],
-      "o2_range": null
+      "o2_range": {
+        "min": 14.3,
+        "max": 20,
+        "label": "Air at normal pressure; chamber oxygen fell from 20% to 14.3% during the burns",
+        "source_id": "NTRS-20250010653",
+        "location": "PDF p.22"
+      }
     },
     {
       "id": "flex",
@@ -971,33 +1025,37 @@
     {
       "id": "same_r",
       "acronym": "SAME-R",
-      "name": "Smoke and Aerosol Measurement Experiment (SAME-R)",
+      "name": "Smoke Aerosol Measurement Experiment reflight (SAME-R, also called SAME-2)",
       "project": "",
       "areas": [
         "detection"
       ],
-      "fuel_type": "unknown",
+      "fuel_type": "solid (heated to smoke)",
       "platform": "ISS",
-      "hardware": "Not yet summarised",
-      "status": "Not yet summarised",
-      "objective": "Named by the challenge, together with SAME, as a study in which fire detection was tested in microgravity.",
-      "fuels": "Not yet summarised",
-      "conditions": "Not yet summarised",
-      "variables": "Not yet summarised",
-      "measurements": "Not yet summarised",
+      "hardware": "Microgravity Science Glovebox (MSG)",
+      "status": "Conducted on ISS Expedition 24 (July to September 2010)",
+      "objective": "A reflight of SAME that added diagnostics and expanded the test matrix, to measure smoke from spacecraft materials well enough to improve the design of future smoke detectors.",
+      "fuels": "Five materials representative of spacecraft: Teflon, Kapton, cotton, silicone rubber and Pyrell, heated below their ignition point",
+      "conditions": "Air flow past the sample from quiescent to 8 cm/s; smoke held in an aging chamber for 11 to 1800 s before measurement",
+      "variables": "Material, sample surface temperature, air flow, smoke aging time",
+      "measurements": "Particle number, diameter and mass concentrations, a prototype two-moment smoke detector, and TEM grids for particle shape and size. Most average particle sizes were 200 to 400 nm.",
       "flags": {
-        "detection": "Microgravity fire detection study"
+        "detection": "Measured smoke particle sizes from spacecraft materials and tested a prototype smoke detector"
       },
       "quotes": [
         {
-          "text": "Fire detection was tested in microgravity",
-          "source_id": "SPACEAPPS-2026-FIF",
-          "location": "Details: Background"
+          "text": "measurements of smoke from spacecraft fires to enable improved design of future detectors",
+          "source_id": "NTRS-20130000422",
+          "location": "p.2"
         }
       ],
       "earth_application": "",
       "ledger_rows": [],
       "sources": [
+        {
+          "source_id": "NTRS-20130000422",
+          "location": "pp.1-2, 4"
+        },
         {
           "source_id": "SPACEAPPS-2026-FIF",
           "location": "Details: Background"

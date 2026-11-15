@@ -47,11 +47,11 @@ _ALIAS_RE = [(mid, re.compile(r"(?<![a-z0-9])" + re.escape(a) + r"(?![a-z0-9])")
 # map a product onto a ledger entry and never give a value.
 HINTS: list[tuple[re.Pattern, str, list[str]]] = [
     (re.compile(r"(?<![a-z])kapton(?![a-z])", re.I),
-     "NASA's SAME experiment heated Kapton to study the smoke it makes, for smoke-detector design; that is not a "
-     "flammability limit. The ledger's polyimide (PI) entry is a different product, so its values do not apply.", ["same"]),
+     "NASA's SAME experiments heated Kapton to study the smoke it makes, for smoke-detector design; that is not a "
+     "flammability limit. The ledger's polyimide (PI) entry is a different product, so its values do not apply.", ["same", "same_r"]),
     (re.compile(r"(?<![a-z])(teflon|ptfe)(?![a-z])", re.I),
-     "NASA's SAME experiment heated Teflon to study its smoke (mostly particles under 1 micron), for smoke-detector "
-     "design; that is not a flammability limit.", ["same"]),
+     "NASA's SAME experiments heated Teflon to study its smoke (mostly particles under 1 micron), for smoke-detector "
+     "design; that is not a flammability limit.", ["same", "same_r"]),
     (re.compile(r"(?<![a-z])(paper|cellulose)(?![a-z])", re.I),
      "NASA's SAME experiment studied smoke from cellulose, and the BRE experiment emulated burning materials such as "
      "paper with a gas burner; neither gives a flammability limit for this habitat.", ["same", "bre"]),

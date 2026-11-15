@@ -124,6 +124,6 @@ def test_only_published_margins_appear(engine):
 
 def test_unlisted_materials_get_sourced_hints_but_no_values(engine):
     kapton = one(engine, "Kapton tape", LUNAR)
-    assert kapton["material_id"] is None and kapton["hint"]["investigation_ids"] == ["same"]
+    assert kapton["material_id"] is None and kapton["hint"]["investigation_ids"] == ["same", "same_r"]
     assert "not a flammability limit" in kapton["headline"]["reason"] and "%" not in kapton["headline"]["reason"]
     assert one(engine, "Velcro", LUNAR).get("hint") is None

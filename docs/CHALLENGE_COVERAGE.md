@@ -34,7 +34,7 @@ The challenge asks for an SI-powered web dashboard that *"summarizes, ranks, and
 | Oxygen tested versus planned atmospheres | Oxygen coverage map on `/investigations`: each investigation's sourced oxygen range against the ISS, Moon base, lunar habitat and spacesuit atmospheres; the caption is computed from the data |
 | Spacesuits and oxygen concentration (100% O2 at 4.3 psi; Moon base ≥30% O2 at ≤10.2 psi) | Habitat Review presets for EVA suits, the Moon base from the challenge brief, NASA's lunar habitat (34% O2, 8.2 psia) and the four FM2 test atmospheres |
 | Highest-oxygen microgravity tests (CFI-G, up to 85% O2) | CFI-G card, tagged "habitat atmosphere" |
-| Partial-gravity data (LUCI, FM2, E-FIELD) | LUCI, FM2 and E-FIELD cards tagged "partial gravity"; the FM2 page; drop-tower lunar and Mars limits in the ledger |
+| Partial-gravity data (LUCI, FM2, E-FIELD) | LUCI (flown Feb 2025 on a spinning New Shepard capsule), FM2 and E-FIELD cards tagged "partial gravity"; the FM2 page; drop-tower lunar and Mars limits in the ledger |
 | The challenge brief suggests (paraphrased) that microgravity and normal-gravity results may span intermediate gravity levels | We show what NASA's own drop-tower data adds: for all three materials tested at four gravity levels, the lunar limit was below both the 0g and the 1g limit (NTRS 20130010991, Table I). This is a short-duration ground-test result, and FM2 will give the first long-duration lunar data. |
 
 ## 3. Gaps we found in our first version, and how we closed them
@@ -68,6 +68,6 @@ Every quote was checked word for word against the source text (see `docs/EVIDENC
 ## 5. Still open (honest limits)
 
 - **PSI data files are not parsed.** We link each investigation to a NASA PSI search, but summaries come from NASA's fact sheets and guide, not from the raw PSI datasets.
-- **Some fields say "Not yet summarised"** (for example LUCI, SAME-R and FLARE details) where our sources didn't give the information. We don't guess.
+- **A few fields still say "Not yet summarised"** (14 of 105 detail fields, mostly for the ACME gas-flame experiments and CFI) where our sources didn't give the information. We don't guess. LUCI, FLARE and SAME-R were filled from their own NASA sources.
 - **Ranking weights are our own research settings**, shown openly and labelled "not NASA criteria".
 - **Ask** answers only from the catalogue and ledger. Questions outside them get a plain "not covered" plus the closest evidence.

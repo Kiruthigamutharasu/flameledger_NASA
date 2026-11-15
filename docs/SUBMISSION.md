@@ -45,7 +45,7 @@ Live app: https://flameledger.onrender.com · Code: https://github.com/Kiruthiga
 - NTRS 20260001966: Ferkul et al., Flammability of Materials on the Moon (FM2), LPSC 2026 presentation. https://ntrs.nasa.gov/citations/20260001966
 
 ### Space Agency Partner & Other Data
-We use no partner-agency datasets directly. The investigation catalogue notes that NASA Glenn lists FLARE (Flammability Limits At Reduced-g Experiment) as an international team that includes JAXA, ESA, CNES and DLR. Habitat presets for the ISS cabin, spacesuit and Moon base come from the NASA Space Apps 2026 *Flame in Freefall* challenge brief. A Saffire preliminary-results paper was considered but is held back, because its only available copy requires a login.
+We use no partner-agency datasets directly. The investigation catalogue includes FLARE (Flammability Limits At Reduced-g Experiment), which NASA Glenn describes as an international team including JAXA, NASA and ESA, flying on JAXA's Kibo module with JAXA's 'Solid Combustion' hardware. Habitat presets for the ISS cabin, spacesuit and Moon base come from the NASA Space Apps 2026 *Flame in Freefall* challenge brief. A Saffire preliminary-results paper was considered but is held back, because its only available copy requires a login.
 
 ### References
 - All NASA documents listed under NASA Data.

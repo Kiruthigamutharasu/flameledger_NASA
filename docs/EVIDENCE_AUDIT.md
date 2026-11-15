@@ -86,3 +86,10 @@ Rules applied:
 - **Challenge-brief presets:** iss_cabin (21% O2, 14.7 psia) and moon_base_brief (30% O2, 10.2 psia) come from the NASA Space Apps 2026 challenge page ("30% or greater, with a corresponding pressure of 10.2 psi or less"). They are not NTRS values.
 - **"Bracketing":** the finding that 0g and 1g did not bracket lunar gravity is limited everywhere to Mylar G, Ultem 1000 and Nomex HT90-40 under drop-tower criteria (NTRS 20130010991, Table I).
 - **Flow sketch on /fm2:** now cites the NASA ISS combustion Researcher's Guide, p.18, Fig. 8 ("region of enhanced flammability in the low-convective flow range"). The sketch is labelled conceptual.
+
+## H. LUCI, FLARE and SAME-R filled from NASA sources, 15 Nov 2026, 17:10 IST
+
+- **LUCI:** NTRS 20250010653 (Ferkul et al., ASGSR 2025), PDF pp.1-2, 10, 12-13, 16-22, and the NASA Glenn article "NASA Fire Safety Test Took on Reduced Gravity" (12 Feb 2025). It flew on 4 Feb 2025 at 11 rpm (radius 1.22 m), with a SIBAL fabric and a 4 mm PMMA rod in air at normal pressure, for over two and a half minutes. Preliminary values: flame-base spread 0.92 mm/s (SIBAL, p.19); flame-tip spread 1.5 mm/s (PMMA, p.21); chamber O2 fell from 20% to 14.3% (p.22). These are not added to the ledger as flammability limits; no limit value is published there.
+- **FLARE:** NASA Glenn FLARE page. Ground 1g and parabolic tests, then Kibo flights expected in 2017 or later; JAXA "Solid Combustion" hardware; a critical Damkohler number; a proposed new standard screening test method; JAXA, NASA and ESA with universities in Japan, the USA and France. (The Combustion Science overview page also names CNES and DLR.)
+- **SAME-R (SAME-2):** NTRS 20130000422 (AIAA 2012-3536), pp.1-2 and 4. Expedition 24, July-September 2010; Teflon, Kapton, cotton, silicone rubber and Pyrell heated below ignition; flow from quiescent to 8 cm/s; smoke aged 11 to 1800 s; most average particle sizes 200-400 nm; installed in the MSG.
+- Quotes from both PDFs were matched word for word against the extracted text.
