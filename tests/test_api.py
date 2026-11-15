@@ -25,7 +25,7 @@ def test_pages_load_with_disclaimer(path):
     assert res.headers["X-Content-Type-Options"] == "nosniff"
 
 
-@pytest.mark.parametrize("path", ["/static/styles.css", "/static/common.js", "/static/ledger.js", "/static/fm2.js", "/static/review.js", "/static/investigations.js", "/static/ask.js",
+@pytest.mark.parametrize("path", ["/static/styles.css", "/static/common.js", "/static/ledger.js", "/static/fm2.js", "/static/review.js", "/static/investigations.js", "/static/ask.js", "/static/gaps.js", "/static/compare.js",
                                   "/static/favicon.svg", "/favicon.ico", "/docs", "/openapi.json"])
 def test_assets_and_docs_load(path):
     assert client.get(path).status_code == 200

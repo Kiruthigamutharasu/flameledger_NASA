@@ -194,3 +194,10 @@ def test_atmosphere_matrix(client):
     assert res["disclaimer"] == "Research decision support, not certification."
     assert client.post("/api/review/matrix", json={**body, "preset_ids": ["iss_cabin"]}).status_code == 422
     assert client.post("/api/review/matrix", json={**body, "preset_ids": ["iss_cabin", "nope"]}).status_code == 422
+
+
+def test_timeline_years_are_sourced(cat):
+    known = {s.source_id for s in cat.sources}
+    pts = {i.id: i.timeline for i in cat.investigations if i.timeline}
+    assert pts["mist"].year == 2003 and pts["luci"].year == 2025 and pts["fm2"].year == 2026
+    assert all(t.source_id in known for t in pts.values())

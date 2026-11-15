@@ -8,6 +8,7 @@
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/static/styles.css">
   <script type="module" src="/static/ledger.js"></script>
+  <script type="module" src="/static/compare.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -84,6 +85,16 @@
         <p class="small" id="grid-caption"></p>
       </div>
       <div id="cell-detail" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="h-cmpmat">
+      <h2 id="h-cmpmat">Compare two materials</h2>
+      <p class="sub">The same five environments side by side for any two materials, with the sources behind each cell.</p>
+      <div class="row">
+        <label class="inline-label" for="mat-a">Material A</label><select id="mat-a"></select>
+        <label class="inline-label" for="mat-b">Material B</label><select id="mat-b"></select>
+      </div>
+      <div class="card"><div class="scroll" id="mat-compare"></div></div>
     </section>
 
     <section aria-labelledby="h-margins">

@@ -65,6 +65,13 @@ class O2Range(_Strict):
         return self
 
 
+class TimelinePoint(_Strict):
+    year: int = Field(ge=1960, le=2035)
+    label: str = Field(min_length=1)
+    source_id: str = Field(min_length=1)
+    location: str = Field(min_length=1)
+
+
 class Investigation(_Strict):
     id: str = Field(pattern=r"^[a-z0-9_]+$")
     acronym: str = Field(min_length=1)
@@ -86,6 +93,7 @@ class Investigation(_Strict):
     ledger_rows: list[str]
     sources: list[Citation] = Field(min_length=1)
     o2_range: O2Range | None = None
+    timeline: TimelinePoint | None = None
 
 
 class EarthApplication(_Strict):
@@ -144,6 +152,7 @@ def load_catalogue(data_dir: Path, ledger_row_ids: set[str]) -> Catalogue:
     for inv in cat.investigations:
         refs = [q.source_id for q in inv.quotes] + [c.source_id for c in inv.sources]
         refs += [inv.o2_range.source_id] if inv.o2_range else []
+        refs += [inv.timeline.source_id] if inv.timeline else []
         for ref in refs:
             if ref not in known:
                 problems.append(f"investigations.json {inv.id}: unknown source_id '{ref}'")

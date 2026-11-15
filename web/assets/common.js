@@ -108,3 +108,31 @@ export function copyLinkButton(label = "Copy link") {
 }
 
 export const linear =(d0, d1, r0, r1) => (v) => r0 + ((v - d0) / (d1 - d0)) * (r1 - r0);
+
+// Light/dark theme toggle on every page; follows the system setting until the viewer chooses.
+(function initTheme() {
+  const root = document.documentElement;
+  let saved = null;
+  try { saved = localStorage.getItem("fl-theme"); } catch { /* storage may be blocked */ }
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  const current = () => root.getAttribute("data-theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const place = () => {
+    const nav = document.querySelector(".nav");
+    if (!nav || nav.querySelector(".theme-btn")) return;
+    const btn = h("button", { class: "theme-btn", type: "button" });
+    const label = () => {
+      const next = current() === "dark" ? "light" : "dark";
+      btn.textContent = next === "dark" ? "☾ Dark" : "☀ Light";
+      btn.setAttribute("aria-label", `Switch to ${next} theme`);
+    };
+    btn.addEventListener("click", () => {
+      const next = current() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("fl-theme", next); } catch { /* ignore */ }
+      label();
+    });
+    label();
+    nav.append(btn);
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", place); else place();
+})();

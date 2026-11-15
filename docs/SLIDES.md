@@ -52,6 +52,6 @@ Submission-guide requirements: at most 7 slides including the title, in English,
 ## 7. Validity: why you can trust it
 - Every source PDF was read and audited page by page (`docs/EVIDENCE_AUDIT.md`); a row with an unverifiable source is held back.
 - Only published margins are shown; FlameLedger never computes one. There are no numeric lunar or Mars predictions.
-- 162 automated tests, a strict CSP and a rate-limited AI endpoint; the page never errors without AI.
+- 165 automated tests, a strict CSP and a rate-limited AI endpoint; the page never errors without AI.
 - Limitations: a small, hand-verified ledger; short drop-tower tests; test-duct flow is not cabin ventilation; not certification.
 - Links: live app · GitHub · `/docs` API

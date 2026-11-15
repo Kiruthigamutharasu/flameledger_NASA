@@ -154,6 +154,44 @@ async function runCompare() {
   } catch (err) { showError(out, err); }
 }
 
+const SIM_FLAGS = [["solid_materials", "Solid materials"], ["ventilation_flow", "Air flow"], ["habitat_atmosphere", "High O2 / low pressure"],
+  ["partial_gravity", "Partial gravity"], ["large_scale", "Large fires"], ["detection", "Detection"], ["suppression", "Suppression"]];
+
+function renderSimMatrix(cat) {
+  const o2 = (i) => !i.o2_range ? "" : i.o2_range.min === null ? `up to ${i.o2_range.max}%` : i.o2_range.min === i.o2_range.max ? `${i.o2_range.max}%` : `${i.o2_range.min}–${i.o2_range.max}%`;
+  $("#sim-matrix").replaceChildren(h("table", { class: "sim-table" },
+    h("caption", { class: "skip", text: "Investigations by fuel, platform, oxygen and relevance tags" }),
+    h("thead", {}, h("tr", {}, ["Investigation", "Fuel", "Platform", "O2 tested"].map((t) => h("th", { scope: "col", text: t })),
+      SIM_FLAGS.map(([, label]) => h("th", { scope: "col", class: "rot", text: label })))),
+    h("tbody", {}, cat.investigations.map((i) => h("tr", {},
+      h("th", { scope: "row" }, h("a", { href: `#inv-${i.id}`, text: i.acronym })),
+      h("td", { text: i.fuel_type.split(" (")[0] }),
+      h("td", { text: i.platform.split(/[,(]/)[0] }),
+      h("td", { class: "num-col", text: o2(i) }),
+      SIM_FLAGS.map(([f, label]) => h("td", { class: "dotcell", title: i.flags[f] || "" },
+        i.flags[f] ? h("span", { class: "dot-on", "aria-label": `${label}: yes` }) : h("span", { class: "skip", text: `${label}: no` }))))))));
+}
+
+function renderTimeline(cat) {
+  const pts = cat.investigations.filter((i) => i.timeline).sort((a, b) => a.timeline.year - b.timeline.year);
+  const y0 = 2000, y1 = 2028, W = 760, L = 30, R = 730, axisY = 150;
+  const x = linear(y0, y1, L, R);
+  const svg = s("svg", { viewBox: `0 0 ${W} 200`, role: "img", "aria-label": `Timeline of ${pts.length} investigations from ${pts[0].timeline.year} to ${pts[pts.length - 1].timeline.year}` });
+  svg.append(s("line", { class: "axis", x1: L, x2: R, y1: axisY, y2: axisY }));
+  for (let yr = y0; yr <= y1; yr += 4) svg.append(s("line", { class: "gridline", x1: x(yr), x2: x(yr), y1: axisY, y2: axisY + 6 }), s("text", { x: x(yr), y: axisY + 22, "text-anchor": "middle", text: String(yr) }));
+  const used = {};
+  pts.forEach((i) => {
+    const yr = i.timeline.year, lane = (used[yr] = (used[yr] ?? -1) + 1);
+    const cx = x(yr), cy = axisY - 18 - lane * 44 - (pts.indexOf(i) % 2) * 22;
+    const planned = /planned/i.test(i.timeline.label);
+    const dot = s("circle", { class: planned ? "planned-dot" : "tl-dot", cx, cy: axisY, r: 6 });
+    tip(dot, `${i.acronym} (${yr}): ${i.timeline.label}\n${i.timeline.source_id}, ${i.timeline.location}`);
+    svg.append(s("line", { class: "link", x1: cx, x2: cx, y1: cy + 4, y2: axisY - 6 }), dot,
+      s("a", { href: `#inv-${i.id}` }, s("text", { class: "lab-strong", x: cx, y: cy, "text-anchor": "middle", text: `${i.acronym.split(" ")[0]} ${yr}` })));
+  });
+  $("#timeline").replaceChildren(svg);
+}
+
 async function renderRank(profileId) {
   const list = $("#rank-list");
   try {
@@ -201,6 +239,8 @@ async function main() {
       .catch((err) => showError($("#o2-chart"), err));
     renderRank(sel.value);
     renderWeights(cat);
+    renderSimMatrix(cat);
+    renderTimeline(cat);
 
     const chips = $("#area-chips");
     const areas = ["", "prevention", "detection", "suppression", "fundamental"];

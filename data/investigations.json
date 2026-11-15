@@ -254,6 +254,12 @@
         "label": "17% to 21% O2 (ISS air; nitrogen used to go as low as 17%)",
         "source_id": "NASA-ISS-COMBUSTION-GUIDE",
         "location": "p.19"
+      },
+      "timeline": {
+        "year": 2012,
+        "label": "Operations started",
+        "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+        "location": "p.19"
       }
     },
     {
@@ -298,7 +304,13 @@
           "location": "Details: Background"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": {
+        "year": 2016,
+        "label": "Saffire-I completed",
+        "source_id": "NASA-FS-SAFFIRE",
+        "location": "p.1"
+      }
     },
     {
       "id": "sofie",
@@ -352,7 +364,8 @@
         "label": "10% to 40% O2 at 0.2 to 1.5 atm (planned chamber range)",
         "source_id": "NASA-ISS-COMBUSTION-GUIDE",
         "location": "p.19"
-      }
+      },
+      "timeline": null
     },
     {
       "id": "flare",
@@ -399,7 +412,8 @@
           "location": "Current Combustion Experiments"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": null
     },
     {
       "id": "fm2",
@@ -459,6 +473,12 @@
         "label": "25%, 29%, 33% and 37% O2 at 8.2 psia (planned)",
         "source_id": "NTRS-20260001966",
         "location": "PDF p.10"
+      },
+      "timeline": {
+        "year": 2026,
+        "label": "Launch planned (late 2026)",
+        "source_id": "NASA-GRC-COMBUSTION",
+        "location": "FM2; ledger row E12"
       }
     },
     {
@@ -516,6 +536,12 @@
         "label": "Air at normal pressure; chamber oxygen fell from 20% to 14.3% during the burns",
         "source_id": "NTRS-20250010653",
         "location": "PDF p.22"
+      },
+      "timeline": {
+        "year": 2025,
+        "label": "Flew on New Shepard",
+        "source_id": "NTRS-20250010653",
+        "location": "PDF p.13"
       }
     },
     {
@@ -573,7 +599,8 @@
         "label": "Oxygen mole fraction 0.10 to 0.50",
         "source_id": "NASA-FS-FLEX",
         "location": "p.1"
-      }
+      },
+      "timeline": null
     },
     {
       "id": "flex2",
@@ -620,7 +647,8 @@
         "label": "Example test: ethanol in 30% O2 at 2.4 atm",
         "source_id": "NASA-ISS-COMBUSTION-GUIDE",
         "location": "p.12"
-      }
+      },
+      "timeline": null
     },
     {
       "id": "cfi",
@@ -659,7 +687,8 @@
           "location": "p.13"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": null
     },
     {
       "id": "cfi_g",
@@ -702,7 +731,8 @@
         "label": "Up to 85% O2 flowing from the burner",
         "source_id": "SPACEAPPS-2026-FIF",
         "location": "Details: Spacesuits and oxygen concentration"
-      }
+      },
+      "timeline": null
     },
     {
       "id": "bre",
@@ -744,7 +774,8 @@
           "location": "Details: Other investigations in PSI"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": null
     },
     {
       "id": "efield",
@@ -785,7 +816,8 @@
           "location": "Details: Partial-gravity data"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": null
     },
     {
       "id": "cld",
@@ -820,7 +852,8 @@
           "location": "p.16"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": null
     },
     {
       "id": "flame_design",
@@ -855,7 +888,8 @@
           "location": "pp.16-17"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": null
     },
     {
       "id": "sflame",
@@ -890,7 +924,8 @@
           "location": "pp.17-18"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": null
     },
     {
       "id": "spice",
@@ -940,7 +975,13 @@
           "location": "Details: Hardware"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": {
+        "year": 2009,
+        "label": "Conducted on the ISS",
+        "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+        "location": "p.13"
+      }
     },
     {
       "id": "slice",
@@ -979,7 +1020,13 @@
           "location": "pp.14-15"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": {
+        "year": 2012,
+        "label": "Started and completed",
+        "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+        "location": "p.14"
+      }
     },
     {
       "id": "same",
@@ -1020,7 +1067,8 @@
           "location": "p.26"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": null
     },
     {
       "id": "same_r",
@@ -1061,7 +1109,13 @@
           "location": "Details: Background"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": {
+        "year": 2010,
+        "label": "ISS Expedition 24",
+        "source_id": "NTRS-20130000422",
+        "location": "p.1"
+      }
     },
     {
       "id": "daft",
@@ -1102,7 +1156,8 @@
           "location": "Details: Other investigations in PSI"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": null
     },
     {
       "id": "mist",
@@ -1143,7 +1198,13 @@
           "location": "Details: Objectives"
         }
       ],
-      "o2_range": null
+      "o2_range": null,
+      "timeline": {
+        "year": 2003,
+        "label": "Flew on STS-107",
+        "source_id": "NASA-ISS-COMBUSTION-GUIDE",
+        "location": "p.26"
+      }
     }
   ],
   "earth_applications": [
