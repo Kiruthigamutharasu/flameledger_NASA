@@ -1,0 +1,124 @@
+# FlameLedger
+
+What do reduced-gravity fire experiments actually tell us about spacecraft materials, and where does the evidence run out? FlameLedger answers that one material at a time, and every number links back to the NASA report it came from.
+
+Our entry for the NASA Space Apps Challenge 2026, *Flame in Freefall*.
+
+- Live app: `<LIVE_URL>`
+- API docs: `<LIVE_URL>/docs`
+
+> Research decision support, not certification. Built for the 2026 NASA Space Apps Challenge. Not affiliated with or endorsed by NASA. Uses public NASA data.
+
+## Why we built this
+
+Spacecraft materials are screened for flammability on Earth. NASA's standard Test 1 is "an upward burning test at the worst-case atmospheric conditions" (NTRS 20260001966, p.27). But flames don't behave the same way when buoyancy is weak or missing, and the published data shows it:
+
+- A ¼-inch PMMA rod has a 1g blowoff limit of 16% O2, yet it kept spreading at 13.6% O2 on the ISS during BASS-II. The NASA authors report this as a margin of −2.4% O2, measured against the 1g blowoff limit rather than Test 1 (NTRS 20160000593, p.18).
+- In NASA's drop-tower tests on Mylar G, Ultem 1000 and Nomex HT90-40, the lunar-gravity limit came out lower than both the microgravity limit and the 1g limit (NTRS 20130010991, Table I). So you can't assume the Moon sits somewhere between orbit and Earth.
+- NASA's FM2 experiment plans to burn four solid samples "in actual long duration Lunar gravity", with launch planned for late 2026 (NTRS 20260000646).
+
+If you're choosing materials for a lunar habitat, the useful question is: for my atmosphere, is there any reduced-gravity evidence for this material, and if not, what's missing? We couldn't find a single place that answers that, so we built one.
+
+## What's in it
+
+**Evidence Ledger** (`/`): headline counts, a grid of materials against test environments (1g, ISS microgravity, lunar, Mars, FM2) and every published oxygen margin, ranked. Click any cell to see the values behind it, with the NASA document, the page or table, and a short quote. The empty cells matter most: they show where nobody has published data yet.
+
+**Habitat Review** (`/review`): enter an atmosphere (O2 %, pressure, gravity) and a list of materials. Each material gets a verdict from fixed rules, then Gemini writes a plain-English explanation that is only shown if it passes a fact check. You can download the whole review as a PDF.
+
+**Partial gravity & FM2** (`/fm2`): why 0g and 1g don't bracket lunar gravity, the published limits at four gravity levels, FM2's four planned tests, and three hypotheses we wrote down before FM2 flies.
+
+**Open API** (`/docs`): the same data as JSON or CSV (`/api/ledger`, `/api/ledger.csv`, `/api/margins`, `/api/coverage`, `/api/gravity-profile`, `/api/hypotheses`, `/api/sources`, `/api/presets`), so anyone can reuse the checked ledger.
+
+### The ledger in numbers
+
+These counts are computed by the app from the data files, not typed in:
+
+- 15 materials and 69 verified evidence rows, from 7 NASA documents
+- 14 of the 15 materials have a 1g result, but only 5 have microgravity evidence and 3 have lunar or Mars data
+- 10 published margins, covering 4 materials
+- 49 of the 75 material/environment cells are empty
+- No material has long-duration lunar-gravity data yet; FM2 plans to be the first
+- 1 row is held back because its only source needs a login
+
+## How the Habitat Review works
+
+The verdicts come from fixed rules, not from the AI. For each material:
+
+- 🔴 It burned in reduced gravity at or below the habitat's O2.
+- 🟠 A published margin is negative or thin.
+- 🟢 It self-extinguished at the habitat's own gravity level, at or above its O2.
+- ⚪ There's no comparable space data, so a test is needed. The app shows the nearest evidence and what's missing.
+
+When several apply, all of them are listed and the most serious one becomes the headline. The thresholds (count a burn up to +0% O2 above the habitat; a margin under 0.5% O2 is thin) are our own research settings, not NASA criteria, and you can change them on the page.
+
+Gemini only gets the habitat, the verdict table and the evidence rows that were used. It has to answer in JSON, and every number it uses has to be listed as a claim with its source. Our verifier then checks three things:
+
+1. every source it cites was in the evidence we gave it;
+2. every number matches that evidence within ±0.1 (it handles 0.136 vs 13.6%);
+3. no number appears in the text without a matching claim, and there's no wording like "certified", "safe" or "NASA's test is wrong".
+
+If the check fails, Gemini gets one more try with the list of errors. If that also fails, the page says "AI explanation unavailable (failed verification)" and still shows the full rule-based result. With no API key, a timeout or any error, you still get the verdicts. The page never breaks because of the AI.
+
+## How this fits the judging criteria
+
+- **Influence:** a public, checked, citable ledger with an open API, and reviews you can download as a PDF.
+- **Creativity:** we treat the gaps as the finding, and we registered FM2 hypotheses before the mission flies (SHA-256 fingerprint plus the git tag `fm2-hypotheses-v1`).
+- **Validity:** every number links to its NASA page, only published margins are shown, the AI is fact-checked, and there are 136 automated tests and a written evidence audit (`docs/EVIDENCE_AUDIT.md`).
+- **Relevance:** it summarises, ranks and interprets NASA combustion data for spacecraft fire safety, which is what *Flame in Freefall* asks for.
+- **Presentation:** three focused pages, hand-drawn SVG charts, no external scripts, and it works on a phone.
+
+## NASA data we used
+
+| ID | Document | What we took from it |
+|---|---|---|
+| [NTRS 20160000593](https://ntrs.nasa.gov/citations/20160000593) | Ferkul et al., *Combustion of Solids in Microgravity: Results from the BASS-II Experiment* (ASGSR 2014 poster) | PMMA rod: 1g blowoff 16% O2, ISS spread at 13.6% O2, published margin −2.4% O2 |
+| [NTRS 20110008636](https://ntrs.nasa.gov/citations/20110008636) | Hirsch et al. 2011, *Selected Parametric Effects on Materials Flammability Limits* | 1g ULOI/MOC for PMMA rods, silicone, polyimide, PEEK, nitrile rubber, PVC, POM, polypropylene, nylon and epoxy/glass (Tables 2, 5, 7, 8, 9) |
+| [NTRS 20130012832](https://ntrs.nasa.gov/citations/20130012832) | Ferkul et al., *Flammability Aspects of a Cotton-Fiberglass Fabric … in Microgravity* | SIBAL fabric, qualitative microgravity and 1g results |
+| [NTRS 20080034883](https://ntrs.nasa.gov/citations/20080034883) | Olson, Ruff & Miller 2008, *Microgravity Flame Spread in Exploration Atmospheres* | Overall finding: 1g limits higher than 0g limits by up to 4% O2 |
+| [NTRS 20130010991](https://ntrs.nasa.gov/citations/20130010991) | Olson & Ferkul 2012, *Evaluating Material Flammability in Microgravity and Martian Gravity …* | Table I: limits and published margins at 1g, Mars, lunar and 0g for Mylar G, Ultem 1000 and Nomex HT90-40 |
+| [NTRS 20260000646](https://ntrs.nasa.gov/citations/20260000646) | Ferkul et al., FM2 abstract, LPSC 2026 | The FM2 mission; partial gravity may raise flammability limits |
+| [NTRS 20260001966](https://ntrs.nasa.gov/citations/20260001966) | Ferkul et al., FM2 presentation, LPSC 2026 | FM2 Tests 1–4 (37/33/29/25% O2 at 8.2 psia), the lunar habitat atmosphere (34% O2, 8.2 psia), the EVA suit (100% O2, 4.3 psia), the Test 1 description, and the FM2 design target |
+
+Some habitat presets also come from the Space Apps 2026 challenge brief. We checked every value against the PDF and logged the page in [`docs/EVIDENCE_AUDIT.md`](docs/EVIDENCE_AUDIT.md).
+
+## Limitations
+
+- 15 materials isn't everything. We added only what we could check against a public NASA PDF. If a material isn't here, we have no verified evidence for it, which doesn't mean it's safe.
+- We only show margins the original authors published. We never calculate a margin ourselves, and we don't predict numbers for lunar or Mars gravity.
+- The lunar and Mars values come from short drop-tower tests, whose limit criteria differ from the 1g test. FM2 will give the first long-duration lunar data.
+- Flow in a test duct or burner isn't the same as cabin ventilation.
+- This is research decision support, not certification. Always go back to the original NASA documents and your programme's materials and processes authority.
+
+## Running it yourself
+
+```bash
+py -3.12 -m venv .venv
+.venv/Scripts/python -m pip install -r requirements-dev.txt
+cp .env.example .env          # optional: GEMINI_API_KEY and GEMINI_MODEL
+.venv/Scripts/python -m uvicorn flameledger.main:app --reload --port 8000
+.venv/Scripts/python -m pytest -q
+```
+
+It works fine without a Gemini key; you just get the rule-based verdicts. We deploy it as a single Render web service (`render.yaml`, health check at `/api/health`).
+
+Built with FastAPI, pydantic and plain HTML/CSS/JS: no build step, no CDN, and a strict Content-Security-Policy. Gemini is called through `google-genai`, and the PDF reports are made with `fpdf2`.
+
+## Timeline
+
+We planned before the event and built all the code and data on 14–15 November 2026.
+
+## Use of AI
+
+- **In the app:** Google Gemini writes the plain-English explanation on the Habitat Review page. It never decides a verdict, and its text is only shown once our verifier has checked every number and source against the ledger.
+- **During development:** we used an AI coding assistant to help write code and documentation. We reviewed all of it ourselves.
+- **Data:** none of the data is AI-generated. We checked every value in the ledger by hand against the NASA PDF, page by page (`docs/EVIDENCE_AUDIT.md`).
+
+## References
+
+All the NASA documents are listed above. Other resources we looked at: `<TEAM: list any public repos or READMEs you consulted, or write "None">`.
+
+## Licence
+
+MIT. See [LICENSE](LICENSE).
+
+Built for the 2026 NASA Space Apps Challenge. Not affiliated with or endorsed by NASA. Uses public NASA data. No NASA logos are used.
