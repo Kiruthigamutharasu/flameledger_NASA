@@ -146,3 +146,34 @@ def test_verify_answer_rules():
     assert not verify_answer({**ok, "claims": [{"text": "a", "value": 55, "source_id": "inv:x"}]}, ctx).ok
     assert not verify_answer({**ok, "answer": "This material is certified at 10%."}, ctx).ok
     assert not verify_answer("not json", ctx).ok
+
+
+def test_catalogue_csv(client):
+    import csv as _csv
+    import io as _io
+    res = client.get("/api/investigations.csv")
+    assert res.status_code == 200 and "attachment" in res.headers["Content-Disposition"]
+    rows = list(_csv.DictReader(_io.StringIO(res.text)))
+    assert len(rows) == len(client.get("/api/investigations").json()["investigations"])
+    flex = next(r for r in rows if r["id"] == "flex")
+    assert (flex["o2_min_pct"], flex["o2_max_pct"]) == ("10", "50") and "nasa.gov" in flex["sources"]
+
+
+def test_o2_ranges_are_sourced(cat):
+    known = {s.source_id for s in cat.sources}
+    ranged = {i.id: i.o2_range for i in cat.investigations if i.o2_range}
+    assert {"bass", "sofie", "flex", "fm2", "cfi_g"} <= set(ranged)
+    assert (ranged["fm2"].min, ranged["fm2"].max) == (25, 37)
+    assert all(r.source_id in known for r in ranged.values())
+
+
+def test_o2_range_order_is_validated(tmp_path):
+    target = tmp_path / "data"
+    shutil.copytree(DATA, target)
+    path = target / "investigations.json"
+    d = json.loads(path.read_text(encoding="utf-8"))
+    next(i for i in d["investigations"] if i["id"] == "flex")["o2_range"]["min"] = 90
+    path.write_text(json.dumps(d), encoding="utf-8")
+    ds = load_dataset(target)
+    with pytest.raises(DataError):
+        load_catalogue(target, {r.row_id for r in ds.rows})

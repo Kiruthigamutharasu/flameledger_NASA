@@ -31,6 +31,7 @@ The challenge asks for *"an SI-powered, web-based dashboard that summarizes, ran
 | Similarities and differences between investigations | Compare two or three investigations side by side; identical fields are highlighted, and shared areas, relevance tags and hardware are listed |
 | Other PSI investigations (DAFT, BRE, ACME) | All included; ACME's six experiments are listed individually |
 | Hardware (MSG, CIR, MDCA, SPICE duct) | "Hardware" field; compare shows shared hardware |
+| Oxygen tested versus planned atmospheres | Oxygen coverage map on `/investigations`: each investigation's sourced oxygen range against the ISS, Moon base, lunar habitat and spacesuit atmospheres; the caption is computed from the data |
 | Spacesuits and oxygen concentration (100% O2 at 4.3 psi; Moon base ≥30% O2 at ≤10.2 psi) | Habitat Review presets for EVA suits, the Moon base from the challenge brief, NASA's lunar habitat (34% O2, 8.2 psia) and the four FM2 test atmospheres |
 | Highest-oxygen microgravity tests (CFI-G, up to 85% O2) | CFI-G card, tagged "habitat atmosphere" |
 | Partial-gravity data (LUCI, FM2, E-FIELD) | LUCI, FM2 and E-FIELD cards tagged "partial gravity"; the FM2 page; drop-tower lunar and Mars limits in the ledger |
@@ -47,6 +48,9 @@ The challenge asks for *"an SI-powered, web-based dashboard that summarizes, ran
 | AI only explained verdicts | New Ask page: free-text questions answered from the evidence and fact-checked |
 | No Earth applications | "Fire safety on Earth" section |
 | Data exports not presented for modellers | "Data for modellers" section |
+| No overview of oxygen levels tested | Oxygen coverage map |
+| Results could not be shared | Every view keeps its state in the URL, with a "Copy link" button |
+| Catalogue not downloadable | `GET /api/investigations.csv` |
 | 7 materials | 15 materials, all checked against NASA PDFs |
 
 ## 4. Sources for the investigation catalogue

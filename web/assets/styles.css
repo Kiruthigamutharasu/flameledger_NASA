@@ -223,6 +223,14 @@ button.btn:disabled { opacity: 0.55; cursor: not-allowed; }
 #ai-panel, #detail-cards { margin-top: 14px; }
 
 /* Investigations and Ask */
+.chart .o2-bar.inv { fill: var(--env-micro); }
+.chart .o2-bar.ledger { fill: var(--env-1g); }
+.chart .o2-bar.planned { fill: var(--planned); }
+.chart a text { fill: var(--accent); }
+.sw.sw-planned-fill { background: var(--planned); }
+.sw.sw-ref { background: transparent; border-left: 2px dashed var(--text-2); border-radius: 0; width: 2px; }
+.o2-insight { font-weight: 600; margin: 0; }
+#o2-chart { min-width: 620px; }
 .inv-card .src, #earth .src, .ev .src, .rank-item .src, .card.ai .src { white-space: normal; overflow-wrap: anywhere; }
 .inv-card, .inv-card dd, .ev { overflow-wrap: anywhere; min-width: 0; }
 .inline-label { font-weight: 600; font-size: 0.9rem; }

@@ -1,4 +1,4 @@
-import { $, h, getJSON, ENV, fillBuildInfo } from "/static/common.js";
+import { $, h, getJSON, ENV, fillBuildInfo, setQuery, copyLinkButton } from "/static/common.js";
 
 const EXAMPLE = ["PMMA rod", "cotton-fiberglass fabric", "silicone", "Synergy Pro Navy fabric"];
 const EXAMPLE_PRESET = "lunar_habitat_nominal";
@@ -160,6 +160,9 @@ async function run(event) {
     $("#download").disabled = false;
     $("#download-md").disabled = false;
     render(result);
+    setQuery({ preset: body.preset_id || "", o2: body.preset_id ? "" : body.o2_pct, pressure: body.preset_id ? "" : body.pressure_psia,
+      gravity: body.preset_id ? "" : body.gravity_g, materials: body.materials.join("|") });
+    $("#share-review").replaceChildren(copyLinkButton("Copy link to this review"));
     $("#h-results").scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (err) {
     showFormError(err.message || "The review could not run. Please try again.");
@@ -203,6 +206,20 @@ async function main() {
     fields.preset.append(...presets.map((p) => h("option", { value: p.preset_id, text: `${p.label} (${p.o2_pct}% O2, ${p.pressure_psia} psia)` })));
     const start = presets.find((p) => p.preset_id === EXAMPLE_PRESET) || presets[0];
     if (start) { fields.preset.value = start.preset_id; applyPreset(start.preset_id); }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("example") === "1") {
+      $("#example").click();
+      form.requestSubmit();
+    } else if (params.get("materials")) {
+      const preset = presets.find((p) => p.preset_id === params.get("preset"));
+      if (preset) { fields.preset.value = preset.preset_id; applyPreset(preset.preset_id); }
+      else {
+        fields.preset.value = ""; applyPreset("");
+        for (const [key, el] of [["o2", fields.o2], ["pressure", fields.pressure], ["gravity", fields.gravity]]) if (params.get(key)) el.value = params.get(key);
+      }
+      fields.materials.value = params.get("materials").split("|").slice(0, 20).join("\n");
+      form.requestSubmit();
+    }
   } catch {
     showFormError("Presets could not load. You can still enter a custom habitat.");
   }

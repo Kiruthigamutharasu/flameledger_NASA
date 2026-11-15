@@ -1,4 +1,4 @@
-import { $, h, fillBuildInfo } from "/static/common.js";
+import { $, h, fillBuildInfo, setQuery, copyLinkButton } from "/static/common.js";
 
 const EXAMPLES = [
   "Which NASA experiments studied smoke detection?",
@@ -61,6 +61,8 @@ async function ask(event) {
     if (res.status === 429) throw new Error("Too many questions in a minute. Please wait a moment and try again.");
     if (!res.ok) throw new Error("The question could not be answered. Please try again.");
     render(await res.json());
+    setQuery({ q: question });
+    $("#share-ask").replaceChildren(copyLinkButton("Copy link to this answer"));
     $("#h-answer").scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (e) {
     err.textContent = e.message; err.hidden = false;
@@ -78,5 +80,7 @@ function main() {
     b.addEventListener("click", () => { q.value = text; $("#chars").textContent = String(text.length); $("#ask-form").requestSubmit(); });
     return b;
   }));
+  const asked = new URLSearchParams(window.location.search).get("q");
+  if (asked) { q.value = asked.slice(0, 300); $("#chars").textContent = String(q.value.length); $("#ask-form").requestSubmit(); }
 }
 main();

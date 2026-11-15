@@ -51,6 +51,20 @@ class Quote(_Strict):
         return v
 
 
+class O2Range(_Strict):
+    min: float | None = Field(default=None, ge=0, le=100)
+    max: float = Field(gt=0, le=100)
+    label: str = Field(min_length=1)
+    source_id: str = Field(min_length=1)
+    location: str = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def _order(self):
+        if self.min is not None and self.min > self.max:
+            raise ValueError("o2_range min is above max")
+        return self
+
+
 class Investigation(_Strict):
     id: str = Field(pattern=r"^[a-z0-9_]+$")
     acronym: str = Field(min_length=1)
@@ -71,6 +85,7 @@ class Investigation(_Strict):
     earth_application: str
     ledger_rows: list[str]
     sources: list[Citation] = Field(min_length=1)
+    o2_range: O2Range | None = None
 
 
 class EarthApplication(_Strict):
@@ -127,7 +142,9 @@ def load_catalogue(data_dir: Path, ledger_row_ids: set[str]) -> Catalogue:
     if len(ids) != len(set(ids)):
         problems.append("investigations.json: duplicate investigation id")
     for inv in cat.investigations:
-        for ref in [q.source_id for q in inv.quotes] + [c.source_id for c in inv.sources]:
+        refs = [q.source_id for q in inv.quotes] + [c.source_id for c in inv.sources]
+        refs += [inv.o2_range.source_id] if inv.o2_range else []
+        for ref in refs:
             if ref not in known:
                 problems.append(f"investigations.json {inv.id}: unknown source_id '{ref}'")
         for row in inv.ledger_rows:

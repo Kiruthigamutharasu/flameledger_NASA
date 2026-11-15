@@ -85,4 +85,26 @@ export async function fillBuildInfo() {
   } catch { slot.textContent = ""; }
 }
 
-export const linear = (d0, d1, r0, r1) => (v) => r0 + ((v - d0) / (d1 - d0)) * (r1 - r0);
+// Keep the page state in the URL so any view can be shared, and copy it on request.
+export function setQuery(params) {
+  const url = new URL(window.location.href);
+  url.search = "";
+  for (const [k, v] of Object.entries(params)) if (v !== undefined && v !== null && v !== "") url.searchParams.set(k, v);
+  window.history.replaceState(null, "", url);
+}
+
+export function copyLinkButton(label = "Copy link") {
+  const btn = h("button", { class: "btn", type: "button", text: label });
+  btn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      btn.textContent = "Link copied ✔";
+    } catch {
+      btn.textContent = "Copy the address bar";
+    }
+    setTimeout(() => { btn.textContent = label; }, 2000);
+  });
+  return btn;
+}
+
+export const linear =(d0, d1, r0, r1) => (v) => r0 + ((v - d0) / (d1 - d0)) * (r1 - r0);

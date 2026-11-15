@@ -22,7 +22,9 @@ If you're choosing materials for a lunar habitat, the useful question is: for my
 
 **Evidence Ledger** (`/`): headline counts, a grid of materials against test environments (1g, ISS microgravity, lunar, Mars, FM2) and every published oxygen margin, ranked. Click any cell to see the values behind it, with the NASA document, the page or table, and a short quote. The empty cells matter most: they show where nobody has published data yet.
 
-**Investigations** (`/investigations`): 21 NASA combustion investigations (BASS, Saffire, SoFIE, FLARE, FM2, LUCI, FLEX, FLEX-2, CFI, the six ACME experiments, SPICE, SLICE, SAME, SAME-R, DAFT and the water-mist experiment). Each card gives the objective, fuels and sample sizes, test conditions, variables, measurements and hardware, with its NASA sources. Pick a habitat (crew spacecraft, space station, lunar base, pressurized rover, Mars base) and the investigations are ranked by relevance, with the reason for every point of the score. Filter by prevention, detection or suppression, and compare two or three investigations side by side. The page also covers fire safety on Earth and a guide to the data for modellers.
+**Investigations** (`/investigations`): 21 NASA combustion investigations (BASS, Saffire, SoFIE, FLARE, FM2, LUCI, FLEX, FLEX-2, CFI, the six ACME experiments, SPICE, SLICE, SAME, SAME-R, DAFT and the water-mist experiment). Each card gives the objective, fuels and sample sizes, test conditions, variables, measurements and hardware, with its NASA sources. Pick a habitat (crew spacecraft, space station, lunar base, pressurized rover, Mars base) and the investigations are ranked by relevance, with the reason for every point of the score. Filter by prevention, detection or suppression, and compare two or three investigations side by side. An **oxygen coverage map** puts the oxygen range each investigation tested next to the atmospheres we plan to live in (ISS 21%, Moon base 30%, lunar habitat 34%, spacesuit 100%). Among the solid-material investigations, only the planned ones (FM2, SoFIE) reach the lunar-habitat level. The page also covers fire safety on Earth and a guide to the data for modellers, and the whole catalogue downloads as CSV.
+
+**Shareable views:** every page keeps its state in the link, so you can send a colleague (or a judge) straight to a result: [`/review?example=1`](/review?example=1) runs the Example review, `/ask?q=…` answers a question, and `/investigations?habitat=space_station&compare=flex,flex2` opens a ranking with a comparison.
 
 **Ask** (`/ask`): ask a question in plain English, such as "Which experiments studied smoke detection?". FlameLedger finds the most relevant investigations and ledger rows, Gemini writes a short answer from that evidence only, and the answer is shown only if every number and citation checks out. The sourced evidence is always listed, even without AI.
 
@@ -59,6 +61,10 @@ These counts are computed by the app from the data files, not typed in:
 
 ![Investigations ranked for a habitat](docs/images/10_investigations_rank.png)
 ![Comparing two investigations](docs/images/11_investigations_compare.png)
+
+**Oxygen coverage:** how far NASA's tests reach toward the oxygen levels planned for lunar habitats and suits.
+
+![Oxygen tested versus habitat atmospheres](docs/images/13_oxygen_coverage.png)
 
 **Ask:** a plain-English question answered from the evidence, with a verified badge and the sources.
 
@@ -115,7 +121,7 @@ If the check fails, Gemini gets one more try with the list of errors. If that al
 
 - **Influence:** a public, checked, citable ledger and investigation catalogue with an open API, habitat-specific rankings, and reviews you can download as a PDF.
 - **Creativity:** we treat the gaps as the finding, and we registered FM2 hypotheses before the mission flies (SHA-256 fingerprint plus the git tag `fm2-hypotheses-v1`).
-- **Validity:** every number links to its NASA page, only published margins are shown, the AI is fact-checked, and there are 156 automated tests and a written evidence audit (`docs/EVIDENCE_AUDIT.md`).
+- **Validity:** every number links to its NASA page, only published margins are shown, the AI is fact-checked, and there are 159 automated tests and a written evidence audit (`docs/EVIDENCE_AUDIT.md`).
 - **Relevance:** it summarises, ranks and interprets NASA combustion investigations for spacecraft, stations, lunar and Mars bases and rovers, which is what *Flame in Freefall* asks for. See [`docs/CHALLENGE_COVERAGE.md`](docs/CHALLENGE_COVERAGE.md) for a point-by-point map.
 - **Presentation:** three focused pages, hand-drawn SVG charts, no external scripts, and it works on a phone.
 

@@ -53,9 +53,30 @@
       </details>
     </section>
 
+    <section aria-labelledby="h-o2">
+      <h2 id="h-o2">Oxygen tested versus the atmospheres we plan to live in</h2>
+      <p class="sub">Each bar is the oxygen range an investigation reported, with its NASA source. The dashed lines are habitat atmospheres from the challenge brief and NASA's FM2 presentation. Flammability rises with oxygen, so the space to the right of the bars is where evidence is thin.</p>
+      <ul class="legend" aria-label="Bar colours">
+        <li><span class="sw env-micro"></span>Conducted tests</li>
+        <li><span class="sw sw-planned-fill"></span>Planned tests</li>
+        <li><span class="sw env-1g"></span>Measured limits in the ledger</li>
+        <li><span class="sw sw-ref"></span>Habitat atmospheres</li>
+      </ul>
+      <div class="card stack">
+        <div class="scroll"><div class="chart" id="o2-chart"><p class="small">Loading…</p></div></div>
+        <p class="o2-insight" id="o2-insight"></p>
+        <p class="small">Oxygen percentage alone does not define flammability: pressure, flow and gravity matter too, and the tests differ in fuel and method. Bars are for orientation, not comparison of limits.</p>
+      </div>
+    </section>
+
     <section aria-labelledby="h-explore">
       <h2 id="h-explore">All investigations</h2>
       <p class="sub">Filter by fire-safety area or fuel type. Select two or three cards to compare them side by side.</p>
+      <p class="row">
+        <a class="btn" href="/api/investigations.csv">Download catalogue (CSV)</a>
+        <a class="btn" href="/api/investigations">Catalogue as JSON</a>
+        <span id="share-slot"></span>
+      </p>
       <div class="filters" role="group" aria-label="Filters">
         <div class="chips" id="area-chips" role="group" aria-label="Fire safety area"></div>
         <label class="inline-label" for="fuel">Fuel</label>

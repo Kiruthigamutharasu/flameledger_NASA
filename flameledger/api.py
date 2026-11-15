@@ -1,6 +1,8 @@
 """Habitat Review endpoints: deterministic verdicts, verified AI explanation, Markdown report."""
 from __future__ import annotations
 
+import csv
+import io
 import logging
 import threading
 import time
@@ -166,6 +168,30 @@ def build_investigations_router(cat: Catalogue, dataset: Dataset, explainer: Exp
                 "sources": [s.model_dump() for s in cat.sources],
                 "earth_applications": [a.model_dump() for a in cat.earth_applications],
                 "investigations": [i.model_dump() for i in items]}
+
+    @router.get("/investigations.csv", summary="The investigation catalogue as CSV")
+    def investigations_csv():
+        """One row per investigation; list fields are joined with '; ' and every row keeps its sources."""
+        cols = ["id", "acronym", "name", "project", "areas", "fuel_type", "platform", "hardware", "status", "objective",
+                "fuels", "conditions", "variables", "measurements", "o2_min_pct", "o2_max_pct", "o2_note",
+                "relevance_tags", "earth_application", "ledger_rows", "sources"]
+        buf = io.StringIO()
+        writer = csv.DictWriter(buf, fieldnames=cols, lineterminator="\n")
+        writer.writeheader()
+        for i in cat.investigations:
+            o2 = i.o2_range
+            writer.writerow({
+                "id": i.id, "acronym": i.acronym, "name": i.name, "project": i.project, "areas": "; ".join(i.areas),
+                "fuel_type": i.fuel_type, "platform": i.platform, "hardware": i.hardware, "status": i.status,
+                "objective": i.objective, "fuels": i.fuels, "conditions": i.conditions, "variables": i.variables,
+                "measurements": i.measurements,
+                "o2_min_pct": "" if not o2 or o2.min is None else f"{o2.min:g}", "o2_max_pct": f"{o2.max:g}" if o2 else "",
+                "o2_note": f"{o2.label} [{o2.source_id}, {o2.location}]" if o2 else "",
+                "relevance_tags": "; ".join(i.flags), "earth_application": i.earth_application,
+                "ledger_rows": "; ".join(i.ledger_rows),
+                "sources": "; ".join(f"{c.source_id} ({c.location}) {cat.source(c.source_id).url}" for c in i.sources)})
+        return Response(buf.getvalue(), media_type="text/csv; charset=utf-8",
+                        headers={"Content-Disposition": 'attachment; filename="flameledger_investigations.csv"'})
 
     @router.get("/investigations/rank", summary="Rank investigations by relevance to a habitat type")
     def investigations_rank(habitat: str = "lunar_base"):

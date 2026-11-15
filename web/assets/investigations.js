@@ -1,4 +1,63 @@
-import { $, h, getJSON, showError, fillBuildInfo } from "/static/common.js";
+import { $, h, s, getJSON, showError, fillBuildInfo, tip, linear, setQuery, copyLinkButton } from "/static/common.js";
+
+const REF_PRESETS = [
+  ["iss_cabin", "ISS cabin"], ["moon_base_brief", "Moon base (brief)"], ["lunar_habitat_nominal", "Lunar habitat"], ["eva_suit_lunar", "Spacesuit"],
+];
+
+function renderO2(cat, presets, rows) {
+  const ranged = cat.investigations.filter((i) => i.o2_range).sort((a, b) => a.o2_range.max - b.o2_range.max);
+  // only measured flammability limits and observations count, never planning values such as habitat atmospheres
+  const reduced = rows.filter((r) => ["microgravity", "lunar", "mars"].includes(r.environment) && r.o2_pct !== null
+    && r.material_id !== "aggregate" && (r.value_kind === "limit" || r.value_kind === "observation"));
+  const bars = ranged.map((i) => ({ label: i.acronym, min: i.o2_range.min, max: i.o2_range.max, note: i.o2_range.label,
+    src: `${i.o2_range.source_id}, ${i.o2_range.location}`, href: `#inv-${i.id}`, cls: /planned/i.test(i.status + i.o2_range.label) ? "planned" : "inv" }));
+  if (reduced.length) {
+    const v = reduced.map((r) => r.o2_pct);
+    bars.unshift({ label: "Ledger limits (0g, Moon, Mars)", min: Math.min(...v), max: Math.max(...v),
+      note: `${reduced.length} verified reduced-gravity rows from NASA reports`, src: "Evidence Ledger", href: "/#h-grid", cls: "ledger" });
+  }
+  const refs = REF_PRESETS.map(([id, label]) => { const p = presets.find((x) => x.preset_id === id); return p && { label, v: p.o2_pct, note: `${p.label}: ${p.o2_pct}% O2, ${p.pressure_psia} psia` }; }).filter(Boolean);
+
+  const W = 760, L = 220, R = 730, top = 66, rowH = 30, H = top + bars.length * rowH + 40;
+  const x = linear(0, 100, L, R);
+  const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Oxygen range reported by each investigation compared with habitat atmospheres" });
+  const bottom = top + bars.length * rowH;
+  for (let t = 0; t <= 100; t += 10) {
+    svg.append(s("line", { class: "gridline", x1: x(t), x2: x(t), y1: top - 6, y2: bottom }),
+      s("text", { x: x(t), y: bottom + 16, "text-anchor": "middle", text: `${t}%` }));
+  }
+  svg.append(s("text", { x: (L + R) / 2, y: bottom + 34, "text-anchor": "middle", text: "Oxygen concentration (% by volume)" }));
+  refs.forEach((r, i) => {
+    const row = [0, 1, 2, 0][i] ?? i % 3;
+    const line = s("line", { class: "ref", x1: x(r.v), x2: x(r.v), y1: 14 + row * 16, y2: bottom });
+    tip(line, r.note);
+    svg.append(line, s("text", { class: "lab-strong", x: r.v > 90 ? x(r.v) : x(r.v) + 4, y: 10 + row * 16, "text-anchor": r.v > 90 ? "end" : "start", text: `${r.label} ${r.v}%` }));
+  });
+  bars.forEach((b, i) => {
+    const y = top + i * rowH + 6;
+    const a = b.min === null ? x(b.max) - 4 : x(b.min), w = Math.max(6, x(b.max) - a);
+    const rect = s("rect", { class: `o2-bar ${b.cls}`, x: a, y, width: w, height: rowH - 12, rx: 4 });
+    tip(rect, `${b.label}\n${b.note}\n${b.src}`);
+    const link = s("a", { href: b.href }, s("text", { class: "lab-strong", x: L - 10, y: y + 13, "text-anchor": "end", text: b.label }));
+    svg.append(link, rect, s("text", { class: "val", x: x(b.max) + 6, y: y + 13,
+      text: b.min === null ? `up to ${b.max}%` : b.min === b.max ? `${b.max}%` : `${b.min}–${b.max}%` }));
+  });
+  $("#o2-chart").replaceChildren(svg);
+
+  const habitat = refs.find((r) => r.label === "Lunar habitat");
+  if (habitat) {
+    const reach = ranged.filter((i) => i.o2_range.max >= habitat.v);
+    const solids = ranged.filter((i) => i.fuel_type === "solid");
+    const solidReach = solids.filter((i) => i.o2_range.max >= habitat.v);
+    const tagPlanned = (i) => i.acronym + (/planned/i.test(i.status + i.o2_range.label) ? " (planned)" : "");
+    const ledgerMax = reduced.length ? Math.max(...reduced.map((r) => r.o2_pct)) : null;
+    $("#o2-insight").textContent =
+      `${reach.length} of ${ranged.length} investigations with a reported oxygen range reach the ${habitat.v}% lunar habitat level ` +
+      `(${reach.map(tagPlanned).join(", ")}). Of the solid-material investigations, ${solidReach.length} of ${solids.length} do` +
+      `${solidReach.length ? ` (${solidReach.map(tagPlanned).join(", ")})` : ""}.` +
+      (ledgerMax !== null ? ` The measured reduced-gravity limits in the ledger go up to ${ledgerMax}% O2.` : "");
+  }
+}
 
 const AREA_LABEL = { prevention: "Prevention", detection: "Detection", suppression: "Suppression", fundamental: "Fundamental science" };
 const FIELD_LABEL = { areas: "Fire safety area", platform: "Platform", hardware: "Hardware", fuel_type: "Fuel type", fuels: "Fuels and samples",
@@ -75,6 +134,7 @@ async function runCompare() {
   const out = $("#compare-out");
   try {
     const res = await getJSON(`/api/investigations/compare?ids=${encodeURIComponent(ids.join(","))}`);
+    if (state.syncUrl) state.syncUrl();
     const sim = res.similarities;
     const shared = [
       sim.areas.length ? `Same fire-safety area: ${sim.areas.map((a) => AREA_LABEL[a]).join(", ")}.` : "They cover different fire-safety areas.",
@@ -129,8 +189,16 @@ async function main() {
 
     const sel = $("#habitat");
     sel.append(...cat.habitat_profiles.map((p) => h("option", { value: p.id, text: p.label })));
-    sel.value = "lunar_base";
-    sel.addEventListener("change", () => renderRank(sel.value));
+    const params = new URLSearchParams(window.location.search);
+    const wanted = params.get("habitat");
+    sel.value = cat.habitat_profiles.some((p) => p.id === wanted) ? wanted : "lunar_base";
+    const syncUrl = () => setQuery({ habitat: sel.value, compare: state.selected.size >= 2 ? [...state.selected].join(",") : "" });
+    state.syncUrl = syncUrl;
+    sel.addEventListener("change", () => { renderRank(sel.value); syncUrl(); });
+    $("#share-slot").replaceChildren(copyLinkButton("Copy link to this view"));
+    Promise.all([getJSON("/api/presets"), getJSON("/api/ledger")])
+      .then(([presets, rows]) => renderO2(cat, presets, rows))
+      .catch((err) => showError($("#o2-chart"), err));
     renderRank(sel.value);
     renderWeights(cat);
 
@@ -147,8 +215,12 @@ async function main() {
     $("#fuel").addEventListener("change", (e) => { state.fuel = e.target.value; renderGrid(); });
     $("#q").addEventListener("input", (e) => { state.q = e.target.value; renderGrid(); });
     $("#compare-go").addEventListener("click", runCompare);
-    $("#compare-clear").addEventListener("click", () => { state.selected.clear(); $("#compare-out").replaceChildren(); syncCompareBar(); renderGrid(); });
+    $("#compare-clear").addEventListener("click", () => { state.selected.clear(); $("#compare-out").replaceChildren(); syncCompareBar(); renderGrid(); syncUrl(); });
+    const preselect = (params.get("compare") || "").split(",").filter((id) => cat.investigations.some((i) => i.id === id)).slice(0, 3);
+    preselect.forEach((id) => state.selected.add(id));
     renderGrid();
+    syncCompareBar();
+    if (state.selected.size >= 2) runCompare();
 
     $("#earth").replaceChildren(...cat.earth_applications.map((a) => h("div", { class: "card stack" },
       h("h3", { text: a.title }), h("p", { text: a.text }),
