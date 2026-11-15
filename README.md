@@ -39,6 +39,38 @@ These counts are computed by the app from the data files, not typed in:
 - No material has long-duration lunar-gravity data yet; FM2 plans to be the first
 - 1 row is held back because its only source needs a login
 
+## Screenshots
+
+**Evidence Ledger:** live counts and the coverage grid. Every striped cell is a material/environment pair with no published data.
+
+![Evidence Ledger: metrics and coverage grid](docs/images/01_evidence_ledger.png)
+
+**Habitat Review:** the Example case (lunar habitat, 34% O2, 8.2 psia). The rules decide the verdicts, and Gemini's explanation is shown only after it passes the fact check.
+
+![Habitat Review input](docs/images/03_habitat_review_input.png)
+![Habitat Review verdicts with a verified AI explanation](docs/images/04_habitat_review_verdicts.png)
+
+Each material gets its own card with the evidence, what's missing and the caveats:
+
+![Material detail card](docs/images/05_material_detail.png)
+
+**Published margins:** only the margins NASA authors published, ranked.
+
+![Published oxygen margins](docs/images/02_published_margins.png)
+
+**Partial gravity:** for all three materials with data at four gravity levels, the lunar limit is lower than both the microgravity and the 1g limit.
+
+![Measured limits at four gravity levels](docs/images/06_partial_gravity.png)
+
+**FM2:** NASA's four planned lunar tests, and our three hypotheses registered before the mission flies.
+
+![FM2 planned tests](docs/images/07_fm2_mission.png)
+![Pre-registered FM2 hypotheses](docs/images/09_fm2_hypotheses.png)
+
+It works on a phone too:
+
+<img src="docs/images/08_mobile_review.png" alt="Habitat Review on a phone" width="300">
+
 ## How the Habitat Review works
 
 The verdicts come from fixed rules, not from the AI. For each material:
