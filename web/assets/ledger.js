@@ -115,6 +115,15 @@ function renderPmma(rowsById, margins) {
     `Published by NASA authors. ${margin.caveat}`);
 }
 
+function renderPunchline(rowsById, margins) {
+  const one = rowsById.get("E1"), zero = rowsById.get("E2"), m = margins.find((x) => x.margin_id === "E3");
+  if (!one || !zero || !m) return;
+  $("#punchline").replaceChildren(
+    h("span", { class: "punch-big", text: `${num(zero.o2_pct)}% O2` }),
+    h("span", {}, ` A PMMA rod kept burning on the Space Station at ${num(zero.o2_pct)}% oxygen, below its ${num(one.o2_pct)}% Earth-gravity blowoff limit: a published margin of ${signed(m.margin_pct_o2)}% O2. `,
+      sourceLink(m.source_id, m.source_url, m.location)));
+}
+
 function renderMargins(margins) {
   const data = [...margins].sort((p, q) => p.margin_pct_o2 - q.margin_pct_o2);
   const W = 560, L = 176, R = 500, rowH = 28, top = 8;
@@ -170,6 +179,7 @@ async function main() {
     renderMetrics(cov.metrics);
     renderGrid(cov, rowsById);
     renderPmma(rowsById, margins);
+    renderPunchline(rowsById, margins);
     renderMargins(margins);
     renderSources(sources, rows);
   } catch (err) {

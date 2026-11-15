@@ -32,12 +32,37 @@
     <div class="hero">
       <p class="eyebrow">Flame in Freefall · fire safety evidence across gravity levels</p>
       <h1>What do we actually know about how spacecraft materials burn off Earth?</h1>
-      <p class="lede">FlameLedger supports the bridge NASA's FM2 mission is building between Earth-gravity material screening and real reduced-gravity fire behaviour: material by material, it shows what microgravity experiments already tell us, and where the evidence runs out.</p>
+      <p class="lede">Ahead of NASA's FM2 mission, FlameLedger shows, material by material and experiment by experiment, what reduced-gravity fire tests already tell us, and where the evidence runs out.</p>
       <p class="row">
         <span class="badge strong">Research decision support, not certification</span>
         <span class="badge">Every number links to its NASA source page</span>
       </p>
     </div>
+
+    <p class="punchline" id="punchline" aria-live="polite"></p>
+
+    <nav class="start-grid" aria-label="Start here">
+      <a class="start-card" href="/investigations?habitat=lunar_base">
+        <span class="start-k">Investigations</span>
+        <strong>Which NASA fire experiments matter for a Moon base?</strong>
+        <span class="small">21 investigations ranked for your habitat, with the reasons.</span>
+      </a>
+      <a class="start-card" href="/review?example=1">
+        <span class="start-k">Habitat Review</span>
+        <strong>Will my materials burn in a lunar habitat?</strong>
+        <span class="small">Verdicts from NASA data, compared across atmospheres, as a PDF.</span>
+      </a>
+      <a class="start-card" href="/ask?q=Which%20investigations%20tested%20high%20oxygen%20atmospheres%3F">
+        <span class="start-k">Ask</span>
+        <strong>Ask the evidence a question</strong>
+        <span class="small">AI answers, with every number and citation checked.</span>
+      </a>
+      <a class="start-card" href="/fm2">
+        <span class="start-k">Partial gravity &amp; FM2</span>
+        <strong>Is the Moon halfway between orbit and Earth?</strong>
+        <span class="small">For three tested materials, it was not.</span>
+      </a>
+    </nav>
 
     <section aria-labelledby="h-metrics">
       <h2 id="h-metrics">The ledger at a glance</h2>
@@ -84,6 +109,36 @@
       <details>
         <summary>Margins as a table, with sources</summary>
         <div class="scroll" id="margin-table"></div>
+      </details>
+    </section>
+
+    <section aria-labelledby="h-terms">
+      <h2 id="h-terms">Terms used on FlameLedger</h2>
+      <p class="sub">Plain definitions for students and engineers new to spacecraft flammability, with the NASA source where the definition comes from a document.</p>
+      <details>
+        <summary>Show the glossary</summary>
+        <dl class="glossary inner">
+          <dt>NASA-STD-6001 Test 1</dt>
+          <dd>NASA's standard upward-burning flammability test for spacecraft materials, run at the worst-case atmosphere. A sample that burns more than 15 cm fails. <a class="src" href="https://ntrs.nasa.gov/api/citations/20260001966/downloads/Ferkul-Lunar%20and%20Planetary%20Science%20Conf%202026%20v2.pdf" target="_blank" rel="noopener noreferrer">NTRS 20260001966, PDF p.27</a></dd>
+          <dt>ULOI (upward limiting oxygen index)</dt>
+          <dd>In 1g, the oxygen level at which a material passes the Test 1 burn-length criterion about half the time. <a class="src" href="https://ntrs.nasa.gov/api/citations/20080034883/downloads/20080034883.pdf" target="_blank" rel="noopener noreferrer">NTRS 20080034883, p.2</a></dd>
+          <dt>MOC (maximum oxygen concentration)</dt>
+          <dd>In 1g, the highest oxygen level at which at least five samples pass the burn criterion, with at least one failing at 1% more oxygen. <a class="src" href="https://ntrs.nasa.gov/api/citations/20080034883/downloads/20080034883.pdf" target="_blank" rel="noopener noreferrer">NTRS 20080034883, p.2</a></dd>
+          <dt>ULOI* and MOC* (low gravity)</dt>
+          <dd>The low-gravity versions: the lowest oxygen at which the flame survived the whole test, and the highest at which it went out. Drop-tower tests are short, so these criteria differ from 1g. <a class="src" href="https://ntrs.nasa.gov/api/citations/20080034883/downloads/20080034883.pdf" target="_blank" rel="noopener noreferrer">NTRS 20080034883, pp.2-4</a> · <a class="src" href="https://ntrs.nasa.gov/api/citations/20130010991/downloads/20130010991.pdf" target="_blank" rel="noopener noreferrer">NTRS 20130010991, p.6</a></dd>
+          <dt>Oxygen margin of safety (ΔO2)</dt>
+          <dd>The mean low-gravity limit minus the mean 1g limit, as defined by NASA authors. A negative value means the material burned at lower oxygen in low gravity than in the 1g test. FlameLedger shows only margins the authors published. <a class="src" href="https://ntrs.nasa.gov/api/citations/20080034883/downloads/20080034883.pdf" target="_blank" rel="noopener noreferrer">NTRS 20080034883, p.4, Eq. 1</a></dd>
+          <dt>Blowoff limit</dt>
+          <dd>The oxygen level below which a flow blows the flame off the sample. The PMMA rod's 16% O2 value is a 1g blowoff limit, not a Test 1 result.</dd>
+          <dt>Concurrent and opposed flow</dt>
+          <dd>Concurrent: the air flows in the same direction the flame spreads (like upward burning on Earth). Opposed: the air flows against the spreading flame. Test-duct flows are not the same as cabin ventilation.</dd>
+          <dt>psia</dt>
+          <dd>Pounds per square inch, absolute. Earth's sea-level pressure is 14.7 psi; NASA's planned lunar habitat uses 8.2 psia, and spacesuits 4.3 psi. <a class="src" href="https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/" target="_blank" rel="noopener noreferrer">Challenge brief</a> · <a class="src" href="https://ntrs.nasa.gov/api/citations/20260001966/downloads/Ferkul-Lunar%20and%20Planetary%20Science%20Conf%202026%20v2.pdf" target="_blank" rel="noopener noreferrer">NTRS 20260001966, PDF p.25</a></dd>
+          <dt>Microgravity, lunar and Mars gravity</dt>
+          <dd>Near-zero gravity in orbit (0g), the Moon's gravity (0.165 g) and Mars's gravity (0.38 g), as recorded with each ledger row.</dd>
+          <dt>MSG, CIR and MDCA</dt>
+          <dd>ISS hardware: the Microgravity Science Glovebox (MSG); the Combustion Integrated Rack (CIR), whose main feature is a 100-liter combustion chamber; and the Multi-user Droplet Combustion Apparatus (MDCA), a CIR insert for droplet experiments. <a class="src" href="https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/" target="_blank" rel="noopener noreferrer">NASA Glenn, Combustion Science</a></dd>
+        </dl>
       </details>
     </section>
 

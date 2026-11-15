@@ -108,11 +108,11 @@
       "label": "Crew spacecraft",
       "weights": {
         "solid_materials": 3,
-        "ventilation_flow": 3,
-        "detection": 2,
-        "suppression": 2,
-        "large_scale": 2,
-        "habitat_atmosphere": 1,
+        "detection": 3,
+        "suppression": 3,
+        "habitat_atmosphere": 2,
+        "ventilation_flow": 2,
+        "large_scale": 1,
         "partial_gravity": 0
       }
     },
@@ -122,9 +122,9 @@
       "weights": {
         "solid_materials": 3,
         "ventilation_flow": 3,
+        "large_scale": 3,
         "detection": 2,
         "suppression": 2,
-        "large_scale": 2,
         "habitat_atmosphere": 1,
         "partial_gravity": 0
       }

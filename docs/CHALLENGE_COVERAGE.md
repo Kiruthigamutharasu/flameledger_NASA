@@ -2,7 +2,7 @@
 
 Challenge: [Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data](https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/) (NASA Space Apps 2026).
 
-The challenge asks for *"an SI-powered, web-based dashboard that summarizes, ranks, and interprets combustion science investigations to deliver critical foundational insights for fire safety."* This file maps each part of the challenge to what we built and where to find it. It also lists what we found missing in our first version and what we added to close each gap.
+The challenge asks for an SI-powered web dashboard that *"summarizes, ranks, and interprets combustion science investigations"* for fire safety. This file maps each part of the challenge to what we built and where to find it. It also lists what we found missing in our first version and what we added to close each gap.
 
 ## 1. Objectives
 
@@ -35,7 +35,7 @@ The challenge asks for *"an SI-powered, web-based dashboard that summarizes, ran
 | Spacesuits and oxygen concentration (100% O2 at 4.3 psi; Moon base ≥30% O2 at ≤10.2 psi) | Habitat Review presets for EVA suits, the Moon base from the challenge brief, NASA's lunar habitat (34% O2, 8.2 psia) and the four FM2 test atmospheres |
 | Highest-oxygen microgravity tests (CFI-G, up to 85% O2) | CFI-G card, tagged "habitat atmosphere" |
 | Partial-gravity data (LUCI, FM2, E-FIELD) | LUCI, FM2 and E-FIELD cards tagged "partial gravity"; the FM2 page; drop-tower lunar and Mars limits in the ledger |
-| "Microgravity and normal-gravity results could bound what occurs at intermediate gravity levels" | We show what NASA's own drop-tower data adds: for all three materials tested at four gravity levels, the lunar limit was below both the 0g and the 1g limit (NTRS 20130010991, Table I). This is a short-duration ground-test result, and FM2 will give the first long-duration lunar data. |
+| The challenge brief suggests (paraphrased) that microgravity and normal-gravity results may span intermediate gravity levels | We show what NASA's own drop-tower data adds: for all three materials tested at four gravity levels, the lunar limit was below both the 0g and the 1g limit (NTRS 20130010991, Table I). This is a short-duration ground-test result, and FM2 will give the first long-duration lunar data. |
 
 ## 3. Gaps we found in our first version, and how we closed them
 

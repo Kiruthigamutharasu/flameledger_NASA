@@ -223,6 +223,23 @@ button.btn:disabled { opacity: 0.55; cursor: not-allowed; }
 #ai-panel, #detail-cards { margin-top: 14px; }
 
 /* Investigations and Ask */
+.glossary { display: grid; grid-template-columns: minmax(160px, max-content) 1fr; gap: 8px 16px; margin: 0; font-size: 0.92rem; }
+.glossary dt { font-weight: 700; }
+.glossary dd { margin: 0; color: var(--text-2); }
+@media (max-width: 640px) { .glossary { grid-template-columns: 1fr; } .glossary dd { margin-bottom: 8px; } }
+.punchline { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--env-lunar); border-radius: 10px; padding: 14px 18px; margin: 0 0 16px; font-size: 1.02rem; }
+.punchline:empty { display: none; }
+.punch-big { font: 700 2rem/1 var(--serif); color: var(--env-lunar); }
+.start-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 0 0 8px; }
+.start-card { display: flex; flex-direction: column; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; text-decoration: none; color: var(--text); box-shadow: var(--shadow); }
+.start-card:hover { border-color: var(--accent); }
+.start-card strong { font-size: 1.02rem; line-height: 1.3; }
+.start-k { font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+.chip-check { font-size: 0.86rem; padding: 4px 10px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); display: inline-flex; gap: 4px; align-items: center; cursor: pointer; }
+.matrix-table td.mcell { font-size: 0.86rem; font-weight: 600; }
+.matrix-table td.mcell.v-red { background: color-mix(in srgb, var(--v-red) 12%, transparent); }
+.matrix-table td.mcell.v-orange { background: color-mix(in srgb, var(--v-orange) 14%, transparent); }
+.matrix-table td.mcell.v-green { background: color-mix(in srgb, var(--v-green) 14%, transparent); }
 .chart .o2-bar.inv { fill: var(--env-micro); }
 .chart .o2-bar.ledger { fill: var(--env-1g); }
 .chart .o2-bar.planned { fill: var(--planned); }

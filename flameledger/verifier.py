@@ -60,7 +60,7 @@ BANNED = [
 ]
 
 _NUM = re.compile(r"(?<![A-Za-z0-9./])(?<![A-Za-z0-9]-)[-−]?\d+(?:\.\d+)?(?![A-Za-z0-9/])"
-                  r"(?!\.\d)(?!\s?-?\s?(?:cm|mm|in|inch|inches|s|sec|seconds|cm/s)\b)")
+                  r"(?!\.\d)(?!\s?-?\s?(?:cm|mm|in|inch|inches|s|sec|seconds|cm/s|micron|microns|um|nm)\b)")
 _STRIP = [
     re.compile(r"NTRS[-\s]?\d+", re.I),
     re.compile(r"\b(?:19|20)\d{2}\b"),                # years, e.g. "late 2026"

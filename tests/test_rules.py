@@ -120,3 +120,10 @@ def test_only_published_margins_appear(engine):
             if e["kind"] == "margin":
                 assert e["id"] in published
         assert "0.4%" not in " ".join(v["reason"] for v in item["verdicts"])
+
+
+def test_unlisted_materials_get_sourced_hints_but_no_values(engine):
+    kapton = one(engine, "Kapton tape", LUNAR)
+    assert kapton["material_id"] is None and kapton["hint"]["investigation_ids"] == ["same"]
+    assert "not a flammability limit" in kapton["headline"]["reason"] and "%" not in kapton["headline"]["reason"]
+    assert one(engine, "Velcro", LUNAR).get("hint") is None

@@ -1,6 +1,9 @@
 import { $, h, getJSON, ENV, fillBuildInfo, setQuery, copyLinkButton } from "/static/common.js";
 
-const EXAMPLE = ["PMMA rod", "cotton-fiberglass fabric", "silicone", "Synergy Pro Navy fabric"];
+const EXAMPLE = ["PMMA rod", "Ultem", "Nomex", "cotton-fiberglass fabric", "Synergy Pro Navy fabric"];
+const SHORT = { red: "Burns at or below this O2", orange: "Thin margin", green: "No burn seen here", grey: "No space data" };
+const MATRIX_DEFAULT = ["iss_cabin", "moon_base_brief", "lunar_habitat_nominal", "eva_suit_lunar"];
+let lastMaterials = [];
 const EXAMPLE_PRESET = "lunar_habitat_nominal";
 const DISCLAIMER = "Research decision support, not certification.";
 const AI_TEXT = {
@@ -129,6 +132,8 @@ function renderCards(result) {
   $("#detail-cards").replaceChildren(...result.verdicts.map((v) => h("article", { class: `card stack vcard v-${v.headline.level}`, id: `card-${v.key}` },
     h("div", { class: "row" }, h("h3", { text: v.input }), v.material ? h("span", { class: "badge", text: v.material }) : h("span", { class: "badge", text: "Not in ledger" })),
     h("ul", { class: "vlist" }, v.verdicts.map((x) => h("li", {}, verdictChip(x), h("p", { text: x.reason })))),
+    v.hint ? h("p", { class: "small" }, "Related NASA investigation: ", ...v.hint.investigation_ids.flatMap((id, i) => [i ? ", " : "",
+      h("a", { href: `/investigations#inv-${id}`, text: id.toUpperCase() })])) : null,
     explanations.has(v.key) ? h("p", { class: "ai-line" }, h("strong", { text: "AI explanation (verified): " }), explanations.get(v.key)) : null,
     v.missing.length ? h("div", {}, h("p", { class: "small strong", text: "What is missing" }), h("ul", { class: "small" }, v.missing.map((m) => h("li", { text: m })))) : null,
     v.evidence.length ? h("details", {}, h("summary", { text: `Evidence used (${v.evidence.length})` }), h("div", { class: "scroll" }, evidenceTable(v.evidence))) : null,
@@ -147,6 +152,29 @@ function render(result) {
   $("#results-section").hidden = false;
 }
 
+async function runMatrix() {
+  const o2 = (id) => (presets.find((p) => p.preset_id === id) || {}).o2_pct ?? 0;
+  const ids = [...document.querySelectorAll("#matrix-presets input:checked")].map((el) => el.value).sort((x, y) => o2(x) - o2(y));
+  const out = $("#matrix");
+  $("#matrix-section").hidden = false;
+  if (!lastMaterials.length) return;
+  if (ids.length < 2) { out.replaceChildren(h("p", { class: "small", text: "Pick at least two atmospheres." })); return; }
+  try {
+    const res = await (await post("/api/review/matrix", { materials: lastMaterials, preset_ids: ids.slice(0, 6) })).json();
+    out.replaceChildren(h("table", { class: "matrix-table" },
+      h("caption", { class: "skip", text: "Headline verdict per material and atmosphere" }),
+      h("thead", {}, h("tr", {}, h("th", { scope: "col", text: "Material" }),
+        res.columns.map((c) => h("th", { scope: "col", title: c.label }, c.label.split(/[/(,]/)[0].trim(), h("span", { class: "small block", text: `${c.o2_pct}% O2, ${c.pressure_psia} psia, ${c.gravity_g} g` }))))),
+      h("tbody", {}, res.rows.map((r) => h("tr", {},
+        h("th", { scope: "row" }, r.input, r.material ? null : h("span", { class: "small block", text: "Not in ledger" })),
+        r.cells.map((c) => h("td", { class: `mcell v-${c.level}`, title: c.reason },
+          h("span", { "aria-hidden": "true", text: c.emoji }), " ", SHORT[c.level] || c.label,
+          h("span", { class: "skip", text: `: ${c.label}` }))))))));
+  } catch (err) {
+    out.replaceChildren(h("p", { class: "error", text: err.message || "The comparison could not run." }));
+  }
+}
+
 async function run(event) {
   event.preventDefault();
   showFormError("");
@@ -160,6 +188,8 @@ async function run(event) {
     $("#download").disabled = false;
     $("#download-md").disabled = false;
     render(result);
+    lastMaterials = body.materials;
+    runMatrix();
     setQuery({ preset: body.preset_id || "", o2: body.preset_id ? "" : body.o2_pct, pressure: body.preset_id ? "" : body.pressure_psia,
       gravity: body.preset_id ? "" : body.gravity_g, materials: body.materials.join("|") });
     $("#share-review").replaceChildren(copyLinkButton("Copy link to this review"));
@@ -203,6 +233,9 @@ async function main() {
   for (const el of [fields.o2, fields.pressure, fields.gravity]) el.addEventListener("input", syncPresetToInputs);
   try {
     presets = await getJSON("/api/presets");
+    $("#matrix-presets").replaceChildren(...presets.map((p) => h("label", { class: "chip-check" },
+      Object.assign(h("input", { type: "checkbox", value: p.preset_id }), { checked: MATRIX_DEFAULT.includes(p.preset_id) }), ` ${p.label}`)));
+    $("#matrix-go").addEventListener("click", runMatrix);
     fields.preset.append(...presets.map((p) => h("option", { value: p.preset_id, text: `${p.label} (${p.o2_pct}% O2, ${p.pressure_psia} psia)` })));
     const start = presets.find((p) => p.preset_id === EXAMPLE_PRESET) || presets[0];
     if (start) { fields.preset.value = start.preset_id; applyPreset(start.preset_id); }

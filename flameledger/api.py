@@ -47,6 +47,13 @@ class ReviewRequest(BaseModel):
         "materials": ["PMMA rod", "cotton-fiberglass fabric", "silicone", "Synergy Pro Navy fabric"]}})
 
 
+class MatrixRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
+    materials: list[MaterialText] = Field(min_length=1, max_length=20)
+    preset_ids: list[Annotated[str, StringConstraints(pattern=r"^[a-z0-9_]+$", max_length=40)]] = Field(min_length=2, max_length=6)
+    thresholds: ThresholdsIn | None = None
+
+
 class RateLimiter:
     """Sliding-window limit per client IP, in memory (one process on Render)."""
 
@@ -109,6 +116,30 @@ def build_router(dataset: Dataset, settings: Settings, disclaimer: str, commit) 
         result = run_rules(req)
         ai = explainer.explain(result)
         return {**result, "ai": ai.ai, "ai_status": ai.status, "ai_note": ai.note}
+
+    @router.post("/review/matrix", summary="Check the same materials across several habitat atmospheres")
+    def review_matrix(req: MatrixRequest, request: Request):
+        """Deterministic verdicts only (no AI): one row per material, one column per preset atmosphere."""
+        guard(report_limit, request)
+        chosen = [presets[p] for p in req.preset_ids if p in presets]
+        if len(chosen) != len(req.preset_ids):
+            raise HTTPException(status_code=422, detail="Unknown preset id.")
+        th = Thresholds(**req.thresholds.model_dump()) if req.thresholds else Thresholds()
+        columns, per_preset = [], []
+        for p in chosen:
+            columns.append({"preset_id": p.preset_id, "label": p.label, "o2_pct": p.o2_pct,
+                            "pressure_psia": p.pressure_psia, "gravity_g": p.gravity_g})
+            per_preset.append(engine.review(Habitat(p.o2_pct, p.pressure_psia, p.gravity_g, p.label), list(req.materials), th))
+        rows = []
+        for idx, item in enumerate(per_preset[0]["verdicts"]):
+            cells = []
+            for res in per_preset:
+                v = res["verdicts"][idx]
+                cells.append({"level": v["headline"]["level"], "emoji": v["headline"]["emoji"], "label": v["headline"]["label"],
+                              "reason": v["headline"]["reason"], "n_verdicts": len(v["verdicts"])})
+            rows.append({"input": item["input"], "material": item["material"], "material_id": item["material_id"], "cells": cells})
+        return {"columns": columns, "rows": rows, "thresholds": th.as_dict(),
+                "disclaimer": "Research decision support, not certification."}
 
     @router.post("/report", summary="Download the Habitat Review as Markdown",
                  response_class=Response, responses={200: {"content": {"text/markdown": {}}}})

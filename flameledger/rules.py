@@ -42,6 +42,31 @@ ALIASES: dict[str, tuple[str, ...]] = {
 _ALIAS_RE = [(mid, re.compile(r"(?<![a-z0-9])" + re.escape(a) + r"(?![a-z0-9])"))
              for mid, aliases in ALIASES.items() for a in sorted(aliases, key=len, reverse=True)]
 
+# Guidance for common spacecraft materials that are NOT in the ledger. Every statement comes from a
+# NASA source in data/investigations.json (SAME and BRE fact sheets / ISS combustion guide). They never
+# map a product onto a ledger entry and never give a value.
+HINTS: list[tuple[re.Pattern, str, list[str]]] = [
+    (re.compile(r"(?<![a-z])kapton(?![a-z])", re.I),
+     "NASA's SAME experiment heated Kapton to study the smoke it makes, for smoke-detector design; that is not a "
+     "flammability limit. The ledger's polyimide (PI) entry is a different product, so its values do not apply.", ["same"]),
+    (re.compile(r"(?<![a-z])(teflon|ptfe)(?![a-z])", re.I),
+     "NASA's SAME experiment heated Teflon to study its smoke (mostly particles under 1 micron), for smoke-detector "
+     "design; that is not a flammability limit.", ["same"]),
+    (re.compile(r"(?<![a-z])(paper|cellulose)(?![a-z])", re.I),
+     "NASA's SAME experiment studied smoke from cellulose, and the BRE experiment emulated burning materials such as "
+     "paper with a gas burner; neither gives a flammability limit for this habitat.", ["same", "bre"]),
+    (re.compile(r"(?<![a-z])silicone rubber(?![a-z])", re.I),
+     "NASA's SAME experiment also heated silicone rubber to study its smoke.", ["same"]),
+]
+
+
+def material_hint(text: str) -> dict | None:
+    for pattern, hint_text, ids in HINTS:
+        if pattern.search(text or ""):
+            return {"text": hint_text, "investigation_ids": ids}
+    return None
+
+
 REDUCED = ("microgravity", "lunar", "mars")
 MEASURE_LABEL = {"uloi": "ULOI", "moc": "MOC", "uloi_star": "ULOI*", "moc_star": "MOC*",
                  "blowoff_limit": "Blowoff limit", "steady_spread": "Steady spread"}
@@ -160,11 +185,12 @@ class RulesEngine:
         mid = match_material(text)
         base = {"key": key, "input": text, "material_id": mid, "material": self.names.get(mid) if mid else None}
         if mid is None or mid not in self.names:
+            hint = material_hint(text)
+            reason = ("This material is not in the FlameLedger ledger. Its reduced-gravity behaviour is "
+                      "unknown here; check the NASA materials database and the original test reports.")
             grey = {"level": "grey", **self._level("grey"),
-                    "reason": "This material is not in the FlameLedger ledger. Its reduced-gravity behaviour is "
-                              "unknown here; check the NASA materials database and the original test reports.",
-                    "evidence_ids": []}
-            return {**base, "headline": grey, "verdicts": [grey], "evidence": [],
+                    "reason": reason + (" " + hint["text"] if hint else ""), "evidence_ids": []}
+            return {**base, "headline": grey, "verdicts": [grey], "evidence": [], "hint": hint,
                     "missing": ["No verified evidence for this material in the ledger."],
                     "caveats": self._general_caveats()}
 

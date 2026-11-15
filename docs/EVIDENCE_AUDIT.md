@@ -79,3 +79,10 @@ Rules applied:
 - Fields with no information in the sources say "Not yet summarised". Nothing was inferred, including what the "-R" in SAME-R stands for.
 - Relevance tags (solid materials, air flow, habitat atmosphere, partial gravity, large scale, detection, suppression) each carry a sentence of evidence from the investigation's sources.
 - Ranking weights are FlameLedger research settings, not NASA criteria, and are shown on the page.
+
+## G. Fact-check corrections, 15 Nov 2026, 16:45 IST
+
+- **E9 context:** the NTRS 20080034883 abstract (PDF p.5) reads in full: the 1g ULOI and 1g MOC "are found to be greater than those in 0g, by up to 4% oxygen mole fraction". The ledger quote is the second half of that sentence. Wording on the site was changed so that it does not imply that NASA's test is wrong.
+- **Challenge-brief presets:** iss_cabin (21% O2, 14.7 psia) and moon_base_brief (30% O2, 10.2 psia) come from the NASA Space Apps 2026 challenge page ("30% or greater, with a corresponding pressure of 10.2 psi or less"). They are not NTRS values.
+- **"Bracketing":** the finding that 0g and 1g did not bracket lunar gravity is limited everywhere to Mylar G, Ultem 1000 and Nomex HT90-40 under drop-tower criteria (NTRS 20130010991, Table I).
+- **Flow sketch on /fm2:** now cites the NASA ISS combustion Researcher's Guide, p.18, Fig. 8 ("region of enhanced flammability in the low-convective flow range"). The sketch is labelled conceptual.

@@ -103,6 +103,14 @@
       <div class="stack" id="ai-panel" aria-live="polite"></div>
       <div class="stack" id="detail-cards"></div>
     </section>
+
+    <section aria-labelledby="h-matrix" id="matrix-section" hidden>
+      <h2 id="h-matrix">Same materials, different atmospheres</h2>
+      <p class="sub">The headline verdict for each material in several habitat atmospheres, side by side. A material can look acceptable in the Space Station's air and still burn in a lunar habitat's richer oxygen. Rule-based verdicts only; no AI. Columns run from lowest to highest oxygen; hover over a cell for the full reason, and see the cards above for the evidence.</p>
+      <div class="row" id="matrix-presets" role="group" aria-label="Atmospheres to compare"></div>
+      <p class="row"><button class="btn" type="button" id="matrix-go">Update comparison</button></p>
+      <div class="card"><div class="scroll" id="matrix"></div></div>
+    </section>
   </main>
 
   <footer>

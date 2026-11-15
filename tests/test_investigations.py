@@ -177,3 +177,20 @@ def test_o2_range_order_is_validated(tmp_path):
     ds = load_dataset(target)
     with pytest.raises(DataError):
         load_catalogue(target, {r.row_id for r in ds.rows})
+
+
+def test_spacecraft_and_station_rank_differently(cat):
+    sc = [r["id"] for r in rank(cat, "spacecraft")["results"]]
+    st = [r["id"] for r in rank(cat, "space_station")["results"]]
+    assert sc != st
+
+
+def test_atmosphere_matrix(client):
+    body = {"materials": ["Ultem", "silicone"], "preset_ids": ["iss_cabin", "lunar_habitat_nominal"]}
+    res = client.post("/api/review/matrix", json=body).json()
+    assert [c["preset_id"] for c in res["columns"]] == ["iss_cabin", "lunar_habitat_nominal"]
+    ultem = next(r for r in res["rows"] if r["material_id"] == "ultem_1000")
+    assert [c["level"] for c in ultem["cells"]] == ["orange", "red"]
+    assert res["disclaimer"] == "Research decision support, not certification."
+    assert client.post("/api/review/matrix", json={**body, "preset_ids": ["iss_cabin"]}).status_code == 422
+    assert client.post("/api/review/matrix", json={**body, "preset_ids": ["iss_cabin", "nope"]}).status_code == 422

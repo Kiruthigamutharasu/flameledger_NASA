@@ -34,14 +34,15 @@ Submission-guide requirements: at most 7 slides including the title, in English,
 - Every value links to its NASA PDF page; the same data is available as an open JSON/CSV API.
 
 ## 5. AI agents with a fact-checker: Habitat Review and Ask
-*[Screenshot: Example case, lunar habitat 34% O2 / 8.2 psia: PMMA rod, cotton-fiberglass fabric, silicone, Synergy Pro Navy fabric]*
-- Rules decide: 🔴 PMMA rod (burned in microgravity at 13.6% O2) · ⚪ the other three (no comparable space data)
+*[Screenshot: docs/images/14_atmosphere_matrix.png, plus the verdicts with the Verified badge]*
+- Rules decide: 🔴 PMMA rod, Ultem and Nomex at a lunar habitat (34% O2) · ⚪ two fabrics with no comparable space data
+- **Same materials, different atmospheres:** Ultem and Nomex have a 🟠 thin margin in ISS air but are 🔴 at Moon-base oxygen
 - Gemini explains; the **verifier checks every number and source** and shows the explanation only if it passes ("Verified ✔")
 - Works without AI too, and the full report downloads as a PDF.
 - **Ask:** plain-English questions answered only from NASA evidence, with every number and citation checked
 
 ## 6. Partial gravity and FM2 hypotheses
-- Why 0g and 1g do not bracket the Moon: there are a quenching branch and a blowoff branch, and the hardest-to-extinguish flow lies in between (conceptual sketch).
+- Why 0g and 1g did not bracket lunar gravity in NASA's drop-tower data: for Mylar G, Ultem 1000 and Nomex HT90-40 the lunar limit was below both. *(NTRS 20130010991, Table I)*
 - FM2 Tests 1–4: 37 / 33 / 29 / 25% O2 at 8.2 psia, Synergy Pro Navy fabric. *(NTRS 20260001966, p.10)*
 - Pre-registered, qualitative, each with a refutation test (git tag `fm2-hypotheses-v1`):
   - H1: the fabric sustains upward spread at 29% O2.
@@ -51,6 +52,6 @@ Submission-guide requirements: at most 7 slides including the title, in English,
 ## 7. Validity: why you can trust it
 - Every source PDF was read and audited page by page (`docs/EVIDENCE_AUDIT.md`); a row with an unverifiable source is held back.
 - Only published margins are shown; FlameLedger never computes one. There are no numeric lunar or Mars predictions.
-- 122 automated tests, a strict CSP and a rate-limited AI endpoint; the page never errors without AI.
+- 162 automated tests, a strict CSP and a rate-limited AI endpoint; the page never errors without AI.
 - Limitations: a small, hand-verified ledger; short drop-tower tests; test-duct flow is not cabin ventilation; not certification.
 - Links: live app · GitHub · `/docs` API

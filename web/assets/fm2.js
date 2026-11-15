@@ -1,9 +1,9 @@
 import { $, h, s, getJSON, ENV, num, pct, sourceLink, tip, showError, fillBuildInfo, linear } from "/static/common.js";
 
 const FINDING_TITLES = {
-  E9: "Earth tests can overstate the oxygen a flame needs",
+  E9: "Limits measured in 1g were higher than in 0g, by up to 4% O2",
   E10: "Below Earth's gravity, some materials burn more readily",
-  E11: "Partial gravity is expected to raise flammability for some materials",
+  E11: "Partial gravity is expected to increase flammability limits for some materials",
 };
 
 function renderFindings(rows) {
