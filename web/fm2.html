@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/static/styles.css">
   <script type="module" src="/static/fm2.js"></script>
   <script type="module" src="/static/gaps.js"></script>
+  <script type="module" src="/static/whatif.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -58,6 +59,23 @@
         <summary>These limits as a table</summary>
         <div class="scroll" id="profile-table"></div>
       </details>
+    </section>
+
+    <section aria-labelledby="h-whatif">
+      <h2 id="h-whatif">Oxygen what-if: where does the evidence turn red?</h2>
+      <p class="sub">Every material in the ledger, at every oxygen level from 15% to 40%. Each cell is FlameLedger's rule-based verdict from verified NASA evidence at that level. Switch the gravity to see how the picture changes between orbit, the Moon and Mars. The dashed lines are planned habitat atmospheres.</p>
+      <div class="row chips" id="whatif-g" role="group" aria-label="Gravity level"></div>
+      <ul class="legend" aria-label="Cell colours">
+        <li><span class="sw sw-red"></span>Evidence of burning at or below this O2</li>
+        <li><span class="sw sw-orange"></span>Thin or negative published margin</li>
+        <li><span class="sw sw-green"></span>Evidence of no burning at this O2</li>
+        <li><span class="sw sw-grey"></span>No comparable space data</li>
+      </ul>
+      <div class="card stack">
+        <div class="scroll"><div class="chart" id="whatif"><p class="small">Loading…</p></div></div>
+        <p class="o2-insight" id="whatif-insight"></p>
+        <p class="small">This re-displays where published evidence sits; it is not a prediction of how a material will burn. Research decision support, not certification.</p>
+      </div>
     </section>
 
     <section aria-labelledby="h-why">

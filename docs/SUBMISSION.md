@@ -26,7 +26,7 @@ Live app: https://flameledger.onrender.com · Code: https://github.com/Kiruthiga
 
 **Benefits.** Habitat and materials engineers, researchers and students can see in seconds which materials have reduced-gravity evidence for their atmosphere, and which tests are missing. The verified ledger is reusable through a JSON/CSV API.
 
-**How we built it.** FastAPI and pydantic serve a static HTML/CSS/JS frontend with hand-built SVG charts (no CDN, strict Content-Security-Policy). The data lives in CSV files that are validated at startup; unverified rows never reach the API. There are 165 automated tests. It is deployed on Render.
+**How we built it.** FastAPI and pydantic serve a static HTML/CSS/JS frontend with hand-built SVG charts (no CDN, strict Content-Security-Policy). The data lives in CSV files that are validated at startup; unverified rows never reach the API. There are 167 automated tests. It is deployed on Render.
 
 **Limitations.** The ledger is small and hand-verified. Lunar and Mars values come from short drop-tower tests. Only published margins are shown, and there are no numeric lunar or Mars predictions. This is research decision support, not certification.
 

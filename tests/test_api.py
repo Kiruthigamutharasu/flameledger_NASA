@@ -25,7 +25,7 @@ def test_pages_load_with_disclaimer(path):
     assert res.headers["X-Content-Type-Options"] == "nosniff"
 
 
-@pytest.mark.parametrize("path", ["/static/styles.css", "/static/common.js", "/static/ledger.js", "/static/fm2.js", "/static/review.js", "/static/investigations.js", "/static/ask.js", "/static/gaps.js", "/static/compare.js",
+@pytest.mark.parametrize("path", ["/static/styles.css", "/static/common.js", "/static/ledger.js", "/static/fm2.js", "/static/review.js", "/static/investigations.js", "/static/ask.js", "/static/gaps.js", "/static/compare.js", "/static/whatif.js",
                                   "/static/favicon.svg", "/favicon.ico", "/docs", "/openapi.json"])
 def test_assets_and_docs_load(path):
     assert client.get(path).status_code == 200
@@ -234,3 +234,17 @@ def test_report_pdf_includes_verified_ai_when_cached():
     assert c.post("/api/review", json=body).json()["ai_status"] == "verified"
     res = c.post("/api/report.pdf", json=body)
     assert res.status_code == 200 and res.content.startswith(b"%PDF")
+
+
+def test_oxygen_sweep():
+    c = TestClient(create_app())
+    lunar = c.get("/api/review/sweep", params={"gravity_g": 0.165}).json()
+    micro = c.get("/api/review/sweep", params={"gravity_g": 0}).json()
+    assert lunar["o2_levels"][0] == 15 and lunar["o2_levels"][-1] == 40
+    first = {r["material"]: r["first_red_o2"] for r in lunar["rows"]}
+    first0 = {r["material"]: r["first_red_o2"] for r in micro["rows"]}
+    # Ultem's lunar ULOI* (21%) is below its microgravity ULOI* (24%): the evidence turns red earlier at lunar g
+    assert first["Ultem 1000"] == 21 and first0["Ultem 1000"] == 24
+    assert all(len(r["levels"]) == 26 for r in lunar["rows"])
+    assert lunar["disclaimer"] == "Research decision support, not certification."
+    assert c.get("/api/review/sweep", params={"o2_min": 40, "o2_max": 20}).status_code == 422

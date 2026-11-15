@@ -31,6 +31,7 @@ The challenge asks for an SI-powered web dashboard that *"summarizes, ranks, and
 | Similarities and differences between investigations | Compare two or three investigations side by side; identical fields are highlighted, and shared areas, relevance tags and hardware are listed |
 | Other PSI investigations (DAFT, BRE, ACME) | All included; ACME's six experiments are listed individually |
 | Hardware (MSG, CIR, MDCA, SPICE duct) | "Hardware" field; compare shows shared hardware |
+| How much oxygen a lunar habitat can afford | Oxygen what-if heatmap on `/fm2`: the rule-based verdict for every material from 15% to 40% O2 at 0g, lunar or Mars gravity, with habitat lines and a computed comparison with microgravity |
 | Oxygen tested versus planned atmospheres | Oxygen coverage map on `/investigations`: each investigation's sourced oxygen range against the ISS, Moon base, lunar habitat and spacesuit atmospheres; the caption is computed from the data |
 | Spacesuits and oxygen concentration (100% O2 at 4.3 psi; Moon base ≥30% O2 at ≤10.2 psi) | Habitat Review presets for EVA suits, the Moon base from the challenge brief, NASA's lunar habitat (34% O2, 8.2 psia) and the four FM2 test atmospheres |
 | Highest-oxygen microgravity tests (CFI-G, up to 85% O2) | CFI-G card, tagged "habitat atmosphere" |

@@ -141,6 +141,42 @@ def build_router(dataset: Dataset, settings: Settings, disclaimer: str, commit) 
         return {"columns": columns, "rows": rows, "thresholds": th.as_dict(),
                 "disclaimer": "Research decision support, not certification."}
 
+    sweep_cache: dict[tuple, dict] = {}
+
+    @router.get("/review/sweep", summary="Oxygen what-if: verdicts for every ledger material across an O2 range")
+    def review_sweep(request: Request, gravity_g: float = 0.165, pressure_psia: float = 8.2,
+                     o2_min: int = 15, o2_max: int = 40):
+        """Deterministic, rule-based only (no AI). For each whole-number O2 level, the headline verdict of every
+        material in the ledger. It re-displays where the published evidence sits; it is not a prediction."""
+        guard(report_limit, request)
+        if not (0 <= gravity_g <= 1.5 and 0 < pressure_psia <= 30 and 1 <= o2_min < o2_max <= 100 and o2_max - o2_min <= 60):
+            raise HTTPException(status_code=422, detail="Choose gravity 0-1.5 g, pressure 0-30 psia and an O2 range of up to 60 points within 1-100%.")
+        key = (round(gravity_g, 3), round(pressure_psia, 2), o2_min, o2_max)
+        if key in sweep_cache:
+            return sweep_cache[key]
+        names = list(dict.fromkeys(engine.names.values()))
+        levels = list(range(o2_min, o2_max + 1))
+        grid = {n: [] for n in names}
+        first_red: dict[str, int | None] = {n: None for n in names}
+        for o2 in levels:
+            res = engine.review(Habitat(o2, pressure_psia, gravity_g), names)
+            for v in res["verdicts"]:
+                lvl = v["headline"]["level"]
+                grid[v["input"]].append(lvl)
+                if lvl == "red" and first_red[v["input"]] is None:
+                    first_red[v["input"]] = o2
+        rows = [{"material": n, "levels": grid[n], "first_red_o2": first_red[n]} for n in names]
+        rows.sort(key=lambda r: (r["first_red_o2"] is None, r["first_red_o2"] or 999, r["material"]))
+        out = {"gravity_g": gravity_g, "pressure_psia": pressure_psia, "o2_levels": levels, "rows": rows,
+               "references": [{"label": p.label, "o2_pct": p.o2_pct, "preset_id": p.preset_id} for p in dataset.presets
+                              if o2_min <= p.o2_pct <= o2_max],
+               "note": "Each cell is the rule-based headline verdict from verified ledger evidence at that oxygen level. "
+                       "It shows where published evidence sits, not a prediction of how a material will burn.",
+               "disclaimer": "Research decision support, not certification."}
+        if len(sweep_cache) < 64:
+            sweep_cache[key] = out
+        return out
+
     @router.post("/report", summary="Download the Habitat Review as Markdown",
                  response_class=Response, responses={200: {"content": {"text/markdown": {}}}})
     def report(req: ReviewRequest, request: Request):

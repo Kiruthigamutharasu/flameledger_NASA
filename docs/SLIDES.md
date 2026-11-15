@@ -42,6 +42,7 @@ Submission-guide requirements: at most 7 slides including the title, in English,
 - **Ask:** plain-English questions answered only from NASA evidence, with every number and citation checked
 
 ## 6. Partial gravity and FM2 hypotheses
+- **Oxygen what-if** (screenshot 17): at lunar gravity the evidence turns red at a lower O2 than in orbit for Mylar G (16% vs 17%), Nomex (21% vs 23%) and Ultem (21% vs 24%)
 - Why 0g and 1g did not bracket lunar gravity in NASA's drop-tower data: for Mylar G, Ultem 1000 and Nomex HT90-40 the lunar limit was below both. *(NTRS 20130010991, Table I)*
 - FM2 Tests 1–4: 37 / 33 / 29 / 25% O2 at 8.2 psia, Synergy Pro Navy fabric. *(NTRS 20260001966, p.10)*
 - Pre-registered, qualitative, each with a refutation test (git tag `fm2-hypotheses-v1`):
@@ -52,6 +53,6 @@ Submission-guide requirements: at most 7 slides including the title, in English,
 ## 7. Validity: why you can trust it
 - Every source PDF was read and audited page by page (`docs/EVIDENCE_AUDIT.md`); a row with an unverifiable source is held back.
 - Only published margins are shown; FlameLedger never computes one. There are no numeric lunar or Mars predictions.
-- 165 automated tests, a strict CSP and a rate-limited AI endpoint; the page never errors without AI.
+- 167 automated tests, a strict CSP and a rate-limited AI endpoint; the page never errors without AI.
 - Limitations: a small, hand-verified ledger; short drop-tower tests; test-duct flow is not cabin ventilation; not certification.
 - Links: live app · GitHub · `/docs` API

@@ -32,7 +32,7 @@ If you're choosing materials for a lunar habitat, the useful question is: for my
 
 On the Evidence Ledger you can also **compare any two materials** across all five environments. A light/dark theme switch and print-friendly pages are on every page.
 
-**Partial gravity & FM2** (`/fm2`): why 0g and 1g did not bracket lunar gravity for the three materials in NASA's drop-tower data, the published limits at four gravity levels, FM2's four planned tests, a **"what to test next"** plan that groups every material by the strongest reduced-gravity evidence it has, and three hypotheses we wrote down before FM2 flies.
+**Partial gravity & FM2** (`/fm2`): why 0g and 1g did not bracket lunar gravity for the three materials in NASA's drop-tower data, the published limits at four gravity levels, FM2's four planned tests, an **oxygen what-if heatmap** (every material at every oxygen level from 15% to 40%, in orbit, on the Moon or on Mars, showing where the evidence turns red: at lunar gravity it turns red at a lower oxygen level than in orbit for Mylar G, Nomex and Ultem), a **"what to test next"** plan that groups every material by the strongest reduced-gravity evidence it has, and three hypotheses we wrote down before FM2 flies.
 
 **Open API** (`/docs`): the same data as JSON or CSV (`/api/ledger`, `/api/ledger.csv`, `/api/margins`, `/api/coverage`, `/api/gravity-profile`, `/api/hypotheses`, `/api/sources`, `/api/presets`), so anyone can reuse the checked ledger.
 
@@ -67,6 +67,10 @@ These counts are computed by the app from the data files, not typed in:
 
 ![Investigations ranked for a habitat](docs/images/10_investigations_rank.png)
 ![Comparing two investigations](docs/images/11_investigations_compare.png)
+
+**Oxygen what-if:** where each material's evidence turns red as habitat oxygen rises, here at lunar gravity.
+
+![Oxygen what-if heatmap](docs/images/17_oxygen_whatif.png)
 
 **Similarities and timeline:** all 21 investigations in one grid, and when they flew.
 
@@ -139,7 +143,7 @@ If the check fails, Gemini gets one more try with the list of errors. If that al
 
 - **Influence:** a public, checked, citable ledger and investigation catalogue with an open API, habitat-specific rankings, and reviews you can download as a PDF.
 - **Creativity:** we treat the gaps as the finding, and we registered FM2 hypotheses before the mission flies (SHA-256 fingerprint plus the git tag `fm2-hypotheses-v1`).
-- **Validity:** every number links to its NASA page, only published margins are shown, the AI is fact-checked, and there are 165 automated tests and a written evidence audit (`docs/EVIDENCE_AUDIT.md`).
+- **Validity:** every number links to its NASA page, only published margins are shown, the AI is fact-checked, and there are 167 automated tests and a written evidence audit (`docs/EVIDENCE_AUDIT.md`).
 - **Relevance:** it summarises, ranks and interprets NASA combustion investigations for spacecraft, stations, lunar and Mars bases and rovers, which is what *Flame in Freefall* asks for. See [`docs/CHALLENGE_COVERAGE.md`](docs/CHALLENGE_COVERAGE.md) for a point-by-point map.
 - **Presentation:** five focused pages with one-click shareable views, hand-drawn SVG charts, no external scripts, and it works on a phone.
 

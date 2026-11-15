@@ -252,6 +252,13 @@ button.btn:disabled { opacity: 0.55; cursor: not-allowed; }
 #ai-panel, #detail-cards { margin-top: 14px; }
 
 /* Investigations and Ask */
+.chart .hm-red { fill: var(--v-red); }
+.chart .hm-orange { fill: var(--v-orange); }
+.chart .hm-green { fill: var(--v-green); }
+.chart .hm-grey { fill: var(--surface-2); stroke: var(--border); stroke-width: 0.5; }
+.sw.sw-red { background: var(--v-red); } .sw.sw-orange { background: var(--v-orange); }
+.sw.sw-green { background: var(--v-green); } .sw.sw-grey { background: var(--surface-2); border: 1px solid var(--border); }
+#whatif { min-width: 760px; }
 #fm2-about { overflow-x: auto; }
 #fm2-about thead th { white-space: normal; }
 .theme-btn { font: inherit; font-size: 0.9rem; background: none; border: 1px solid var(--border); color: var(--text-2); border-radius: 6px; padding: 5px 9px; cursor: pointer; margin-left: 4px; }
