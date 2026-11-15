@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5b6070"/>
+    </marker>
+    <marker id="arrG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2e8b57"/>
+    </marker>
+    <marker id="arrR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#c8312b"/>
+    </marker>
+    <style>
+      .h { font-size: 16px; font-weight: 700; fill: #14161a; }
+      .s { font-size: 13px; fill: #474b54; }
+      .n { font-size: 13px; font-weight: 700; fill: #ffffff; }
+      .lab { font-size: 13px; font-weight: 600; }
+      .line { stroke: #5b6070; stroke-width: 1.8; fill: none; }
+    </style>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="600" y="38" text-anchor="middle" font-size="24" font-weight="700" fill="#14161a">Habitat Review agent: how a review is made</text>
+  <text x="600" y="62" text-anchor="middle" class="s">The rules decide. The AI only explains, and its text is shown only after the verifier checks it.</text>
+
+  <!-- Step boxes -->
+  <g>
+    <rect x="30" y="100" width="200" height="170" rx="12" fill="#fff" stroke="#b9b6ab" stroke-width="1.5"/>
+    <circle cx="56" cy="126" r="14" fill="#14161a"/><text x="56" y="131" text-anchor="middle" class="n">1</text>
+    <text x="80" y="131" class="h">Input</text>
+    <text x="50" y="162" class="s">Habitat O2 %, pressure</text>
+    <text x="50" y="180" class="s">and gravity (or a NASA</text>
+    <text x="50" y="198" class="s">preset), plus up to 20</text>
+    <text x="50" y="216" class="s">materials, one per line</text>
+    <text x="50" y="246" class="s" font-style="italic">Validated, rate-limited</text>
+
+    <rect x="260" y="100" width="210" height="170" rx="12" fill="#fdecea" stroke="#c8312b" stroke-width="1.5"/>
+    <circle cx="286" cy="126" r="14" fill="#c8312b"/><text x="286" y="131" text-anchor="middle" class="n">2</text>
+    <text x="310" y="131" class="h">Rules decide</text>
+    <circle cx="288" cy="160" r="6" fill="#c8312b"/><text x="300" y="165" class="s">burned at or below this O2</text>
+    <circle cx="288" cy="184" r="6" fill="#d9822b"/><text x="300" y="189" class="s">thin / negative margin</text>
+    <circle cx="288" cy="208" r="6" fill="#2e8b57"/><text x="300" y="213" class="s">extinguished at this g</text>
+    <circle cx="288" cy="232" r="6" fill="#fff" stroke="#8a8d94" stroke-width="1.5"/><text x="300" y="237" class="s">no space data: test</text>
+    <text x="280" y="258" class="s" font-style="italic">From verified rows only</text>
+
+    <rect x="500" y="100" width="210" height="170" rx="12" fill="#eef4ff" stroke="#2a78d6" stroke-width="1.5"/>
+    <circle cx="526" cy="126" r="14" fill="#2a78d6"/><text x="526" y="131" text-anchor="middle" class="n">3</text>
+    <text x="550" y="131" class="h">Gemini explains</text>
+    <text x="520" y="162" class="s">Gets only the habitat,</text>
+    <text x="520" y="180" class="s">the verdict table and the</text>
+    <text x="520" y="198" class="s">evidence rows used.</text>
+    <text x="520" y="216" class="s">Answers in JSON; every</text>
+    <text x="520" y="234" class="s">number listed as a claim</text>
+    <text x="520" y="258" class="s" font-style="italic">temperature 0.2, 30 s timeout</text>
+
+    <rect x="740" y="100" width="210" height="170" rx="12" fill="#f3f1fb" stroke="#6250d6" stroke-width="1.5"/>
+    <circle cx="766" cy="126" r="14" fill="#6250d6"/><text x="766" y="131" text-anchor="middle" class="n">4</text>
+    <text x="790" y="131" class="h">Verifier checks</text>
+    <text x="760" y="162" class="s">Sources were given</text>
+    <text x="760" y="180" class="s">Numbers match within ±0.1</text>
+    <text x="760" y="198" class="s">(0.136 = 13.6%)</text>
+    <text x="760" y="216" class="s">No number without a claim</text>
+    <text x="760" y="234" class="s">No "certified", "safe",</text>
+    <text x="760" y="252" class="s">"NASA's test is wrong"</text>
+
+    <rect x="980" y="100" width="190" height="170" rx="12" fill="#e5f4ea" stroke="#2e8b57" stroke-width="1.5"/>
+    <circle cx="1006" cy="126" r="14" fill="#2e8b57"/><text x="1006" y="131" text-anchor="middle" class="n">5</text>
+    <text x="1030" y="131" class="h">Show + report</text>
+    <text x="1000" y="162" class="s">Verdicts, evidence,</text>
+    <text x="1000" y="180" class="s">caveats and the AI text</text>
+    <text x="1000" y="198" class="s">with a "Verified" badge</text>
+    <text x="1000" y="228" class="s">Download as PDF</text>
+    <text x="1000" y="246" class="s">or Markdown</text>
+  </g>
+
+  <line class="line" x1="230" y1="185" x2="256" y2="185" marker-end="url(#arr)"/>
+  <line class="line" x1="470" y1="185" x2="496" y2="185" marker-end="url(#arr)"/>
+  <line class="line" x1="710" y1="185" x2="736" y2="185" marker-end="url(#arr)"/>
+  <path d="M950 185 L976 185" stroke="#2e8b57" stroke-width="2" fill="none" marker-end="url(#arrG)"/>
+  <text x="963" y="176" text-anchor="middle" class="lab" fill="#2e8b57">pass</text>
+
+  <!-- Retry loop -->
+  <path d="M845 270 L845 320 L605 320 L605 274" stroke="#c8312b" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
+  <text x="725" y="342" text-anchor="middle" class="lab" fill="#c8312b">fail: retry once, with the list of errors</text>
+
+  <!-- Fallback paths -->
+  <rect x="500" y="380" width="450" height="108" rx="12" fill="#fdf3dc" stroke="#e2b64a" stroke-width="1.5"/>
+  <text x="520" y="408" class="h">Fail closed: the page never breaks</text>
+  <text x="520" y="432" class="s">Fails again → "AI explanation unavailable (failed verification)"</text>
+  <text x="520" y="452" class="s">No API key, timeout or any error → the rule-based verdicts</text>
+  <text x="520" y="470" class="s">are still shown in full</text>
+  <path d="M900 270 L900 376" stroke="#c8312b" stroke-width="1.8" fill="none" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
+  <path d="M950 428 L1075 428 L1075 274" class="line" marker-end="url(#arr)"/>
+  <text x="1012" y="418" text-anchor="middle" class="s" font-style="italic">verdicts only</text>
+
+  <!-- Data source strip -->
+  <rect x="30" y="510" width="1140" height="80" rx="12" fill="#f6f5f1" stroke="#d9d7cf"/>
+  <text x="54" y="540" class="h">Evidence behind every verdict</text>
+  <text x="54" y="564" class="s">69 rows from 7 public NASA reports, each with its NTRS ID, page or table and a short quote. Only published margins are shown;</text>
+  <text x="54" y="582" class="s">FlameLedger never computes a margin and makes no numeric prediction for lunar or Mars gravity.</text>
+
+  <text x="600" y="622" text-anchor="middle" class="s" font-style="italic">Thresholds are FlameLedger research thresholds, not NASA criteria. Research decision support, not certification.</text>
+</svg>

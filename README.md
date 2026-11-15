@@ -28,6 +28,12 @@ If you're choosing materials for a lunar habitat, the useful question is: for my
 
 **Open API** (`/docs`): the same data as JSON or CSV (`/api/ledger`, `/api/ledger.csv`, `/api/margins`, `/api/coverage`, `/api/gravity-profile`, `/api/hypotheses`, `/api/sources`, `/api/presets`), so anyone can reuse the checked ledger.
 
+### Architecture
+
+One FastAPI service serves both the pages and the JSON API. The verified data files are loaded and checked once, at startup.
+
+![FlameLedger architecture](docs/images/architecture.png)
+
 ### The ledger in numbers
 
 These counts are computed by the app from the data files, not typed in:
@@ -72,6 +78,8 @@ It works on a phone too:
 <img src="docs/images/08_mobile_review.png" alt="Habitat Review on a phone" width="300">
 
 ## How the Habitat Review works
+
+![Habitat Review agent workflow](docs/images/agent_workflow.png)
 
 The verdicts come from fixed rules, not from the AI. For each material:
 
