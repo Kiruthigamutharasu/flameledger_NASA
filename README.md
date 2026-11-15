@@ -4,7 +4,12 @@ What do reduced-gravity fire experiments actually tell us about spacecraft mater
 
 Our entry for the NASA Space Apps Challenge 2026, *Flame in Freefall*.
 
+- **Live app: https://flameledger.onrender.com**
+- Try the Example review: https://flameledger.onrender.com/review?example=1
+- API docs: https://flameledger.onrender.com/docs
 - Code: https://github.com/Kiruthigamutharasu/flameledger_NASA
+
+The app runs on Render's free tier, so the first visit after a quiet period can take about a minute to wake up.
 
 > Research decision support, not certification. Built for the 2026 NASA Space Apps Challenge. Not affiliated with or endorsed by NASA. Uses public NASA data.
 
